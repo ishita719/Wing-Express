@@ -1,8 +1,8 @@
 /**
- * Cloudflare Pages Function — POST /api/quote
+ * Quote request handler — POST /api/quote (called from worker/index.js)
  *
  * Emails quote requests to dispatch using Resend (https://resend.com).
- * Set these in Cloudflare → Pages project → Settings → Variables and Secrets:
+ * Set these in Cloudflare → Workers & Pages → wing-express → Settings → Variables and Secrets:
  *   RESEND_API_KEY   (secret)  your Resend API key
  *   QUOTE_TO_EMAIL             where requests are delivered, e.g. dispatch@wingexpress.ca
  *   QUOTE_FROM_EMAIL           a sender on a domain verified in Resend, e.g. website@wingexpress.ca
@@ -17,13 +17,13 @@ const LABELS = {
   cargo: 'Freight', weight: 'Weight / pieces', tailgate: 'Tailgate needed', notes: 'Notes',
 }
 
-const json = (body, status = 200) =>
+export const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
 
 const escape = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 
-export async function onRequestPost({ request, env }) {
+export async function handleQuote(request, env) {
   let data
   try {
     data = await request.json()
@@ -63,4 +63,3 @@ export async function onRequestPost({ request, env }) {
   return json({ ok: true })
 }
 
-export const onRequest = () => json({ ok: false, error: 'Method not allowed' }, 405)

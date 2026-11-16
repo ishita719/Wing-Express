@@ -1,7 +1,7 @@
 # Wing Express — Website
 
 Marketing website for **Wing Express**, a trucking and freight company.
-Built with **React 19 + Vite + Tailwind CSS 4 + Lucide icons** and hosted on **Cloudflare Pages**.
+Built with **React 19 + Vite + Tailwind CSS 4 + Lucide icons** and hosted on **Cloudflare Workers**.
 
 ## Quick start
 
@@ -15,7 +15,8 @@ npm run preview   # serve the production build locally
 ## Project structure
 
 ```
-├── functions/api/quote.js     Cloudflare Pages Function: emails quote requests (Resend)
+├── worker/                    Cloudflare Worker: serves the site + /api/quote (emails via Resend)
+├── wrangler.jsonc             Cloudflare Worker config
 ├── public/                    Static files: favicon, OG image, robots.txt, sitemap.xml, _headers
 ├── src/
 │   ├── data/site.js           ★ ALL business content: name, phone, email, services, stops, FAQ
@@ -33,23 +34,24 @@ npm run preview   # serve the production build locally
 **To update company details, edit `src/data/site.js`.** Every value marked `TODO` is a placeholder.
 Also update the JSON-LD block in `index.html`, plus `public/robots.txt` and `public/sitemap.xml` once the real domain is known.
 
-## Deploying to Cloudflare Pages (from GitHub)
+## Deployment: Cloudflare Workers (auto-deploys from GitHub)
 
-1. Push this repo to GitHub.
-2. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git** → pick the repo.
-3. Build settings:
-   - Framework preset: **Vite** (or "None")
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Environment variable: `VITE_SITE_URL` = `https://wing-express.pages.dev` (later: your real domain)
-4. Save and deploy. Every push to `main` now redeploys automatically, and pull requests get preview URLs.
+The site runs as a Cloudflare Worker named `wing-express` with static assets (config: `wrangler.jsonc`).
+Cloudflare Workers Builds is connected to this GitHub repo:
+
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Every push to `main` builds and deploys automatically.
+
+`worker/index.js` serves `/api/quote`; everything else is the static React build in `dist/`.
+The public site URL used for SEO tags lives in `.env.production` (`VITE_SITE_URL`).
 
 ### Quote form email (optional, recommended)
 
 The quote form posts to `/api/quote`. To have requests emailed to dispatch:
 
 1. Create a free account at [resend.com](https://resend.com) and verify the company domain.
-2. In the Pages project → **Settings → Variables and Secrets**, add:
+2. In Cloudflare → **Workers & Pages → wing-express → Settings → Variables and Secrets**, add:
    - `RESEND_API_KEY` (as a secret)
    - `QUOTE_TO_EMAIL`: inbox that receives requests
    - `QUOTE_FROM_EMAIL`: sender on the verified domain, e.g. `website@wingexpress.ca`
@@ -59,9 +61,9 @@ Until these are set, the form honestly tells visitors it could not send and offe
 
 ### Connecting the real domain later
 
-1. Pages project → **Custom domains → Set up a custom domain** → enter `wingexpress.ca` (and `www`).
-2. If the domain's DNS is on Cloudflare, records are added automatically. Otherwise, follow the CNAME instructions shown.
-3. Change `VITE_SITE_URL` to the new domain, update `robots.txt` and `sitemap.xml`, and redeploy.
+1. Add the domain to Cloudflare (**Domains → Add a domain**) and point its nameservers to Cloudflare.
+2. **Workers & Pages → wing-express → Settings → Domains & Routes → Add → Custom domain** → `wingexpress.ca` (and `www.wingexpress.ca`).
+3. Change `VITE_SITE_URL` in `.env.production` to the new domain, update `robots.txt` and `sitemap.xml`, and push.
 
 ### Manual deploy from your machine (alternative)
 
