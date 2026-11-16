@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand palette */
+  --color-ink-950: #050816;
+  --color-ink-900: #0a1028;
+  --color-ink-800: #121a3a;
+  --color-ink-700: #1d2752;
+
+  --color-wing-50: #eef2ff;
+  --color-wing-100: #dfe6ff;
+  --color-wing-300: #9db1ff;
+  --color-wing-400: #7390ff;
+  --color-wing-500: #4c6bff;
+  --color-wing-600: #3550f0;
+  --color-wing-700: #2a3fc9;
+
+  --color-ember-300: #ffb38a;
+  --color-ember-400: #ff8d55;
+  --color-ember-500: #ff6a2b;
+  --color-ember-600: #f04f0f;
+
+  --color-mist: #f5f7fc;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-dash: dash 3s linear infinite;
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-drive: drive 2.2s ease-in-out infinite;
+  --animate-route: route 9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+  @keyframes route {
+    0% { left: 0%; }
+    45%, 55% { left: 100%; }
+    100% { left: 0%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: -40; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes drive {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-1.5px); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-ink-900 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    @apply bg-ember-500 text-white;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ember-500;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-ember-400 via-ember-300 to-wing-300 bg-clip-text text-transparent;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .field {
+    @apply w-full rounded-xl border border-ink-900/10 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-ink-900/40 transition focus:border-wing-500 focus:ring-4 focus:ring-wing-500/15 focus:outline-none;
+  }
+}
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
