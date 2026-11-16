@@ -24,7 +24,7 @@ export const company = {
   hours: 'Monday – Saturday · 7:00 am – 7:00 pm',
   serviceDays: 'Mon – Sat',
   cutoff: '4:00 pm',
-  url: import.meta.env.VITE_SITE_URL || 'https://wing-express.pages.dev',
+  url: import.meta.env.VITE_SITE_URL || 'https://wing-express.ishita-8ab.workers.dev',
   founded: '2026',
 }
 

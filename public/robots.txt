@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wing-express.pages.dev/sitemap.xml
+Sitemap: https://wing-express.ishita-8ab.workers.dev/sitemap.xml
