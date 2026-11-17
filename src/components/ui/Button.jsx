@@ -1,9 +1,9 @@
 const variants = {
-  // Amber (brand) with a light "shine" sweep on hover
-  primary: 'bg-amber text-navy shadow-sm shadow-amber/30 hover:bg-amber-dark hover:shadow-lg hover:shadow-amber/30',
-  navy: 'bg-navy text-white hover:bg-navy-2 hover:shadow-lg hover:shadow-navy/20',
-  white: 'bg-white text-navy shadow-sm hover:bg-amber-50',
-  outline: 'border border-line bg-white text-ink hover:border-navy hover:text-navy',
+  // Crimson (brand) with a light "shine" sweep on hover
+  primary: 'bg-crimson text-white shadow-sm shadow-crimson/30 hover:bg-crimson-dark hover:shadow-lg hover:shadow-crimson/30',
+  charcoal: 'bg-charcoal text-white hover:bg-charcoal-2 hover:shadow-lg hover:shadow-charcoal/20',
+  white: 'bg-white text-charcoal shadow-sm hover:bg-crimson-50',
+  outline: 'border border-line bg-white text-ink hover:border-charcoal hover:text-charcoal',
   ghost: 'border border-white/25 text-white hover:bg-white/10 hover:border-white/40',
 }
 
@@ -28,7 +28,7 @@ export default function Button({
   ...props
 }) {
   const Tag = as || (href ? 'a' : 'button')
-  const shine = variant === 'primary' || variant === 'navy'
+  const shine = variant === 'primary' || variant === 'charcoal'
   return (
     <Tag
       href={href}

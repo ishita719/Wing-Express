@@ -2,35 +2,36 @@
 
 /*
  * EAGLEWING EXPRESS — corporate design system
- * Brand navy + amber (carried over from the company's original logo),
+ * Brand charcoal + crimson (carried over from the company's original logo),
  * steel blue for links/icons, emerald for status. Archivo + Public Sans.
  */
 @theme {
   --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Archivo', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --color-navy: #0b2e4f;
-  --color-navy-2: #0f3a62;
-  --color-navy-3: #174b7a;
-  --color-navy-950: #071d33;
-  --color-amber: #f5b247;
-  --color-amber-dark: #e39b28;
-  --color-amber-50: #fef6e7;
-  --color-amber-100: #fde9c4;
-  --color-amber-700: #9a5f07;
-  --color-brand: #1e5a96;
-  --color-brand-dark: #164677;
-  --color-brand-50: #edf3fa;
-  --color-brand-100: #d5e3f2;
+  --color-charcoal: #1b1f27;
+  --color-charcoal-2: #232934;
+  --color-charcoal-3: #2e3542;
+  --color-charcoal-950: #12151b;
+  --color-crimson: #d7263d;
+  --color-crimson-dark: #b51d32;
+  --color-crimson-50: #fdecee;
+  --color-crimson-100: #f9d3d8;
+  --color-crimson-700: #a51a2d;
+  --color-crimson-400: #f0566a;
+  --color-brand: #46607a;
+  --color-brand-dark: #384e64;
+  --color-brand-50: #eef2f6;
+  --color-brand-100: #dde3ea;
   --color-accent: #0f9d76;
   --color-accent-50: #e7f6f1;
-  --color-surface: #f6f8fb;
+  --color-surface: #f7f6f4;
   --color-line: #e2e8f0;
-  --color-ink: #0b2e4f;
-  --color-muted: #55657a;
+  --color-ink: #1b1f27;
+  --color-muted: #5b6472;
 
-  --shadow-card: 0 1px 2px rgb(11 46 79 / 0.04), 0 4px 16px rgb(11 46 79 / 0.06);
-  --shadow-card-hover: 0 2px 4px rgb(11 46 79 / 0.06), 0 18px 44px rgb(11 46 79 / 0.13);
+  --shadow-card: 0 1px 2px rgb(27 31 39 / 0.04), 0 4px 16px rgb(27 31 39 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(27 31 39 / 0.06), 0 18px 44px rgb(27 31 39 / 0.13);
 
   --animate-marquee: marquee 45s linear infinite;
   --animate-pulse-dot: pulse-dot 2s ease-out infinite;
@@ -81,10 +82,10 @@
     @apply font-display font-bold tracking-tight text-balance;
   }
   ::selection {
-    @apply bg-amber text-navy;
+    @apply bg-crimson text-white;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-amber;
+    @apply outline-2 outline-offset-2 outline-crimson;
   }
 }
 

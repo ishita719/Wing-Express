@@ -15,7 +15,7 @@ export default function TrustMarquee() {
             className="flex items-center gap-2.5 px-7 font-display text-lg font-semibold whitespace-nowrap text-ink/80"
             aria-hidden={i >= coverage.all.length}
           >
-            <MapPin className="size-4 text-amber-dark" aria-hidden="true" />
+            <MapPin className="size-4 text-crimson-dark" aria-hidden="true" />
             {town}
           </li>
         ))}

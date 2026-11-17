@@ -43,11 +43,11 @@ export default function Coverage() {
             </div>
             <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`Route map: ${mainLine.join(', ')}, with a branch from ${branch.from} to ${branch.to}`}>
               {/* track beds */}
-              <path d={main} fill="none" stroke="#d5e3f2" strokeWidth="14" strokeLinecap="round" />
-              <path d={spur} fill="none" stroke="#d5e3f2" strokeWidth="14" strokeLinecap="round" />
+              <path d={main} fill="none" stroke="#dde3ea" strokeWidth="14" strokeLinecap="round" />
+              <path d={spur} fill="none" stroke="#dde3ea" strokeWidth="14" strokeLinecap="round" />
               {/* drawn lines */}
-              <path id="ew-main" d={main} pathLength="1000" className="draw-path" fill="none" stroke="#0b2e4f" strokeWidth="5" strokeLinecap="round" />
-              <path d={spur} pathLength="1000" className="draw-path" style={{ transitionDelay: '1.2s' }} fill="none" stroke="#f5b247" strokeWidth="5" strokeLinecap="round" />
+              <path id="ew-main" d={main} pathLength="1000" className="draw-path" fill="none" stroke="#1b1f27" strokeWidth="5" strokeLinecap="round" />
+              <path d={spur} pathLength="1000" className="draw-path" style={{ transitionDelay: '1.2s' }} fill="none" stroke="#d7263d" strokeWidth="5" strokeLinecap="round" />
 
               {/* highway labels */}
               {[
@@ -55,19 +55,19 @@ export default function Coverage() {
                 { label: 'Hwy 19', cx: (nanaimoX + pts.at(-1).x) / 2 + 40 },
               ].map((h) => (
                 <g key={h.label} transform={`translate(${h.cx - 26} ${LINE_Y + 58})`}>
-                  <rect width="52" height="22" rx="11" fill="#fff" stroke="#d5e3f2" />
-                  <text x="26" y="15" textAnchor="middle" fontFamily="Public Sans, sans-serif" fontWeight="700" fontSize="11" fill="#1e5a96">{h.label}</text>
+                  <rect width="52" height="22" rx="11" fill="#fff" stroke="#dde3ea" />
+                  <text x="26" y="15" textAnchor="middle" fontFamily="Public Sans, sans-serif" fontWeight="700" fontSize="11" fill="#46607a">{h.label}</text>
                 </g>
               ))}
               <g transform={`translate(${(fork.x + alberni.x) / 2 - 62} ${(LINE_Y + alberni.y) / 2 - 11})`}>
-                <rect width="44" height="22" rx="11" fill="#fff" stroke="#fde9c4" />
-                <text x="22" y="15" textAnchor="middle" fontFamily="Public Sans, sans-serif" fontWeight="700" fontSize="11" fill="#e39b28">{branch.highway}</text>
+                <rect width="44" height="22" rx="11" fill="#fff" stroke="#f9d3d8" />
+                <text x="22" y="15" textAnchor="middle" fontFamily="Public Sans, sans-serif" fontWeight="700" fontSize="11" fill="#b51d32">{branch.highway}</text>
               </g>
 
               {/* moving truck */}
               <g>
-                <rect x="-15" y="-10" width="30" height="20" rx="6" fill="#f5b247" stroke="#fff" strokeWidth="3" />
-                <path d="M-7 -3 h9 v6 h-9z M3 -1 h4 l2 3 v1 h-6z" fill="#0b2e4f" />
+                <rect x="-15" y="-10" width="30" height="20" rx="6" fill="#d7263d" stroke="#fff" strokeWidth="3" />
+                <path d="M-7 -3 h9 v6 h-9z M3 -1 h4 l2 3 v1 h-6z" fill="#1b1f27" />
                 <animateMotion dur="12s" repeatCount="indefinite" keyPoints="0;1;1;0;0" keyTimes="0;0.45;0.5;0.95;1" calcMode="linear">
                   <mpath href="#ew-main" />
                 </animateMotion>
@@ -80,8 +80,8 @@ export default function Coverage() {
                 const below = isBranch ? false : p.name === branch.from ? true : i % 2 === 0
                 return (
                   <g key={p.name} className="group">
-                    <circle cx={p.x} cy={p.y} r={end ? 11 : 8} fill="#fff" stroke={isBranch ? '#e39b28' : '#0b2e4f'} strokeWidth="4" />
-                    {end && <circle cx={p.x} cy={p.y} r="4" fill="#f5b247" />}
+                    <circle cx={p.x} cy={p.y} r={end ? 11 : 8} fill="#fff" stroke={isBranch ? '#b51d32' : '#1b1f27'} strokeWidth="4" />
+                    {end && <circle cx={p.x} cy={p.y} r="4" fill="#d7263d" />}
                     <text
                       x={isBranch ? p.x - 18 : p.x}
                       y={isBranch ? p.y + 5 : below ? p.y + 36 : p.y - 24}
@@ -89,7 +89,7 @@ export default function Coverage() {
                       fontFamily="Archivo, sans-serif"
                       fontWeight="700"
                       fontSize="16"
-                      fill="#0b2e4f"
+                      fill="#1b1f27"
                     >
                       {p.name}
                     </text>
@@ -100,14 +100,14 @@ export default function Coverage() {
           </div>
 
           {/* Mobile: vertical route list (north at the bottom) */}
-          <ol className="relative m-6 ml-9 border-l-2 border-navy/20 md:hidden">
+          <ol className="relative m-6 ml-9 border-l-2 border-charcoal/20 md:hidden">
             {mainLine.map((s, i) => (
               <li key={s} className="relative pb-5 pl-6 last:pb-0">
-                <span className={`absolute top-1 -left-[9px] size-4 rounded-full border-[3px] bg-white ${i === 0 || i === mainLine.length - 1 ? 'border-amber' : 'border-navy'}`} />
+                <span className={`absolute top-1 -left-[9px] size-4 rounded-full border-[3px] bg-white ${i === 0 || i === mainLine.length - 1 ? 'border-crimson' : 'border-charcoal'}`} />
                 <p className="font-semibold">{s}</p>
                 {s === branch.from && (
-                  <p className="mt-2 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-sm">
-                    <span className="size-2 shrink-0 rounded-full bg-amber-dark" aria-hidden="true" />
+                  <p className="mt-2 inline-flex items-center gap-2 rounded-full bg-crimson-50 px-3 py-1 text-sm">
+                    <span className="size-2 shrink-0 rounded-full bg-crimson-dark" aria-hidden="true" />
                     <span>
                       Branch to <strong>{branch.to}</strong> via {branch.highway}
                     </span>
@@ -120,12 +120,12 @@ export default function Coverage() {
           <div className="flex flex-col items-start justify-between gap-6 border-t border-line p-6 lg:flex-row lg:items-center">
             <ul className="flex flex-wrap gap-2">
               {all.map((t) => (
-                <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3.5 py-1.5 text-sm text-ink/80 transition hover:bg-amber-50">
-                  <MapPin className="size-3.5 text-amber-dark" aria-hidden="true" /> {t}
+                <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3.5 py-1.5 text-sm text-ink/80 transition hover:bg-crimson-50">
+                  <MapPin className="size-3.5 text-crimson-dark" aria-hidden="true" /> {t}
                 </li>
               ))}
             </ul>
-            <Button href="#quote" variant="navy" icon={ArrowRight} className="shrink-0">
+            <Button href="#quote" variant="charcoal" icon={ArrowRight} className="shrink-0">
               Check your location
             </Button>
           </div>

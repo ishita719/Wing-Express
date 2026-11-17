@@ -12,16 +12,16 @@ function Col({ title, children }) {
   )
 }
 
-const linkCls = 'text-sm text-white/60 transition hover:text-amber'
+const linkCls = 'text-sm text-white/60 transition hover:text-crimson'
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative overflow-hidden bg-navy-950 text-white" aria-labelledby="footer-heading">
+    <footer className="relative overflow-hidden bg-charcoal-950 text-white" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="h-1 bg-gradient-to-r from-amber via-amber to-brand" aria-hidden="true" />
+      <div className="h-1 bg-gradient-to-r from-crimson via-crimson to-brand" aria-hidden="true" />
 
       <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
@@ -67,22 +67,22 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-white/60">
               <li>
                 <a href={tel(company.phone)} className="flex items-start gap-3 transition hover:text-white">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden="true" />
+                  <Phone className="mt-0.5 size-4 shrink-0 text-crimson-400" aria-hidden="true" />
                   {company.phone}
                 </a>
               </li>
               <li>
                 <a href={`mailto:${company.email}`} className="flex items-start gap-3 break-all transition hover:text-white">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden="true" />
+                  <Mail className="mt-0.5 size-4 shrink-0 text-crimson-400" aria-hidden="true" />
                   {company.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden="true" />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-crimson-400" aria-hidden="true" />
                 {company.region}
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden="true" />
+                <Clock className="mt-0.5 size-4 shrink-0 text-crimson-400" aria-hidden="true" />
                 {company.hours}
               </li>
             </ul>

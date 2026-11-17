@@ -30,13 +30,13 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-gradient-to-br from-navy-950 via-navy to-navy-3 pt-36 pb-20 text-white lg:pt-44 lg:pb-28"
+      className="relative isolate overflow-hidden bg-gradient-to-br from-charcoal-950 via-charcoal to-charcoal-3 pt-36 pb-20 text-white lg:pt-44 lg:pb-28"
       aria-labelledby="hero-title"
     >
       {/* Ambient background */}
       <div className="grid-lines absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
       <div className="absolute -top-40 -left-40 -z-10 size-[560px] animate-drift rounded-full bg-brand/40 blur-[120px]" aria-hidden="true" />
-      <div className="absolute -right-32 bottom-[-180px] -z-10 size-[520px] animate-drift-slow rounded-full bg-amber/20 blur-[120px]" aria-hidden="true" />
+      <div className="absolute -right-32 bottom-[-180px] -z-10 size-[520px] animate-drift-slow rounded-full bg-crimson/20 blur-[120px]" aria-hidden="true" />
 
       <div className="container-x grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-6">
@@ -50,10 +50,10 @@ export default function Hero() {
           <Reveal delay={100}>
             <h1 id="hero-title" className="text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.6rem]">
               Freight delivery across{' '}
-              <span className="relative whitespace-nowrap text-amber">
+              <span className="relative whitespace-nowrap text-crimson-400">
                 Vancouver Island
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M2 9 C80 2 200 2 298 7" fill="none" stroke="#f5b247" strokeWidth="3" strokeLinecap="round" pathLength="1000" className="draw-path" />
+                  <path d="M2 9 C80 2 200 2 298 7" fill="none" stroke="#d7263d" strokeWidth="3" strokeLinecap="round" pathLength="1000" className="draw-path" />
                 </svg>
               </span>
               , done right.
@@ -82,7 +82,7 @@ export default function Hero() {
             <ul className="mt-10 grid gap-x-6 gap-y-3 text-sm text-white/75 sm:grid-cols-2">
               {heroBadges.map((b) => (
                 <li key={b} className="flex items-center gap-2">
-                  <CircleCheck className="size-4 shrink-0 text-amber" aria-hidden="true" />
+                  <CircleCheck className="size-4 shrink-0 text-crimson-400" aria-hidden="true" />
                   {b}
                 </li>
               ))}
@@ -101,10 +101,10 @@ export default function Hero() {
               <span
                 key={step}
                 className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                  step === 3 ? 'bg-accent-50 text-accent' : 'bg-amber-50 text-amber-dark'
+                  step === 3 ? 'bg-accent-50 text-accent' : 'bg-crimson-50 text-crimson-dark'
                 }`}
               >
-                <span className={`size-1.5 rounded-full ${step === 3 ? 'bg-accent' : 'bg-amber-dark'}`} aria-hidden="true" />
+                <span className={`size-1.5 rounded-full ${step === 3 ? 'bg-accent' : 'bg-crimson-dark'}`} aria-hidden="true" />
                 {steps[step].label}
               </span>
             </div>
@@ -116,16 +116,16 @@ export default function Hero() {
             {/* Route track with moving marker */}
             <div className="mt-6">
               <div className="relative mx-2 h-1.5 rounded-full bg-line">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-brand via-amber to-accent opacity-80" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-brand via-crimson to-accent opacity-80" />
                 {stops.map((s, i) => (
                   <span
                     key={s}
-                    className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-navy"
+                    className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-charcoal"
                     style={{ left: `${(i / (stops.length - 1)) * 100}%` }}
                     title={s}
                   />
                 ))}
-                <span className="absolute top-1/2 grid size-7 -translate-x-1/2 -translate-y-1/2 animate-route place-items-center rounded-full bg-amber text-navy shadow-lg ring-4 ring-white">
+                <span className="absolute top-1/2 grid size-7 -translate-x-1/2 -translate-y-1/2 animate-route place-items-center rounded-full bg-crimson text-white shadow-lg ring-4 ring-white">
                   <Truck className="size-3.5" aria-hidden="true" />
                 </span>
               </div>
@@ -145,7 +145,7 @@ export default function Hero() {
                     <span
                       className={`mx-auto grid size-9 place-items-center rounded-full transition-all duration-500 ${
                         active
-                          ? 'scale-110 bg-navy text-amber ring-4 ring-amber-100'
+                          ? 'scale-110 bg-charcoal text-crimson-400 ring-4 ring-crimson-100'
                           : done
                             ? 'bg-accent text-white'
                             : 'bg-surface text-muted'

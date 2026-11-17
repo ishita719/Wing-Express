@@ -66,11 +66,11 @@ export default function Quote() {
   ]
 
   return (
-    <section id="quote" className="relative overflow-hidden bg-navy py-20 sm:py-28" aria-labelledby="quote-title">
+    <section id="quote" className="relative overflow-hidden bg-charcoal py-20 sm:py-28" aria-labelledby="quote-title">
       <div className="container-x relative grid gap-10 lg:grid-cols-12 lg:gap-14">
         {/* Contact side */}
         <Reveal className="text-white lg:col-span-5">
-          <p className="eyebrow mb-3 text-amber">
+          <p className="eyebrow mb-3 text-crimson-400">
             Dispatch
           </p>
           <h2 id="quote-title" className="text-3xl leading-tight sm:text-4xl lg:text-[2.6rem]">
@@ -84,7 +84,7 @@ export default function Quote() {
             {contact.map(({ icon: Icon, label, value, href }) => {
               const Inner = (
                 <>
-                  <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white/10 text-amber transition group-hover:bg-amber group-hover:text-navy">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white/10 text-crimson-400 transition group-hover:bg-crimson group-hover:text-white">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
                   <span>
@@ -185,8 +185,8 @@ export default function Quote() {
                 </div>
 
                 {status === 'error' && (
-                  <div className="mt-5 flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-ink" role="alert">
-                    <TriangleAlert className="size-5 shrink-0 text-amber-600" aria-hidden="true" />
+                  <div className="mt-5 flex gap-3 rounded-lg border border-crimson-200 bg-crimson-50 p-4 text-sm text-ink" role="alert">
+                    <TriangleAlert className="size-5 shrink-0 text-crimson-600" aria-hidden="true" />
                     <p>
                       We could not send your request online. Please{' '}
                       <a href={buildMailto(data)} className="font-semibold text-brand underline">

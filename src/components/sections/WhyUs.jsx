@@ -29,7 +29,7 @@ export default function WhyUs() {
         <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
           {features.map(({ icon: Icon, title, text }, i) => (
             <Reveal key={title} as="article" delay={(i % 2) * 90} className="card card-hover group p-6">
-              <span className="grid size-11 place-items-center rounded-lg bg-amber-50 text-amber-dark transition-colors duration-300 group-hover:bg-navy group-hover:text-amber">
+              <span className="grid size-11 place-items-center rounded-lg bg-crimson-50 text-crimson-dark transition-colors duration-300 group-hover:bg-charcoal group-hover:text-crimson-400">
                 <Icon className="size-5" aria-hidden="true" />
               </span>
               <h3 className="mt-5 text-lg">{title}</h3>

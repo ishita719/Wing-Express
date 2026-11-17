@@ -22,23 +22,23 @@ export default function Header() {
   return (
     <header id="top" className="fixed inset-x-0 top-0 z-50">
       {/* Utility bar */}
-      <div className={`hidden overflow-hidden bg-navy-950 text-xs text-white/65 transition-all duration-300 lg:block ${scrolled ? 'max-h-0' : 'max-h-10'}`}>
+      <div className={`hidden overflow-hidden bg-charcoal-950 text-xs text-white/65 transition-all duration-300 lg:block ${scrolled ? 'max-h-0' : 'max-h-10'}`}>
         <div className="container-x flex h-9 items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-2">
-              <Clock className="size-3.5 text-amber" aria-hidden="true" /> {company.hours}
+              <Clock className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.hours}
             </span>
             <span className="inline-flex items-center gap-2">
-              <MapPin className="size-3.5 text-amber" aria-hidden="true" /> {company.region}
+              <MapPin className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.region}
             </span>
           </div>
           <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 transition hover:text-white">
-            <Mail className="size-3.5 text-amber" aria-hidden="true" /> {company.email}
+            <Mail className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.email}
           </a>
         </div>
       </div>
 
-      <div className={`backdrop-blur-md transition-all duration-300 ${scrolled ? 'bg-navy/95 shadow-lg shadow-navy/25' : 'bg-navy/80'}`}>
+      <div className={`backdrop-blur-md transition-all duration-300 ${scrolled ? 'bg-charcoal/95 shadow-lg shadow-charcoal/25' : 'bg-charcoal/80'}`}>
         <nav className={`container-x flex items-center justify-between gap-6 transition-all duration-300 ${scrolled ? 'h-16' : 'h-[4.5rem]'}`} aria-label="Main">
           <Logo animate />
 
@@ -50,7 +50,7 @@ export default function Header() {
                   className="group relative px-3.5 py-2 text-sm font-medium whitespace-nowrap text-white/75 transition hover:text-white"
                 >
                   {l.label}
-                  <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-amber transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-crimson transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -59,7 +59,7 @@ export default function Header() {
           <div className="hidden items-center gap-5 lg:flex">
             <a
               href={tel(company.phone)}
-              className="hidden items-center gap-2.5 text-sm font-semibold whitespace-nowrap text-white transition hover:text-amber xl:inline-flex"
+              className="hidden items-center gap-2.5 text-sm font-semibold whitespace-nowrap text-white transition hover:text-crimson-400 xl:inline-flex"
             >
               <span className="grid size-8 place-items-center rounded-full bg-white/10">
                 <Phone className="size-4" aria-hidden="true" />
@@ -88,7 +88,7 @@ export default function Header() {
       {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[4.7rem] bottom-0 bg-navy transition-all duration-300 lg:hidden ${
+        className={`fixed inset-x-0 top-[4.7rem] bottom-0 bg-charcoal transition-all duration-300 lg:hidden ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >

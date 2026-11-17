@@ -20,7 +20,7 @@ export default function Services() {
           {services.map(({ icon: Icon, title, text }, i) => (
             <Reveal key={title} as="article" delay={(i % 3) * 90} className="h-full">
               <SpotlightCard as="a" href="#quote" className="card card-hover flex h-full flex-col p-7">
-                <span className="relative grid size-12 place-items-center rounded-xl bg-navy text-amber transition-all duration-300 group-hover:scale-110 group-hover:bg-amber group-hover:text-navy">
+                <span className="relative grid size-12 place-items-center rounded-xl bg-charcoal text-crimson-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-crimson group-hover:text-white">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>
                 <h3 className="relative mt-6 text-xl">{title}</h3>
