@@ -1,16 +1,16 @@
 const variants = {
-  primary:
-    'bg-ember-500 text-white shadow-lg shadow-ember-500/30 hover:bg-ember-600 hover:shadow-ember-500/40',
-  secondary: 'bg-wing-600 text-white shadow-lg shadow-wing-600/25 hover:bg-wing-700',
-  ghost: 'border border-white/20 bg-white/5 text-white backdrop-blur hover:bg-white/10 hover:border-white/40',
-  outline: 'border border-ink-900/15 bg-white text-ink-900 hover:border-ink-900/40',
-  dark: 'bg-ink-900 text-white hover:bg-ink-800',
+  // Road-sign yellow with a hard shadow that "presses" on click
+  primary: 'bg-signal text-ink border-ink shadow-hard-sm hover:shadow-hard active:shadow-none active:translate-x-[3px] active:translate-y-[3px]',
+  dark: 'bg-ink text-paper border-ink shadow-[3px_3px_0_0_#ffc21a] hover:shadow-[6px_6px_0_0_#ffc21a] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]',
+  green: 'bg-route text-white border-ink shadow-hard-sm hover:shadow-hard active:shadow-none',
+  outline: 'bg-transparent text-ink border-ink hover:bg-ink hover:text-paper',
+  ghost: 'bg-transparent text-paper border-paper/40 hover:border-signal hover:text-signal',
 }
 
 const sizes = {
-  sm: 'px-4 py-2 text-sm',
+  sm: 'px-4 py-2 text-xs',
   md: 'px-5 py-3 text-sm',
-  lg: 'px-7 py-4 text-base',
+  lg: 'px-6 py-3.5 text-base',
 }
 
 /**
@@ -31,12 +31,12 @@ export default function Button({
   return (
     <Tag
       href={href}
-      className={`group inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60 ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`group inline-flex items-center justify-center gap-2 rounded-md border-2 font-mono font-bold tracking-wider whitespace-nowrap uppercase transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-60 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {IconLeft && <IconLeft className="size-4" aria-hidden="true" />}
       {children}
-      {Icon && <Icon className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />}
+      {Icon && <Icon className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />}
     </Tag>
   )
 }

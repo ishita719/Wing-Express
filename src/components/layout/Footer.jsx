@@ -6,31 +6,34 @@ import { tel } from '../../lib/utils'
 function Col({ title, children }) {
   return (
     <div>
-      <h3 className="mb-5 text-sm font-semibold tracking-[0.15em] text-white uppercase">{title}</h3>
+      <h3 className="label mb-5 font-sans text-signal">{title}</h3>
       {children}
     </div>
   )
 }
 
-const linkCls = 'text-sm text-white/55 transition hover:text-ember-300'
+const linkCls = 'text-sm text-paper/60 transition hover:text-signal hover:translate-x-1 inline-block'
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative overflow-hidden bg-ink-950 text-white" aria-labelledby="footer-heading">
+    <footer className="bg-asphalt text-paper" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="pointer-events-none absolute -top-40 right-0 size-[500px] rounded-full bg-wing-600/10 blur-3xl" aria-hidden="true" />
+      <div className="hazard h-3" aria-hidden="true" />
 
-      <div className="container-x relative grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:py-20">
+      {/* Giant wordmark */}
+      <div className="container-x overflow-hidden pt-14">
+        <p className="font-display text-[18vw] leading-[0.8] font-black text-paper/[0.06] uppercase select-none lg:text-[11rem]" aria-hidden="true">
+          Wing Express
+        </p>
+      </div>
+
+      <div className="container-x grid gap-12 py-12 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <Logo />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">{company.description}</p>
-          <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs text-white/60">
-            <span className="size-2 animate-pulse rounded-full bg-emerald-400" aria-hidden="true" />
-            Dispatch open {company.serviceDays}
-          </p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-paper/60">{company.description}</p>
         </div>
 
         <div className="lg:col-span-2">
@@ -68,29 +71,29 @@ export default function Footer() {
 
         <div className="lg:col-span-3">
           <Col title="Contact">
-            <ul className="space-y-4 text-sm text-white/55">
+            <ul className="space-y-4 text-sm text-paper/60">
               <li>
-                <a href={tel(company.phone)} className="flex items-start gap-3 transition hover:text-white">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-ember-400" aria-hidden="true" />
-                  <span>
-                    Dispatch: {company.phone}
+                <a href={tel(company.phone)} className="flex items-start gap-3 transition hover:text-signal">
+                  <Phone className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
+                  <span className="font-mono">
+                    {company.phone}
                     <br />
-                    Alt: {company.phoneAlt}
+                    {company.phoneAlt}
                   </span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${company.email}`} className="flex items-start gap-3 transition hover:text-white">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-ember-400" aria-hidden="true" />
+                <a href={`mailto:${company.email}`} className="flex items-start gap-3 transition hover:text-signal">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
                   {company.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-ember-400" aria-hidden="true" />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
                 <address className="not-italic">{company.address}</address>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="mt-0.5 size-4 shrink-0 text-ember-400" aria-hidden="true" />
+                <Clock className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
                 {company.hours}
               </li>
             </ul>
@@ -98,12 +101,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/40 sm:flex-row">
+      <div className="border-t-2 border-dashed border-paper/15">
+        <div className="container-x label flex flex-col items-center justify-between gap-3 py-6 text-paper/40 sm:flex-row">
           <p>
             © {year} {company.legalName} All rights reserved.
           </p>
-          <p>Serving {coverage.stops.length} stops and {coverage.pickups.length} pickup regions</p>
+          <p>
+            {coverage.stops.length} stops · {coverage.pickups.length} pickup regions · {company.serviceDays}
+          </p>
         </div>
       </div>
     </footer>

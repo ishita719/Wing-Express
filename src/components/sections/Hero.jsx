@@ -1,108 +1,129 @@
-import { ArrowRight, Phone, CircleCheck, Clock, PackageCheck, Navigation } from 'lucide-react'
+import { ArrowRight, Phone, Check } from 'lucide-react'
 import Button from '../ui/Button'
+import Reveal from '../ui/Reveal'
 import TruckIllustration from '../ui/TruckIllustration'
-import { company, heroBadges } from '../../data/site'
+import { company, heroBadges, coverage } from '../../data/site'
 import { tel } from '../../lib/utils'
 
-export default function Hero() {
+const headline = [
+  { text: 'Freight' },
+  { text: 'that flies.', accent: true },
+  { text: 'On time.' },
+]
+
+/** Decorative barcode built from bars of varying width. */
+function Barcode() {
+  const bars = [3, 1, 2, 1, 3, 2, 1, 1, 3, 1, 2, 3, 1, 2, 1, 3, 1, 1, 2, 3, 1, 2]
   return (
-    <section
-      className="relative isolate overflow-hidden bg-ink-900 pt-32 pb-20 text-white sm:pt-40 lg:pt-44 lg:pb-28"
-      aria-labelledby="hero-title"
-    >
-      {/* Background layers */}
-      <div className="grid-bg absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" aria-hidden="true" />
-      <div className="absolute -top-32 -left-32 -z-10 size-[520px] rounded-full bg-wing-600/30 blur-[120px]" aria-hidden="true" />
-      <div className="absolute right-0 bottom-0 -z-10 size-[460px] rounded-full bg-ember-500/20 blur-[120px]" aria-hidden="true" />
+    <div className="flex h-9 items-stretch gap-[2px]" aria-hidden="true">
+      {bars.map((w, i) => (
+        <span key={i} className="bg-ink" style={{ width: w * 2 }} />
+      ))}
+    </div>
+  )
+}
+
+export default function Hero() {
+  const first = coverage.stops[0].name
+  const last = coverage.stops[coverage.stops.length - 1].name
+
+  return (
+    <section className="relative isolate overflow-hidden bg-asphalt pt-32 pb-20 text-paper sm:pt-36 lg:pt-44 lg:pb-28" aria-labelledby="hero-title">
+      {/* moving lane markings */}
+      <div className="lane-lines absolute top-0 right-[8%] -z-10 hidden h-full w-1 animate-lane opacity-25 lg:block" aria-hidden="true" />
+      <div className="lane-lines absolute top-0 right-[38%] -z-10 hidden h-full w-1 animate-lane opacity-10 lg:block" aria-hidden="true" />
 
       <div className="container-x grid items-center gap-14 lg:grid-cols-12">
         {/* Copy */}
-        <div className="lg:col-span-6">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1.5 pr-4 pl-1.5 text-xs font-medium text-white/80 backdrop-blur">
-            <span className="rounded-full bg-ember-500 px-2.5 py-1 text-[10px] font-bold tracking-wider text-white uppercase">
-              Now booking
-            </span>
-            Daily runs · {company.serviceDays}
+        <div className="lg:col-span-7">
+          <p className="label mb-6 inline-flex flex-wrap items-center gap-2 text-paper/70">
+            <span className="rounded-sm bg-route px-2 py-1 text-white">● Now booking</span>
+            <span>Daily runs · {company.serviceDays}</span>
           </p>
 
-          <h1 id="hero-title" className="text-4xl leading-[1.05] font-extrabold text-balance sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-            Freight that moves like it has <span className="text-gradient">wings.</span>
-          </h1>
+          <Reveal effect="none">
+            <h1 id="hero-title" className="text-[3.6rem] leading-[0.86] sm:text-8xl lg:text-[7.5rem] xl:text-[8.5rem]">
+              {headline.map((l, i) => (
+                <span key={l.text} className="mask-line">
+                  <span style={{ transitionDelay: `${150 + i * 130}ms` }} className={l.accent ? 'text-signal' : ''}>
+                    {l.text}
+                  </span>
+                </span>
+              ))}
+            </h1>
+          </Reveal>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-            Scheduled daily freight, full truckloads and tailgate delivery — from a single parcel to a full
-            pallet deck. Book by <strong className="font-semibold text-white">{company.cutoff}</strong>, delivered next day.
-          </p>
+          <Reveal effect="rise" delay={550}>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-paper/70">
+              Scheduled daily freight, full truckloads and tailgate delivery — from a single parcel to a full pallet deck.
+              Book by <strong className="bg-signal px-1 font-semibold whitespace-nowrap text-ink">{company.cutoff}</strong>, delivered next day.
+            </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Button href="#quote" size="lg" icon={ArrowRight}>
-              Get a free quote
-            </Button>
-            <Button href={tel(company.phone)} size="lg" variant="ghost" iconLeft={Phone}>
-              Call dispatch
-            </Button>
-          </div>
-
-          <ul className="mt-10 grid grid-cols-1 gap-3 text-sm text-white/70 sm:grid-cols-2">
-            {heroBadges.map((b) => (
-              <li key={b} className="flex items-center gap-2">
-                <CircleCheck className="size-4 shrink-0 text-ember-400" aria-hidden="true" />
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Visual */}
-        <div className="relative lg:col-span-6">
-          <div className="relative rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.02] p-6 shadow-2xl backdrop-blur sm:p-10">
-            <div className="mb-6 flex items-center justify-between text-xs text-white/50">
-              <span className="inline-flex items-center gap-2">
-                <span className="size-2 animate-pulse rounded-full bg-emerald-400" aria-hidden="true" />
-                Live run · WX-204
-              </span>
-              <span>Hub → Coast Terminal</span>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <Button href="#quote" size="lg" icon={ArrowRight}>
+                Get a free quote
+              </Button>
+              <Button href={tel(company.phone)} size="lg" variant="ghost" iconLeft={Phone}>
+                Call dispatch
+              </Button>
             </div>
 
-            <TruckIllustration className="w-full" />
+            <ul className="mt-10 flex flex-wrap gap-2">
+              {heroBadges.map((b) => (
+                <li key={b} className="label inline-flex items-center gap-1.5 rounded-sm border border-paper/20 px-2.5 py-1.5 text-paper/75">
+                  <Check className="size-3.5 text-signal" strokeWidth={3} aria-hidden="true" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
 
-            {/* Progress */}
-            <div className="mt-6">
-              <div className="mb-2 flex justify-between text-xs text-white/50">
-                <span>Departed 6:00 pm</span>
-                <span>ETA 11:30 am</span>
+        {/* Waybill card */}
+        <Reveal effect="rise" delay={350} className="relative lg:col-span-5">
+          <div className="relative rotate-[-1.5deg] rounded-md border-2 border-ink bg-paper p-5 text-ink shadow-hard-signal transition-transform duration-500 hover:rotate-0 sm:p-7">
+            <div className="flex items-start justify-between gap-4 border-b-2 border-dashed border-ink/30 pb-4">
+              <div>
+                <p className="label text-ink/50">Waybill Nº</p>
+                <p className="font-mono text-xl font-bold">WX-0204</p>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-wing-500 to-ember-500" />
+              <Barcode />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 border-b-2 border-dashed border-ink/30 py-4">
+              <div>
+                <p className="label text-ink/50">From</p>
+                <p className="font-display text-2xl font-black uppercase">{first}</p>
+              </div>
+              <div className="text-right">
+                <p className="label text-ink/50">To</p>
+                <p className="font-display text-2xl font-black uppercase">{last}</p>
               </div>
             </div>
-          </div>
 
-          {/* Floating cards */}
-          <div className="absolute -top-6 -left-2 hidden animate-float items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink-900 shadow-2xl sm:flex lg:-left-10">
-            <span className="grid size-10 place-items-center rounded-xl bg-ember-500/10 text-ember-600">
-              <Clock className="size-5" aria-hidden="true" />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[11px] text-ink-900/50">Daily cutoff</span>
-              <span className="font-display text-sm font-bold">{company.cutoff}</span>
-            </span>
-          </div>
+            <TruckIllustration className="my-5 w-full" />
 
-          <div className="absolute -right-2 -bottom-8 hidden animate-float items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink-900 shadow-2xl [animation-delay:1.5s] sm:flex lg:-right-6">
-            <span className="grid size-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-600">
-              <PackageCheck className="size-5" aria-hidden="true" />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[11px] text-ink-900/50">Delivered · photo POD</span>
-              <span className="font-display text-sm font-bold">Signed 10:42 am</span>
-            </span>
-          </div>
+            <dl className="grid grid-cols-3 gap-3 border-t-2 border-dashed border-ink/30 pt-4 font-mono text-xs">
+              <div>
+                <dt className="label text-ink/50">Pieces</dt>
+                <dd className="mt-1 font-bold">6 PLT</dd>
+              </div>
+              <div>
+                <dt className="label text-ink/50">Cutoff</dt>
+                <dd className="mt-1 font-bold">{company.cutoff}</dd>
+              </div>
+              <div>
+                <dt className="label text-ink/50">ETA</dt>
+                <dd className="mt-1 font-bold">Next day</dd>
+              </div>
+            </dl>
 
-          <div className="absolute top-1/2 -right-4 hidden size-14 animate-float place-items-center rounded-full bg-wing-600 shadow-xl shadow-wing-600/40 [animation-delay:.8s] xl:grid">
-            <Navigation className="size-6 text-white" aria-hidden="true" />
+            {/* rubber stamp */}
+            <div className="absolute -top-5 -right-3 rotate-[12deg] rounded-md border-[3px] border-route bg-paper/90 px-3 py-1.5 font-display text-xl font-black tracking-wider text-route uppercase sm:-right-6">
+              On schedule
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )
