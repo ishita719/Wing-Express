@@ -1,6 +1,6 @@
-# Wing Express — Website
+# EagleWing Express — Website
 
-Marketing website for **Wing Express**, a trucking and freight company.
+Marketing website for **EagleWing Express Ltd.**, a freight and delivery company serving Vancouver Island (Victoria → Campbell River).
 Built with **React 19 + Vite + Tailwind CSS 4 + Lucide icons** and hosted on **Cloudflare Workers**.
 
 ## Quick start

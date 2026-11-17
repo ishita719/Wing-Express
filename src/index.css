@@ -1,33 +1,44 @@
 @import 'tailwindcss';
 
 /*
- * WING EXPRESS — corporate design system
- * Deep navy + brand blue + emerald on white / soft blue-grey.
- * Archivo (headings) + Public Sans (body). Soft shadows, 8px radius.
+ * EAGLEWING EXPRESS — corporate design system
+ * Brand navy + amber (carried over from the company's original logo),
+ * steel blue for links/icons, emerald for status. Archivo + Public Sans.
  */
 @theme {
   --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Archivo', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --color-navy: #0a1f33;
-  --color-navy-2: #10294a;
-  --color-navy-3: #1a3a63;
-  --color-brand: #1f5fbf;
-  --color-brand-dark: #174a96;
-  --color-brand-50: #eef4fc;
-  --color-brand-100: #dbe7f8;
+  --color-navy: #0b2e4f;
+  --color-navy-2: #0f3a62;
+  --color-navy-3: #174b7a;
+  --color-navy-950: #071d33;
+  --color-amber: #f5b247;
+  --color-amber-dark: #e39b28;
+  --color-amber-50: #fef6e7;
+  --color-amber-100: #fde9c4;
+  --color-amber-700: #9a5f07;
+  --color-brand: #1e5a96;
+  --color-brand-dark: #164677;
+  --color-brand-50: #edf3fa;
+  --color-brand-100: #d5e3f2;
   --color-accent: #0f9d76;
   --color-accent-50: #e7f6f1;
-  --color-surface: #f5f7fa;
+  --color-surface: #f6f8fb;
   --color-line: #e2e8f0;
-  --color-ink: #0a1f33;
-  --color-muted: #52637a;
+  --color-ink: #0b2e4f;
+  --color-muted: #55657a;
 
-  --shadow-card: 0 1px 2px rgb(10 31 51 / 0.04), 0 4px 16px rgb(10 31 51 / 0.06);
-  --shadow-card-hover: 0 2px 4px rgb(10 31 51 / 0.06), 0 16px 40px rgb(10 31 51 / 0.12);
+  --shadow-card: 0 1px 2px rgb(11 46 79 / 0.04), 0 4px 16px rgb(11 46 79 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 46 79 / 0.06), 0 18px 44px rgb(11 46 79 / 0.13);
 
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 45s linear infinite;
   --animate-pulse-dot: pulse-dot 2s ease-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 26s ease-in-out infinite alternate-reverse;
+  --animate-route: route-run 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-shine: shine 0.9s ease;
+  --animate-float: float 6s ease-in-out infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -36,6 +47,24 @@
   @keyframes pulse-dot {
     0% { box-shadow: 0 0 0 0 rgb(15 157 118 / 0.5); }
     100% { box-shadow: 0 0 0 10px rgb(15 157 118 / 0); }
+  }
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.08); }
+    100% { transform: translate(-30px, 20px) scale(0.95); }
+  }
+  @keyframes route-run {
+    0% { left: 0%; }
+    45%, 55% { left: 100%; }
+    100% { left: 0%; }
+  }
+  @keyframes shine {
+    from { transform: translateX(-120%) skewX(-20deg); }
+    to { transform: translateX(220%) skewX(-20deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 }
 
@@ -52,10 +81,10 @@
     @apply font-display font-bold tracking-tight text-balance;
   }
   ::selection {
-    @apply bg-brand text-white;
+    @apply bg-amber text-navy;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand;
+    @apply outline-2 outline-offset-2 outline-amber;
   }
 }
 
@@ -93,6 +122,32 @@
   opacity: 1;
   transform: none;
 }
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* Line that grows left→right when its parent becomes visible */
+.grow-x {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s;
+}
+.is-visible .grow-x {
+  transform: scaleX(1);
+}
+/* Logo feathers sweep in on load */
+.feather {
+  animation: feather-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes feather-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: none; }
+}
 /* Route drawing */
 .draw-path {
   stroke-dasharray: 1000;
@@ -105,7 +160,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal-up, .draw-path {
+  .reveal-up, .reveal-scale, .grow-x, .feather, .draw-path {
     opacity: 1 !important;
     transform: none !important;
     stroke-dashoffset: 0 !important;

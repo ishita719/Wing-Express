@@ -1,161 +1,156 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  WING EXPRESS — SITE CONTENT
- *  Every piece of business info lives here. Replace the values
- *  marked `TODO` with the real company details before launch.
+ *  EAGLEWING EXPRESS — SITE CONTENT
+ *  Every piece of business info lives here.
+ *  Details below were supplied by the client (Nov 2026).
+ *  Items marked `CONFIRM` are reasonable defaults the client
+ *  should check before launch.
  * ─────────────────────────────────────────────────────────────
  */
 import {
-  Truck, Package, Warehouse, Clock, ShieldCheck, MapPin, Route, Snowflake,
-  CalendarCheck, Zap, Headset, Radar, Forklift, Boxes, Store, Factory,
-  Stethoscope, HardHat, ShoppingBag, Wheat, BadgeCheck, Timer, PackageCheck,
+  Truck, Package, Boxes, Zap, Building2, Home, Route, MapPin, Clock,
+  Headset, BadgeDollarSign, HandHeart, CalendarSync, Mountain,
+  PhoneCall, ClipboardList, PackageCheck, Store, HardHat, Factory,
+  Stethoscope, ShoppingBag, Wheat,
 } from 'lucide-react'
 
 export const company = {
-  name: 'Wing Express',
-  legalName: 'Wing Express Inc.', // TODO: confirm legal name
-  tagline: 'Freight that moves like it has wings.',
+  name: 'EagleWing Express',
+  legalName: 'EagleWing Express Ltd.',
+  tagline: 'Fast, reliable freight across Vancouver Island.',
   description:
-    'Wing Express is a reliable trucking and freight company offering scheduled daily runs, full truckload, LTL, tailgate and last-mile delivery for businesses of every size.',
-  phone: '+1 (555) 010-2040', // TODO: real dispatch phone
-  phoneAlt: '+1 (555) 010-2041', // TODO: real alternate phone
-  email: 'dispatch@wingexpress.ca', // TODO: real email
-  address: '100 Freightway Drive, Your City, BC', // TODO: real address
-  hours: 'Monday – Saturday · 7:00 am – 7:00 pm',
-  serviceDays: 'Mon – Sat',
-  cutoff: '4:00 pm',
+    'EagleWing Express delivers parcels, pallets and full loads up and down Vancouver Island — from Victoria to Campbell River — with friendly dispatch and upfront quotes.',
+  phone: '(778) 268-5136',
+  email: 'expresseaglewing@gmail.com',
+  region: 'Vancouver Island, British Columbia',
+  hours: 'Monday – Friday · 8:00 am – 8:00 pm',
+  hoursShort: 'Mon – Fri, 8 am – 8 pm',
+  serviceDays: 'Mon – Fri',
   url: import.meta.env.VITE_SITE_URL || 'https://wing-express.ishita-8ab.workers.dev',
-  founded: '2026',
 }
 
 export const navLinks = [
   { label: 'Services', href: '#services' },
-  { label: 'Fleet', href: '#fleet' },
   { label: 'How it works', href: '#process' },
   { label: 'Coverage', href: '#coverage' },
+  { label: 'Why us', href: '#why' },
   { label: 'FAQ', href: '#faq' },
 ]
 
 export const heroBadges = [
-  'Daily scheduled runs',
-  'Tailgate on every truck',
-  'Fully insured & NSC compliant',
-  'Same-day quotes',
+  'Victoria to Campbell River',
+  company.hoursShort,
+  'Parcels, pallets & full loads',
+  'Fast, upfront quotes',
 ]
 
 export const stats = [
-  { value: 98, suffix: '%', label: 'On-time delivery' },
-  { value: 6, suffix: ' days', label: 'Service every week' },
-  { value: 3, suffix: ' sizes', label: '16, 20 & 26 ft trucks' },
-  { value: 24, suffix: 'h', label: 'Typical transit, hub to door' },
+  { value: 8, suffix: '', label: 'Island communities served' },
+  { value: 5, suffix: ' days', label: 'Service every week' },
+  { value: 12, suffix: ' hrs', label: 'Dispatch open daily' },
+  { value: 1, suffix: ' call', label: 'Is all it takes to book' },
 ]
 
+// CONFIRM: service list with the client.
 export const services = [
   {
     icon: Route,
-    title: 'Scheduled Daily Freight',
-    text: 'Fixed departures on a set route so you always know when your freight leaves and when it lands. Book by the cutoff, delivered next day.',
+    title: 'Scheduled Island Runs',
+    text: 'Regular runs up and down the Island between Victoria and Campbell River, so your freight moves on a schedule you can plan around.',
   },
   {
-    icon: Truck,
-    title: 'Full Truckload (FTL)',
-    text: 'A dedicated truck for your load only — direct, no transfers, no shared stops. Ideal for large orders and time-critical shipments.',
+    icon: Zap,
+    title: 'Express Delivery',
+    text: 'Time-sensitive shipment? We prioritise urgent freight and keep you updated from pickup to drop-off.',
   },
   {
     icon: Boxes,
-    title: 'LTL & Pallet Shipping',
-    text: 'From a single parcel to multiple pallets. Pay only for the deck space you use while riding on our scheduled network.',
+    title: 'Pallet & LTL Freight',
+    text: 'From a single pallet to several — pay only for the space your shipment needs on a shared run.',
   },
   {
-    icon: Forklift,
-    title: 'Tailgate Delivery',
-    text: 'No dock or forklift at your site? Every Wing Express truck carries a power tailgate to set freight down right where you need it.',
+    icon: Truck,
+    title: 'Full Loads',
+    text: 'A dedicated truck for your load only. Direct, with no transfers and no shared stops.',
   },
   {
-    icon: PackageCheck,
-    title: 'Last-Mile & Residential',
-    text: 'Careful final-leg delivery to shops, job sites and homes, with photo proof of delivery and recipient sign-off.',
+    icon: Building2,
+    title: 'Business & Commercial',
+    text: 'Retail restocks, job-site materials, office and trade deliveries — handled professionally and on time.',
   },
   {
-    icon: Warehouse,
-    title: 'Cross-Dock & Storage',
-    text: 'Drop freight at our secure hub, consolidate shipments, or hold stock short-term until your customer is ready to receive.',
+    icon: Home,
+    title: 'Residential Delivery',
+    text: 'Careful final-mile delivery to homes across the Island, with clear communication about timing.',
   },
 ]
 
-export const fleet = [
+export const shipmentSizes = [
   {
-    size: '16 ft',
-    name: 'City Runner',
-    capacity: 'Up to 6 pallets · 3,000 lb',
-    best: 'Parcels, retail restocks and residential drops in tight streets.',
-    features: ['Power tailgate', 'E-track tie-downs', 'GPS tracked'],
+    icon: Package,
+    name: 'Parcels & boxes',
+    text: 'Small shipments, documents and boxed goods moving between Island communities.',
+    examples: ['Business parcels', 'Retail orders', 'Parts & supplies'],
   },
   {
-    size: '20 ft',
-    name: 'Regional Workhorse',
-    capacity: 'Up to 10 pallets · 5,500 lb',
-    best: 'Mixed LTL loads on scheduled daily runs between hubs.',
-    features: ['Power tailgate', 'Pallet jack on board', 'GPS tracked'],
+    icon: Boxes,
+    name: 'Pallets & LTL',
+    text: 'One or more pallets riding on a shared run — the most cost-effective way to move bulk.',
+    examples: ['Palletised stock', 'Building materials', 'Wholesale orders'],
     featured: true,
   },
   {
-    size: '26 ft',
-    name: 'Heavy Hauler',
-    capacity: 'Up to 14 pallets · 10,000 lb',
-    best: 'Full truckloads, building supplies and bulk commercial orders.',
-    features: ['Power tailgate', 'Air-ride suspension', 'GPS tracked'],
+    icon: Truck,
+    name: 'Full loads',
+    text: 'A dedicated truck from pickup to delivery when you need the whole deck.',
+    examples: ['Large orders', 'Moves & equipment', 'Time-critical loads'],
   },
 ]
 
 export const process = [
   {
-    icon: CalendarCheck,
-    step: '01',
-    title: 'Book before cutoff',
-    text: `Request a quote or call dispatch. Freight booked by ${company.cutoff} rides the next departure.`,
+    icon: PhoneCall,
+    title: 'Call or request a quote',
+    text: `Call ${'(778) 268-5136'} or send the quote form. We reply with a clear, upfront price.`,
   },
   {
-    icon: Package,
-    step: '02',
-    title: 'Pickup & load',
-    text: 'We collect from your door or you drop at our hub. Freight is loaded in stop order that evening.',
+    icon: ClipboardList,
+    title: 'We schedule your pickup',
+    text: 'Dispatch confirms the pickup time and the best run for your shipment.',
   },
   {
-    icon: Radar,
-    step: '03',
-    title: 'Tracked in transit',
-    text: 'Every truck is GPS tracked. Dispatch keeps you posted with real updates — not guesses.',
+    icon: Truck,
+    title: 'On the road',
+    text: 'Your freight travels the Island highway with a team that knows every stop.',
   },
   {
-    icon: BadgeCheck,
-    step: '04',
+    icon: PackageCheck,
     title: 'Delivered & confirmed',
-    text: 'Freight lands next day with photo proof of delivery and a confirmation sent straight to you.',
+    text: 'We deliver with care and confirm as soon as your shipment arrives.',
   },
 ]
 
 export const features = [
-  { icon: Clock, title: 'On-time, every run', text: 'Fixed schedules and a cutoff you can plan around.' },
-  { icon: ShieldCheck, title: 'Insured & compliant', text: 'Cargo insurance, WCB coverage and NSC-certified carrier.' },
-  { icon: Headset, title: 'Real people at dispatch', text: 'Call and talk to the team that is actually moving your freight.' },
-  { icon: Zap, title: 'Same-day quotes', text: 'Clear, upfront rates — usually within a few business hours.' },
-  { icon: Snowflake, title: 'All-season reliability', text: 'Winter-ready trucks and experienced drivers on every road.' },
-  { icon: Timer, title: 'Standing bookings', text: 'Weekly reserved deck space and locked-in rates for regular shippers.' },
+  { icon: Mountain, title: 'Island-wide coverage', text: 'Eight communities from Victoria to Campbell River, including Port Alberni.' },
+  { icon: Headset, title: 'Real people at dispatch', text: 'Talk directly to the team moving your freight — no call centres.' },
+  { icon: BadgeDollarSign, title: 'Upfront quotes', text: 'Clear pricing before we move anything. No surprises on the invoice.' },
+  { icon: HandHeart, title: 'Careful handling', text: 'Every shipment is loaded, secured and delivered as if it were our own.' },
+  { icon: CalendarSync, title: 'Regular pickups', text: 'Ask us about recurring pickups for businesses that ship every week.' },
+  { icon: Clock, title: 'Long service hours', text: `Dispatch is open ${'8 am to 8 pm'}, Monday to Friday.` },
 ]
 
-// TODO: replace with the real stops / cities Wing Express serves.
+/**
+ * Coverage — Vancouver Island, south to north.
+ * Port Alberni sits on Hwy 4, branching west from Parksville.
+ */
 export const coverage = {
-  hub: 'Main Hub',
-  stops: [
-    { name: 'Main Hub', km: 0 },
-    { name: 'Stop 2', km: 120 },
-    { name: 'Stop 3', km: 245 },
-    { name: 'Stop 4', km: 380 },
-    { name: 'Stop 5', km: 520 },
-    { name: 'Coast Terminal', km: 700 },
+  mainLine: ['Victoria', 'Duncan', 'Ladysmith', 'Nanaimo', 'Parksville', 'Courtenay', 'Campbell River'],
+  branch: { from: 'Parksville', to: 'Port Alberni', highway: 'Hwy 4' },
+  highways: [
+    { label: 'Hwy 1', from: 'Victoria', to: 'Nanaimo' },
+    { label: 'Hwy 19', from: 'Nanaimo', to: 'Campbell River' },
   ],
-  pickups: ['Metro Region', 'Valley Region', 'Interior Region'],
+  all: ['Victoria', 'Duncan', 'Ladysmith', 'Nanaimo', 'Parksville', 'Port Alberni', 'Courtenay', 'Campbell River'],
 }
 
 export const industries = [
@@ -169,32 +164,32 @@ export const industries = [
 
 export const faqs = [
   {
-    q: 'What areas does Wing Express service?',
-    a: 'We run scheduled daily freight across our core route and offer pickups from surrounding regions. Not sure if we reach you? Send a quote request and dispatch will confirm the same day.',
+    q: 'Which areas does EagleWing Express serve?',
+    a: `We deliver across Vancouver Island: ${coverage.all.slice(0, -1).join(', ')} and ${coverage.all.at(-1)}. Not on the list? Ask us — we will let you know if we can help.`,
   },
   {
-    q: 'How often do your trucks run?',
-    a: `Our scheduled runs operate ${company.serviceDays}. Freight booked before the ${company.cutoff} cutoff ships on the next departure.`,
+    q: 'What are your business hours?',
+    a: `Our dispatch team is available ${company.hours}.`,
   },
   {
     q: 'What size of shipment can you take?',
-    a: 'Anything from a single parcel to a full 26 ft truckload. LTL customers pay only for the space their freight uses.',
+    a: 'Anything from a single parcel or box to pallets and full truckloads.',
   },
   {
-    q: 'Do I need a loading dock or forklift?',
-    a: 'No. Every Wing Express truck has a power tailgate, and our 20 ft trucks carry a pallet jack, so we can deliver to sites without a dock.',
-  },
-  {
-    q: 'Is my freight insured?',
-    a: 'Yes. We carry cargo insurance and full commercial liability, are WCB covered, and operate as an NSC-certified carrier. Certificates are available on request.',
+    q: 'How do I book a delivery?',
+    a: `Call us at ${company.phone}, email ${company.email}, or fill in the quote form on this page. We confirm your pickup time and price before anything moves.`,
   },
   {
     q: 'How are rates calculated?',
-    a: 'Rates depend on distance, weight or pallet count, and any extras such as tailgate or residential delivery. Standing weekly bookings receive locked-in pricing.',
+    a: 'Rates depend on distance, the size and weight of your shipment, and any special handling. You always get an upfront quote first.',
+  },
+  {
+    q: 'Do you offer regular pickups for businesses?',
+    a: 'Yes — if you ship regularly, ask us about setting up recurring pickups on the days that suit you.',
   },
 ]
 
 export const quoteOptions = {
-  timing: ['Ready now', 'Today', 'Tomorrow', 'This week', 'Weekly standing booking'],
-  service: ['Scheduled daily freight', 'Full truckload', 'LTL / pallets', 'Last-mile delivery', 'Storage / cross-dock', 'Not sure'],
+  timing: ['As soon as possible', 'Today', 'Tomorrow', 'This week', 'Regular / recurring'],
+  service: ['Scheduled run', 'Express delivery', 'Pallet / LTL', 'Full load', 'Residential delivery', 'Not sure'],
 }

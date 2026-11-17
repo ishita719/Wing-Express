@@ -34,7 +34,7 @@ function buildMailto(d) {
 export default function Quote() {
   const [data, setData] = useState(initial)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
-  const stopNames = [...coverage.stops.map((s) => s.name), ...coverage.pickups, 'Other']
+  const stopNames = [...coverage.all, 'Other / not listed']
 
   const update = (e) => {
     const { name, value, type, checked } = e.target
@@ -60,9 +60,8 @@ export default function Quote() {
 
   const contact = [
     { icon: Phone, label: 'Dispatch', value: company.phone, href: tel(company.phone) },
-    { icon: Phone, label: 'Alternate', value: company.phoneAlt, href: tel(company.phoneAlt) },
     { icon: Mail, label: 'Email', value: company.email, href: `mailto:${company.email}` },
-    { icon: MapPin, label: 'Main hub', value: company.address },
+    { icon: MapPin, label: 'Service area', value: company.region },
     { icon: Clock, label: 'Hours', value: company.hours },
   ]
 
@@ -71,21 +70,21 @@ export default function Quote() {
       <div className="container-x relative grid gap-10 lg:grid-cols-12 lg:gap-14">
         {/* Contact side */}
         <Reveal className="text-white lg:col-span-5">
-          <p className="eyebrow mb-3 text-brand-100">
+          <p className="eyebrow mb-3 text-amber">
             Dispatch
           </p>
           <h2 id="quote-title" className="text-3xl leading-tight sm:text-4xl lg:text-[2.6rem]">
             Get a freight quote today
           </h2>
           <p className="mt-4 text-white/70">
-            Tell us what is moving and where. Our dispatch team replies the same business day with a clear, upfront rate.
+            Tell us what is moving and where. Our dispatch team gets back to you quickly with a clear, upfront price.
           </p>
 
           <ul className="mt-10 space-y-3">
             {contact.map(({ icon: Icon, label, value, href }) => {
               const Inner = (
                 <>
-                  <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white/10 text-brand-100 transition group-hover:bg-brand group-hover:text-white">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white/10 text-amber transition group-hover:bg-amber group-hover:text-navy">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
                   <span>
@@ -117,7 +116,7 @@ export default function Quote() {
                 <CircleCheck className="mx-auto size-16 text-accent" aria-hidden="true" />
                 <h3 className="mt-5 text-2xl">Request received!</h3>
                 <p className="mx-auto mt-2 max-w-sm text-muted">
-                  Thanks — our dispatch team will get back to you the same business day.
+                  Thanks — our dispatch team will be in touch shortly.
                 </p>
                 <Button type="button" variant="outline" className="mt-8" onClick={() => setStatus('idle')}>
                   Send another request
@@ -199,7 +198,7 @@ export default function Quote() {
                 )}
 
                 <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                  <p className="text-xs text-muted">Same-day replies, {company.serviceDays}.</p>
+                  <p className="text-xs text-muted">Dispatch hours: {company.hoursShort}.</p>
                   <Button type="submit" size="lg" disabled={status === 'sending'} icon={status === 'sending' ? undefined : Send}>
                     {status === 'sending' && <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />}
                     {status === 'sending' ? 'Sending…' : 'Send request'}

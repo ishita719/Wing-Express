@@ -1,8 +1,12 @@
 import useInView from '../../hooks/useInView'
 
+const effects = { up: 'reveal-up', scale: 'reveal-scale', none: '' }
+
 /**
- * Fades + lifts children in when scrolled into view.
- * effect="none" only toggles .is-visible (for children such as .draw-path).
+ * Reveals children when scrolled into view.
+ * effect="up"    → fade + lift (default)
+ * effect="scale" → fade + gentle zoom
+ * effect="none"  → only toggles .is-visible (for children such as .draw-path / .grow-x)
  */
 export default function Reveal({ as: Tag = 'div', effect = 'up', delay = 0, className = '', children, ...props }) {
   const [ref, inView] = useInView()
@@ -10,7 +14,7 @@ export default function Reveal({ as: Tag = 'div', effect = 'up', delay = 0, clas
     <Tag
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`${effect === 'up' ? 'reveal-up' : ''} ${inView ? 'is-visible' : ''} ${className}`}
+      className={`${effects[effect]} ${inView ? 'is-visible' : ''} ${className}`}
       {...props}
     >
       {children}

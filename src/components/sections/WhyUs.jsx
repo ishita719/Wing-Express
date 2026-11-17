@@ -9,7 +9,7 @@ export default function WhyUs() {
         <div className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
           <SectionHeading
             id="why-title"
-            eyebrow="Why Wing Express"
+            eyebrow="Why EagleWing"
             title="A carrier you can count on"
             text="Built for businesses that cannot afford a missed delivery. Clear communication, careful handling and trucks that leave on time — every time."
           />
@@ -28,8 +28,8 @@ export default function WhyUs() {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
           {features.map(({ icon: Icon, title, text }, i) => (
-            <Reveal key={title} as="article" delay={(i % 2) * 90} className="card card-hover p-6">
-              <span className="grid size-11 place-items-center rounded-lg bg-accent-50 text-accent">
+            <Reveal key={title} as="article" delay={(i % 2) * 90} className="card card-hover group p-6">
+              <span className="grid size-11 place-items-center rounded-lg bg-amber-50 text-amber-dark transition-colors duration-300 group-hover:bg-navy group-hover:text-amber">
                 <Icon className="size-5" aria-hidden="true" />
               </span>
               <h3 className="mt-5 text-lg">{title}</h3>
