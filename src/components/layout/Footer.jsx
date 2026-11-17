@@ -1,39 +1,31 @@
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import Logo from '../ui/Logo'
-import { company, navLinks, services, coverage } from '../../data/site'
+import { company, navLinks, services } from '../../data/site'
 import { tel } from '../../lib/utils'
 
 function Col({ title, children }) {
   return (
     <div>
-      <h3 className="label mb-5 font-sans text-signal">{title}</h3>
+      <h3 className="mb-5 font-sans text-sm font-semibold text-white">{title}</h3>
       {children}
     </div>
   )
 }
 
-const linkCls = 'text-sm text-paper/60 transition hover:text-signal hover:translate-x-1 inline-block'
+const linkCls = 'text-sm text-white/60 transition hover:text-white'
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="bg-asphalt text-paper" aria-labelledby="footer-heading">
+    <footer className="bg-navy text-white" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="h-1 bg-gradient-to-r from-signal via-signal to-route" aria-hidden="true" />
 
-      {/* Giant wordmark */}
-      <div className="container-x overflow-hidden pt-14">
-        <p className="font-display text-[18vw] leading-[0.8] font-black text-paper/[0.06] uppercase select-none lg:text-[11rem]" aria-hidden="true">
-          Wing Express
-        </p>
-      </div>
-
-      <div className="container-x grid gap-12 py-12 sm:grid-cols-2 lg:grid-cols-12">
+      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <Logo />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-paper/60">{company.description}</p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">{company.description}</p>
         </div>
 
         <div className="lg:col-span-2">
@@ -48,7 +40,7 @@ export default function Footer() {
               ))}
               <li>
                 <a href="#quote" className={linkCls}>
-                  Get a quote
+                  Request a quote
                 </a>
               </li>
             </ul>
@@ -71,11 +63,11 @@ export default function Footer() {
 
         <div className="lg:col-span-3">
           <Col title="Contact">
-            <ul className="space-y-4 text-sm text-paper/60">
+            <ul className="space-y-4 text-sm text-white/60">
               <li>
-                <a href={tel(company.phone)} className="flex items-start gap-3 transition hover:text-signal">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
-                  <span className="font-mono">
+                <a href={tel(company.phone)} className="flex items-start gap-3 transition hover:text-white">
+                  <Phone className="mt-0.5 size-4 shrink-0 text-brand-100" aria-hidden="true" />
+                  <span>
                     {company.phone}
                     <br />
                     {company.phoneAlt}
@@ -83,17 +75,17 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`mailto:${company.email}`} className="flex items-start gap-3 transition hover:text-signal">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
+                <a href={`mailto:${company.email}`} className="flex items-start gap-3 transition hover:text-white">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-brand-100" aria-hidden="true" />
                   {company.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-brand-100" aria-hidden="true" />
                 <address className="not-italic">{company.address}</address>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden="true" />
+                <Clock className="mt-0.5 size-4 shrink-0 text-brand-100" aria-hidden="true" />
                 {company.hours}
               </li>
             </ul>
@@ -101,14 +93,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t-2 border-dashed border-paper/15">
-        <div className="container-x label flex flex-col items-center justify-between gap-3 py-6 text-paper/40 sm:flex-row">
+      <div className="border-t border-white/10">
+        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/45 sm:flex-row">
           <p>
             © {year} {company.legalName} All rights reserved.
           </p>
-          <p>
-            {coverage.stops.length} stops · {coverage.pickups.length} pickup regions · {company.serviceDays}
-          </p>
+          <p>Fully insured · NSC-compliant carrier</p>
         </div>
       </div>
     </footer>

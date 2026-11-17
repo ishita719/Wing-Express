@@ -1,75 +1,61 @@
 @import 'tailwindcss';
 
 /*
- * WING EXPRESS — "Highway Signage & Freight Manifest" theme
- * Road-sign yellow, highway green and asphalt on warm paper.
- * Square corners, solid borders, hard offset shadows — no glassmorphism.
+ * WING EXPRESS — corporate design system
+ * Deep navy + brand blue + emerald on white / soft blue-grey.
+ * Archivo (headings) + Public Sans (body). Soft shadows, 8px radius.
  */
 @theme {
-  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Archivo', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --color-asphalt: #0f1b2d;
-  --color-asphalt-2: #16243a;
-  --color-asphalt-3: #223350;
-  --color-paper: #f5f6f8;
-  --color-paper-2: #e8ecf2;
-  --color-signal: #e0a83a;
-  --color-signal-2: #c98f22;
-  --color-route: #1d6f7a;
-  --color-route-2: #155660;
-  --color-route-tint: #d6ebee;
-  --color-ink: #0f1b2d;
+  --color-navy: #0a1f33;
+  --color-navy-2: #10294a;
+  --color-navy-3: #1a3a63;
+  --color-brand: #1f5fbf;
+  --color-brand-dark: #174a96;
+  --color-brand-50: #eef4fc;
+  --color-brand-100: #dbe7f8;
+  --color-accent: #0f9d76;
+  --color-accent-50: #e7f6f1;
+  --color-surface: #f5f7fa;
+  --color-line: #e2e8f0;
+  --color-ink: #0a1f33;
+  --color-muted: #52637a;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  --shadow-card: 0 1px 2px rgb(10 31 51 / 0.04), 0 4px 16px rgb(10 31 51 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(10 31 51 / 0.06), 0 16px 40px rgb(10 31 51 / 0.12);
 
-  --shadow-hard: 6px 6px 0 0 #0f1b2d;
-  --shadow-hard-sm: 3px 3px 0 0 #0f1b2d;
-  --shadow-hard-signal: 6px 6px 0 0 #e0a83a;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-out infinite;
 
-  --animate-lane: lane 1.1s linear infinite;
-  --animate-hazard: hazard 30s linear infinite;
-  --animate-blink: blink 1.4s steps(2, start) infinite;
-  --animate-bob: bob 0.5s ease-in-out infinite;
-
-  @keyframes lane {
-    from { background-position: 0 0; }
-    to { background-position: 0 64px; }
-  }
-  @keyframes hazard {
+  @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-  @keyframes blink {
-    to { visibility: hidden; }
-  }
-  @keyframes bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-1px); }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgb(15 157 118 / 0.5); }
+    100% { box-shadow: 0 0 0 10px rgb(15 157 118 / 0); }
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-paper font-sans text-ink antialiased;
+    @apply bg-white font-sans text-ink antialiased;
   }
   h1, h2, h3 {
-    @apply font-display font-extrabold uppercase;
-    letter-spacing: 0.005em;
+    @apply font-display font-bold tracking-tight text-balance;
   }
   ::selection {
-    @apply bg-signal text-ink;
+    @apply bg-brand text-white;
   }
   :focus-visible {
-    @apply outline-3 outline-offset-2 outline-signal;
+    @apply outline-2 outline-offset-2 outline-brand;
   }
 }
 
@@ -77,76 +63,41 @@
   .container-x {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  /* Small monospace "manifest" label */
-  .label {
-    @apply font-mono text-[11px] font-medium tracking-[0.14em] uppercase;
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.14em] uppercase;
   }
-  /* Card with border + hard shadow that shifts on hover */
-  .plate {
-    @apply rounded-md border-2 border-ink bg-white shadow-hard transition-[transform,box-shadow] duration-200;
+  .card {
+    @apply rounded-lg border border-line bg-white shadow-card transition duration-300;
   }
-  .plate-hover {
-    @apply hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_0_#0f1b2d];
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-brand-100 hover:shadow-card-hover;
   }
   .field {
-    @apply w-full rounded-sm border-2 border-ink/80 bg-paper px-3.5 py-2.5 text-sm text-ink placeholder:text-ink/40 transition focus:border-ink focus:bg-white focus:shadow-hard-sm focus:outline-none;
+    @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/60 transition focus:border-brand focus:ring-4 focus:ring-brand/10 focus:outline-none;
   }
-  .hazard {
-    background-image: repeating-linear-gradient(-45deg, #e0a83a 0 18px, #0f1b2d 18px 36px);
-  }
-  .dot-grid {
-    background-image: radial-gradient(rgb(15 27 45 / 0.12) 1px, transparent 1px);
-    background-size: 22px 22px;
-  }
-  .lane-lines {
-    background-image: linear-gradient(to bottom, #e0a83a 0 50%, transparent 50% 100%);
-    background-size: 4px 64px;
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 }
 
 /* ── Scroll reveals ─────────────────────────────── */
-/* Wipe: content is uncovered left→right like tape being pulled.
-   The clip goes on the children so the observed element keeps its size
-   (a fully clipped element never reports as intersecting). */
-.reveal > * {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.9s cubic-bezier(0.77, 0, 0.18, 1);
-}
-.reveal > *:nth-child(2) { transition-delay: 0.08s; }
-.reveal > *:nth-child(n + 3) { transition-delay: 0.16s; }
-.reveal.is-visible > * {
-  clip-path: inset(0 0 0 0);
-}
-/* Rise: element pops up with a slight overshoot */
-.reveal-rise {
+.reveal-up {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal-rise.is-visible {
+.reveal-up.is-visible {
   opacity: 1;
-  transform: none;
-}
-/* Masked line: text slides up out of a hidden mask */
-.mask-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.04em;
-}
-.mask-line > span {
-  display: block;
-  transform: translateY(105%);
-  transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
-}
-.is-visible .mask-line > span,
-.mask-line.is-visible > span {
   transform: none;
 }
 /* Route drawing */
 .draw-path {
-  stroke-dasharray: var(--len, 1200);
-  stroke-dashoffset: var(--len, 1200);
-  transition: stroke-dashoffset 2.4s cubic-bezier(0.65, 0, 0.35, 1);
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2.2s cubic-bezier(0.65, 0, 0.35, 1);
 }
 .is-visible .draw-path {
   stroke-dashoffset: 0;
@@ -154,8 +105,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal > *, .reveal-rise, .mask-line > span, .draw-path {
-    clip-path: none !important;
+  .reveal-up, .draw-path {
     opacity: 1 !important;
     transform: none !important;
     stroke-dashoffset: 0 !important;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Menu, X, Phone, ArrowRight } from 'lucide-react'
+import { Menu, X, Phone, ArrowRight, Clock, Mail } from 'lucide-react'
 import Logo from '../ui/Logo'
 import Button from '../ui/Button'
 import RoadProgress from '../ui/RoadProgress'
@@ -21,38 +21,31 @@ export default function Header() {
 
   return (
     <header id="top" className="fixed inset-x-0 top-0 z-50">
-      {/* Dispatch ticker */}
-      <div
-        className={`hidden overflow-hidden bg-signal text-ink transition-all duration-300 lg:block ${
-          scrolled ? 'max-h-0' : 'max-h-9'
-        }`}
-      >
-        <div className="container-x label flex h-8 items-center justify-between">
+      {/* Utility bar */}
+      <div className={`hidden overflow-hidden bg-navy text-xs text-white/65 transition-all duration-300 lg:block ${scrolled ? 'max-h-0' : 'max-h-10'}`}>
+        <div className="container-x flex h-9 items-center justify-between border-b border-white/10">
           <span className="inline-flex items-center gap-2">
-            <span className="size-2 animate-blink rounded-full bg-route" aria-hidden="true" />
-            Dispatch open · {company.hours}
+            <Clock className="size-3.5 text-brand-100" aria-hidden="true" /> {company.hours}
           </span>
-          <span>Cutoff {company.cutoff} → delivered next day</span>
-          <a href={`mailto:${company.email}`} className="underline-offset-4 hover:underline">
-            {company.email}
+          <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 transition hover:text-white">
+            <Mail className="size-3.5 text-brand-100" aria-hidden="true" /> {company.email}
           </a>
         </div>
       </div>
 
-      <div className={`bg-asphalt transition-shadow ${scrolled ? 'shadow-[0_6px_0_0_rgb(0_0_0/0.15)]' : ''}`}>
-        <nav className="container-x flex h-16 items-center justify-between gap-6" aria-label="Main">
+      <div className={`bg-navy/95 backdrop-blur transition-shadow ${scrolled ? 'shadow-lg shadow-navy/20' : ''}`}>
+        <nav className="container-x flex h-[4.25rem] items-center justify-between gap-6" aria-label="Main">
           <Logo />
 
-          <ul className="hidden items-center lg:flex">
-            {navLinks.map((l, i) => (
+          <ul className="hidden items-center gap-1 lg:flex">
+            {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="group relative inline-flex items-baseline gap-1.5 px-3 py-2 font-display text-lg font-bold tracking-wide whitespace-nowrap text-paper/80 uppercase transition hover:text-signal xl:px-4"
+                  className="group relative px-3.5 py-2 text-sm font-medium whitespace-nowrap text-white/75 transition hover:text-white"
                 >
-                  <span className="font-mono text-[10px] text-signal/60">0{i + 1}</span>
                   {l.label}
-                  <span className="absolute inset-x-3 bottom-0.5 h-0.5 origin-left scale-x-0 bg-signal transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-brand-100 transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -61,19 +54,19 @@ export default function Header() {
           <div className="hidden items-center gap-5 lg:flex">
             <a
               href={tel(company.phone)}
-              className="hidden items-center gap-2 font-mono text-sm font-bold whitespace-nowrap text-paper transition hover:text-signal xl:inline-flex"
+              className="hidden items-center gap-2 text-sm font-semibold whitespace-nowrap text-white transition hover:text-brand-100 xl:inline-flex"
             >
-              <Phone className="size-4 text-signal" aria-hidden="true" />
+              <Phone className="size-4" aria-hidden="true" />
               {company.phone}
             </a>
             <Button href="#quote" size="sm" icon={ArrowRight}>
-              Get a quote
+              Request a quote
             </Button>
           </div>
 
           <button
             type="button"
-            className="grid size-11 place-items-center rounded-md border-2 border-signal text-signal lg:hidden"
+            className="grid size-10 place-items-center rounded-lg border border-white/20 text-white lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -85,11 +78,11 @@ export default function Header() {
         <RoadProgress />
       </div>
 
-      {/* Mobile menu — slides down like a roller door */}
+      {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[4.5rem] bottom-0 origin-top bg-asphalt transition-transform duration-500 ease-[cubic-bezier(0.77,0,0.18,1)] lg:hidden ${
-          open ? 'scale-y-100' : 'pointer-events-none scale-y-0'
+        className={`fixed inset-x-0 top-[4.4rem] bottom-0 bg-navy transition-all duration-300 lg:hidden ${
+          open ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
         <div className="container-x flex h-full flex-col overflow-y-auto py-6">
@@ -98,18 +91,17 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              style={{ transitionDelay: open ? `${200 + i * 60}ms` : '0ms' }}
-              className={`flex items-baseline gap-3 border-b-2 border-dashed border-paper/15 py-4 font-display text-4xl font-black text-paper uppercase transition-all duration-300 ${
-                open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+              style={{ transitionDelay: open ? `${i * 50}ms` : '0ms' }}
+              className={`border-b border-white/10 py-4 font-display text-2xl font-semibold text-white transition-all duration-300 ${
+                open ? 'translate-x-0 opacity-100' : '-translate-x-3 opacity-0'
               }`}
             >
-              <span className="font-mono text-xs text-signal">0{i + 1}</span>
               {l.label}
             </a>
           ))}
           <div className="mt-auto flex flex-col gap-3 pt-8">
             <Button href="#quote" size="lg" icon={ArrowRight} onClick={() => setOpen(false)}>
-              Get a quote
+              Request a quote
             </Button>
             <Button href={tel(company.phone)} variant="ghost" size="lg" iconLeft={Phone}>
               {company.phone}

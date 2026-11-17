@@ -1,21 +1,22 @@
-/** Wing Express brand mark (three slanted "speed wings") + stencil wordmark. */
+/** Wing Express brand mark (three forward-swept wing strokes) + wordmark. */
 export default function Logo({ light = true, className = '' }) {
   return (
     <a href="#top" className={`group inline-flex items-center gap-2.5 ${className}`} aria-label="Wing Express — home">
-      <svg viewBox="0 0 64 64" className="size-10 shrink-0" aria-hidden="true">
-        <rect width="64" height="64" rx="6" fill={light ? '#e0a83a' : '#0f1b2d'} />
-        <g fill={light ? '#0f1b2d' : '#e0a83a'} className="transition-transform duration-300 group-hover:translate-x-1">
-          <path d="M10 44 L30 16 H40 L20 44 Z" />
-          <path d="M24 44 L40 22 H50 L34 44 Z" />
-          <path d="M38 44 L48 30 H58 L48 44 Z" />
+      <svg viewBox="0 0 40 40" className="size-9 shrink-0" aria-hidden="true">
+        <rect width="40" height="40" rx="9" fill="#1f5fbf" />
+        <g fill="#fff" className="origin-center transition-transform duration-300 group-hover:translate-x-0.5">
+          <path d="M7 28 L18 12 h6 L13 28 Z" opacity="0.55" />
+          <path d="M15 28 L24 15 h6 L21 28 Z" opacity="0.8" />
+          <path d="M23 28 L29 19 h5 L28 28 Z" />
         </g>
-        <rect x="8" y="50" width="48" height="4" fill="#1d6f7a" />
       </svg>
-      <span className="flex flex-col leading-none">
-        <span className={`font-display text-2xl font-black tracking-wide uppercase ${light ? 'text-paper' : 'text-ink'}`}>
+      <span className="leading-none">
+        <span className={`block font-display text-xl font-extrabold tracking-tight ${light ? 'text-white' : 'text-ink'}`}>
           Wing Express
         </span>
-        <span className={`label mt-0.5 !text-[9px] ${light ? 'text-signal' : 'text-route'}`}>Freight · Logistics</span>
+        <span className={`mt-1 block text-[10px] font-semibold tracking-[0.18em] uppercase ${light ? 'text-white/55' : 'text-muted'}`}>
+          Freight &amp; Logistics
+        </span>
       </span>
     </a>
   )

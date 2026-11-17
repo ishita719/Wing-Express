@@ -6,36 +6,18 @@ import { fleet } from '../../data/site'
 
 const lengths = { '16 ft': 16, '20 ft': 20, '26 ft': 26 }
 
-/** Ruler showing truck length in feet, 0–26. */
-function LengthRuler({ ft, dark }) {
-  return (
-    <div className="mt-6" aria-hidden="true">
-      <div className={`relative h-6 border-2 ${dark ? 'border-paper/70' : 'border-ink'}`}>
-        <div className="hazard absolute inset-y-0 left-0 opacity-90" style={{ width: `${(ft / 26) * 100}%` }} />
-      </div>
-      <div className={`mt-1 flex justify-between font-mono text-[10px] ${dark ? 'text-paper/50' : 'text-ink/50'}`}>
-        <span>0</span>
-        <span>8</span>
-        <span>16</span>
-        <span>26 FT</span>
-      </div>
-    </div>
-  )
-}
-
 export default function Fleet() {
   return (
-    <section id="fleet" className="border-t-2 border-ink bg-paper-2 py-20 sm:py-28" aria-labelledby="fleet-title">
+    <section id="fleet" className="bg-white py-20 sm:py-28" aria-labelledby="fleet-title">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
             id="fleet-title"
-            number="02"
             eyebrow="Our fleet"
-            title={['The right truck', 'for every load']}
+            title="The right truck for every size of load"
             text="Three box-truck sizes, each fitted with a power tailgate — so we can deliver to any site, dock or no dock."
           />
-          <Reveal effect="rise">
+          <Reveal>
             <Button href="#quote" variant="outline" icon={ArrowRight}>
               Not sure which? Ask us
             </Button>
@@ -44,30 +26,38 @@ export default function Fleet() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {fleet.map((t, i) => {
-            const dark = t.featured
+            const featured = t.featured
             return (
-              <Reveal key={t.size} as="article" effect="rise" delay={i * 110}>
+              <Reveal key={t.size} as="article" delay={i * 90}>
                 <div
-                  className={`plate plate-hover relative flex h-full flex-col p-7 ${dark ? '!bg-asphalt text-paper !shadow-hard-signal' : ''}`}
+                  className={`relative flex h-full flex-col rounded-xl p-8 transition duration-300 hover:-translate-y-1 ${
+                    featured ? 'bg-navy text-white shadow-xl shadow-navy/20' : 'card card-hover'
+                  }`}
                 >
-                  {dark && (
-                    <span className="label absolute -top-3.5 left-6 rounded-sm border-2 border-ink bg-signal px-2 py-1 text-ink">
+                  {featured && (
+                    <span className="absolute top-6 right-6 rounded-full bg-brand px-3 py-1 text-xs font-semibold text-white">
                       Most booked
                     </span>
                   )}
-                  <p className="label opacity-60">Unit 0{i + 1} · Box truck</p>
-                  <p className={`mt-2 font-display text-8xl leading-none font-black ${dark ? 'text-signal' : ''}`}>{t.size}</p>
-                  <LengthRuler ft={lengths[t.size]} dark={dark} />
+                  <p className={`text-sm font-medium ${featured ? 'text-white/60' : 'text-muted'}`}>Box truck</p>
+                  <p className={`mt-1 font-display text-5xl font-extrabold ${featured ? '' : 'text-ink'}`}>{t.size}</p>
 
-                  <h3 className="mt-7 text-3xl leading-none">{t.name}</h3>
-                  <p className={`mt-2 font-mono text-xs font-bold ${dark ? 'text-signal' : 'text-route'}`}>{t.capacity}</p>
-                  <p className={`mt-4 text-sm leading-relaxed ${dark ? 'text-paper/70' : 'text-ink/65'}`}>{t.best}</p>
+                  <div className={`mt-5 h-2 rounded-full ${featured ? 'bg-white/10' : 'bg-surface'}`} aria-hidden="true">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-brand to-accent"
+                      style={{ width: `${(lengths[t.size] / 26) * 100}%` }}
+                    />
+                  </div>
 
-                  <ul className={`mt-auto space-y-2.5 border-t-2 border-dashed pt-6 ${dark ? 'border-paper/20' : 'border-ink/20'} mt-6`}>
+                  <h3 className="mt-7 text-xl">{t.name}</h3>
+                  <p className={`mt-1 text-sm font-semibold ${featured ? 'text-brand-100' : 'text-brand'}`}>{t.capacity}</p>
+                  <p className={`mt-4 text-sm leading-relaxed ${featured ? 'text-white/70' : 'text-muted'}`}>{t.best}</p>
+
+                  <ul className={`mt-6 space-y-2.5 border-t pt-6 ${featured ? 'border-white/10' : 'border-line'}`}>
                     {t.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2.5 text-sm font-medium">
-                        <span className={`grid size-5 place-items-center rounded-sm ${dark ? 'bg-signal text-ink' : 'bg-route text-white'}`}>
-                          <Check className="size-3" strokeWidth={3.5} aria-hidden="true" />
+                      <li key={f} className={`flex items-center gap-2.5 text-sm ${featured ? 'text-white/85' : 'text-ink/80'}`}>
+                        <span className="grid size-5 place-items-center rounded-full bg-accent text-white">
+                          <Check className="size-3" strokeWidth={3} aria-hidden="true" />
                         </span>
                         {f}
                       </li>

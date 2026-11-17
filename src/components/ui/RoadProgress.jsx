@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Truck } from 'lucide-react'
 
-/** A thin "road" under the header; a truck drives along it as you scroll the page. */
+/** Thin page-progress line under the header. */
 export default function RoadProgress() {
   const [p, setP] = useState(0)
 
@@ -26,18 +25,8 @@ export default function RoadProgress() {
   }, [])
 
   return (
-    <div className="relative h-2 bg-asphalt-3" aria-hidden="true">
-      {/* dashed centre line */}
-      <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#e0a83a55_0_14px,transparent_14px_28px)]" />
-      {/* travelled road */}
-      <div className="absolute inset-y-0 left-0 bg-signal" style={{ width: `${p * 100}%` }} />
-      {/* truck */}
-      <div
-        className="absolute -top-2.5 grid size-6 -translate-x-1/2 place-items-center rounded-sm border-2 border-ink bg-signal text-ink"
-        style={{ left: `clamp(12px, ${p * 100}%, calc(100% - 12px))` }}
-      >
-        <Truck className="size-3.5" strokeWidth={2.5} />
-      </div>
+    <div className="h-[3px] bg-white/5" aria-hidden="true">
+      <div className="h-full origin-left bg-gradient-to-r from-brand to-accent" style={{ transform: `scaleX(${p})` }} />
     </div>
   )
 }

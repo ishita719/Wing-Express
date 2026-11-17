@@ -15,8 +15,8 @@ const initial = {
 function Field({ label, id, required, className = '', children }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-1.5 block label text-ink/70">
-        {label} {required && <span className="text-route">*</span>}
+      <label htmlFor={id} className="mb-1.5 block text-xs font-semibold text-ink">
+        {label} {required && <span className="text-red-600">*</span>}
       </label>
       {children}
     </div>
@@ -67,17 +67,17 @@ export default function Quote() {
   ]
 
   return (
-    <section id="quote" className="relative overflow-hidden bg-asphalt py-20 sm:py-28" aria-labelledby="quote-title">
+    <section id="quote" className="relative overflow-hidden bg-navy py-20 sm:py-28" aria-labelledby="quote-title">
       <div className="container-x relative grid gap-10 lg:grid-cols-12 lg:gap-14">
         {/* Contact side */}
-        <Reveal className="text-paper lg:col-span-5">
-          <p className="label mb-4 inline-flex items-center gap-3 text-signal"><span className="rounded-sm bg-signal px-1.5 py-0.5 text-ink">06</span>
+        <Reveal className="text-white lg:col-span-5">
+          <p className="eyebrow mb-3 text-brand-100">
             Dispatch
           </p>
-          <h2 id="quote-title" className="text-5xl leading-[0.9] sm:text-6xl lg:text-7xl">
+          <h2 id="quote-title" className="text-3xl leading-tight sm:text-4xl lg:text-[2.6rem]">
             Get a freight quote today
           </h2>
-          <p className="mt-4 text-paper/65">
+          <p className="mt-4 text-white/70">
             Tell us what is moving and where. Our dispatch team replies the same business day with a clear, upfront rate.
           </p>
 
@@ -85,11 +85,11 @@ export default function Quote() {
             {contact.map(({ icon: Icon, label, value, href }) => {
               const Inner = (
                 <>
-                  <span className="grid size-11 shrink-0 place-items-center rounded-md bg-paper/10 text-signal transition group-hover:bg-signal group-hover:text-ink">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white/10 text-brand-100 transition group-hover:bg-brand group-hover:text-white">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
                   <span>
-                    <span className="block text-xs text-paper/45">{label}</span>
+                    <span className="block text-xs text-white/50">{label}</span>
                     <span className="font-medium">{value}</span>
                   </span>
                 </>
@@ -97,11 +97,11 @@ export default function Quote() {
               return (
                 <li key={label}>
                   {href ? (
-                    <a href={href} className="group flex items-center gap-4 rounded-md border-2 border-dashed border-paper/20 p-3 transition hover:border-signal hover:bg-paper/5">
+                    <a href={href} className="group flex items-center gap-4 rounded-lg border border-white/10 p-3 transition hover:border-white/25 hover:bg-white/5">
                       {Inner}
                     </a>
                   ) : (
-                    <div className="group flex items-center gap-4 rounded-md border-2 border-dashed border-paper/20 p-3">{Inner}</div>
+                    <div className="group flex items-center gap-4 rounded-lg border border-white/10 p-3">{Inner}</div>
                   )}
                 </li>
               )
@@ -111,12 +111,12 @@ export default function Quote() {
 
         {/* Form */}
         <Reveal delay={120} className="lg:col-span-7">
-          <form onSubmit={submit} className="rounded-md border-2 border-ink bg-white p-6 shadow-hard-signal sm:p-10" noValidate={false}>
+          <form onSubmit={submit} className="rounded-xl bg-white p-6 shadow-2xl shadow-black/30 sm:p-10" noValidate={false}>
             {status === 'sent' ? (
               <div className="py-16 text-center" role="status">
-                <CircleCheck className="mx-auto size-16 text-emerald-500" aria-hidden="true" />
-                <h3 className="mt-5 text-4xl">Request received!</h3>
-                <p className="mx-auto mt-2 max-w-sm text-ink/60">
+                <CircleCheck className="mx-auto size-16 text-accent" aria-hidden="true" />
+                <h3 className="mt-5 text-2xl">Request received!</h3>
+                <p className="mx-auto mt-2 max-w-sm text-muted">
                   Thanks — our dispatch team will get back to you the same business day.
                 </p>
                 <Button type="button" variant="outline" className="mt-8" onClick={() => setStatus('idle')}>
@@ -125,8 +125,8 @@ export default function Quote() {
               </div>
             ) : (
               <>
-                <h3 className="text-4xl leading-none">Request a rate</h3>
-                <p className="mt-1 text-sm text-ink/50">Fields marked * are required.</p>
+                <h3 className="text-2xl">Request a rate</h3>
+                <p className="mt-1 text-sm text-muted">Fields marked * are required.</p>
 
                 <div className="mt-7 grid gap-4 sm:grid-cols-2">
                   <Field label="Pickup from" id="from" required>
@@ -160,8 +160,8 @@ export default function Quote() {
                     <input id="weight" name="weight" value={data.weight} onChange={update} className="field" placeholder="e.g. 1,800 lb" />
                   </Field>
 
-                  <label className="flex cursor-pointer items-center gap-3 rounded-sm border-2 border-ink bg-paper px-4 py-3 font-medium text-sm sm:col-span-2">
-                    <input type="checkbox" name="tailgate" checked={data.tailgate} onChange={update} className="size-4 accent-route" />
+                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-line bg-surface px-4 py-3 text-sm sm:col-span-2">
+                    <input type="checkbox" name="tailgate" checked={data.tailgate} onChange={update} className="size-4 accent-brand" />
                     Tailgate needed — no dock or forklift at the delivery site
                   </label>
 
@@ -186,11 +186,11 @@ export default function Quote() {
                 </div>
 
                 {status === 'error' && (
-                  <div className="mt-5 flex gap-3 rounded-sm bg-signal/40 border-2 border-ink p-4 text-sm text-ink" role="alert">
-                    <TriangleAlert className="size-5 shrink-0 text-route" aria-hidden="true" />
+                  <div className="mt-5 flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-ink" role="alert">
+                    <TriangleAlert className="size-5 shrink-0 text-amber-600" aria-hidden="true" />
                     <p>
                       We could not send your request online. Please{' '}
-                      <a href={buildMailto(data)} className="font-semibold text-route underline">
+                      <a href={buildMailto(data)} className="font-semibold text-brand underline">
                         email it to dispatch
                       </a>{' '}
                       or call <a href={tel(company.phone)} className="font-semibold underline">{company.phone}</a>.
@@ -199,7 +199,7 @@ export default function Quote() {
                 )}
 
                 <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                  <p className="text-xs text-ink/50">Same-day replies, {company.serviceDays}.</p>
+                  <p className="text-xs text-muted">Same-day replies, {company.serviceDays}.</p>
                   <Button type="submit" size="lg" disabled={status === 'sending'} icon={status === 'sending' ? undefined : Send}>
                     {status === 'sending' && <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />}
                     {status === 'sending' ? 'Sending…' : 'Send request'}
