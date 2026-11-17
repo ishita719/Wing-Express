@@ -9,7 +9,7 @@ export default function CtaBand() {
     <section className="bg-paper py-20 sm:py-24" aria-labelledby="cta-title">
       <div className="container-x">
         <Reveal effect="wipe" className="relative overflow-hidden rounded-md border-2 border-ink bg-signal shadow-hard">
-          <div className="hazard h-3 border-b-2 border-ink" aria-hidden="true" />
+          <div className="h-1.5 bg-ink" aria-hidden="true" />
           <div className="flex flex-col items-start justify-between gap-8 px-6 py-12 sm:px-12 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <p className="label mb-3 text-ink/70">Freight cutoff today · {company.cutoff}</p>

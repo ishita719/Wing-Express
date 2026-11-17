@@ -13,23 +13,21 @@ const items = [
 export default function TrustMarquee() {
   const row = [...items, ...items]
   return (
-    <div className="relative border-y-2 border-ink" aria-label="Highlights">
-      <div className="hazard h-2.5" aria-hidden="true" />
-      <div className="overflow-hidden bg-signal py-3.5 text-ink">
+    <div className="relative border-y border-signal/40 bg-asphalt-2" aria-label="Highlights">
+      <div className="overflow-hidden py-4 text-paper">
         <div className="flex w-max animate-hazard hover:[animation-play-state:paused]">
           {row.map((t, i) => (
             <span
               key={i}
-              className="flex items-center gap-6 pr-6 font-display text-2xl font-black whitespace-nowrap uppercase sm:text-3xl"
+              className="flex items-center gap-6 pr-6 font-display text-xl font-bold tracking-wide whitespace-nowrap uppercase sm:text-2xl"
               aria-hidden={i >= items.length}
             >
               {t}
-              <span className="inline-block size-3 rotate-45 bg-ink" aria-hidden="true" />
+              <span className="inline-block size-2 rotate-45 bg-signal" aria-hidden="true" />
             </span>
           ))}
         </div>
       </div>
-      <div className="hazard h-2.5" aria-hidden="true" />
     </div>
   )
 }

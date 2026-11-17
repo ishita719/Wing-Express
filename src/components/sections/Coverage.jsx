@@ -39,7 +39,7 @@ export default function Coverage() {
           {/* Desktop: route drawn as it scrolls into view, truck drives along it */}
           <div className="relative hidden p-6 md:block">
             <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Route map of Wing Express stops">
-              <path d={d} fill="none" stroke="#15171c" strokeWidth="22" strokeLinejoin="round" strokeLinecap="round" />
+              <path d={d} fill="none" stroke="#0f1b2d" strokeWidth="22" strokeLinejoin="round" strokeLinecap="round" />
               <path
                 id="wx-route"
                 d={d}
@@ -47,7 +47,7 @@ export default function Coverage() {
                 style={{ '--len': 1000 }}
                 className="draw-path"
                 fill="none"
-                stroke="#ffc21a"
+                stroke="#e0a83a"
                 strokeWidth="3"
                 strokeDasharray="1000"
                 strokeLinejoin="round"
@@ -55,7 +55,7 @@ export default function Coverage() {
 
               {/* truck */}
               <g>
-                <rect x="-13" y="-9" width="26" height="18" rx="2" fill="#ffc21a" stroke="#15171c" strokeWidth="3" />
+                <rect x="-13" y="-9" width="26" height="18" rx="2" fill="#e0a83a" stroke="#0f1b2d" strokeWidth="3" />
                 <animateMotion dur="10s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1;0;0" keyTimes="0;0.45;0.5;0.95;1" calcMode="linear">
                   <mpath href="#wx-route" />
                 </animateMotion>
@@ -67,13 +67,13 @@ export default function Coverage() {
                 const lw = Math.max(p.name.length * 9 + 24, 70)
                 return (
                   <g key={p.name}>
-                    <circle cx={p.x} cy={p.y} r="10" fill={end ? '#ffc21a' : '#f2efe6'} stroke="#15171c" strokeWidth="4" />
+                    <circle cx={p.x} cy={p.y} r="10" fill={end ? '#e0a83a' : '#f5f6f8'} stroke="#0f1b2d" strokeWidth="4" />
                     <g transform={`translate(${p.x - lw / 2} ${above ? p.y - 62 : p.y + 22})`}>
-                      <rect width={lw} height="40" rx="4" fill="#0e6b4a" stroke="#f2efe6" strokeWidth="2" />
+                      <rect width={lw} height="40" rx="4" fill="#1d6f7a" stroke="#f5f6f8" strokeWidth="2" />
                       <text x={lw / 2} y="18" textAnchor="middle" fontFamily="Big Shoulders Display, Impact, sans-serif" fontWeight="800" fontSize="16" fill="#fff">
                         {p.name.toUpperCase()}
                       </text>
-                      <text x={lw / 2} y="33" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#ffc21a">
+                      <text x={lw / 2} y="33" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#e0a83a">
                         {p.km} KM
                       </text>
                     </g>

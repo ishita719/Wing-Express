@@ -1,7 +1,7 @@
 const variants = {
   // Road-sign yellow with a hard shadow that "presses" on click
   primary: 'bg-signal text-ink border-ink shadow-hard-sm hover:shadow-hard active:shadow-none active:translate-x-[3px] active:translate-y-[3px]',
-  dark: 'bg-ink text-paper border-ink shadow-[3px_3px_0_0_#ffc21a] hover:shadow-[6px_6px_0_0_#ffc21a] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]',
+  dark: 'bg-ink text-paper border-ink shadow-[3px_3px_0_0_#e0a83a] hover:shadow-[6px_6px_0_0_#e0a83a] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]',
   green: 'bg-route text-white border-ink shadow-hard-sm hover:shadow-hard active:shadow-none',
   outline: 'bg-transparent text-ink border-ink hover:bg-ink hover:text-paper',
   ghost: 'bg-transparent text-paper border-paper/40 hover:border-signal hover:text-signal',

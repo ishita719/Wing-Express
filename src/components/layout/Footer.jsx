@@ -21,7 +21,7 @@ export default function Footer() {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="hazard h-3" aria-hidden="true" />
+      <div className="h-1 bg-gradient-to-r from-signal via-signal to-route" aria-hidden="true" />
 
       {/* Giant wordmark */}
       <div className="container-x overflow-hidden pt-14">

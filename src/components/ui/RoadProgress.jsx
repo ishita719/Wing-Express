@@ -28,7 +28,7 @@ export default function RoadProgress() {
   return (
     <div className="relative h-2 bg-asphalt-3" aria-hidden="true">
       {/* dashed centre line */}
-      <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#ffc21a55_0_14px,transparent_14px_28px)]" />
+      <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#e0a83a55_0_14px,transparent_14px_28px)]" />
       {/* travelled road */}
       <div className="absolute inset-y-0 left-0 bg-signal" style={{ width: `${p * 100}%` }} />
       {/* truck */}
