@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Phone, Mail, MapPin, Clock, Send, LoaderCircle, CircleCheck, TriangleAlert } from 'lucide-react'
 import Reveal from '../ui/Reveal'
@@ -198,7 +199,10 @@ export default function Quote() {
                 )}
 
                 <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                  <p className="text-xs text-muted">Dispatch hours: {company.hoursShort}.</p>
+                  <p className="max-w-xs text-xs text-muted">
+                    Dispatch hours: {company.hoursShort}. We use your details only to respond to this request — see our{' '}
+                    <Link to="/privacy" className="underline hover:text-ink">privacy policy</Link>.
+                  </p>
                   <Button type="submit" size="lg" disabled={status === 'sending'} icon={status === 'sending' ? undefined : Send}>
                     {status === 'sending' && <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />}
                     {status === 'sending' ? 'Sending…' : 'Send request'}

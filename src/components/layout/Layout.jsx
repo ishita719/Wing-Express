@@ -14,6 +14,8 @@ const TITLES = {
   '/coverage': `Coverage Area | ${company.name}`,
   '/faq': `FAQ | ${company.name}`,
   '/contact': `Contact & Quote | ${company.name}`,
+  '/terms': `Terms of Service | ${company.name}`,
+  '/privacy': `Privacy Policy | ${company.name}`,
 }
 
 /**

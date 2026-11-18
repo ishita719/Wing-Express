@@ -258,9 +258,70 @@ export const faqs = [
     q: 'Can I request a quote outside business hours?',
     a: `Yes. Send the quote form or an email any time, and our team will reply during business hours (${company.hoursShort}).`,
   },
+  {
+    q: 'Are you open on weekends?',
+    a: 'No. Our dispatch team works Monday to Friday, 8 am to 8 pm, and we are closed on Saturdays and Sundays. Quote requests sent over the weekend are answered on the next business day.',
+  },
+  {
+    q: 'What items can you not ship?',
+    a: 'We do not carry dangerous goods regulated under the Transportation of Dangerous Goods Act, explosives, firearms or ammunition, illegal items, live animals, perishable goods that need refrigeration, or cash and valuables. If you are unsure, ask dispatch before booking.',
+  },
+  {
+    q: 'Do you publish your prices?',
+    a: 'No — every shipment is different, so we quote each one individually based on distance, size, weight and handling. Quotes are free and you get your price before anything moves.',
+  },
 ]
 
 export const quoteOptions = {
   timing: ['As soon as possible', 'Today', 'Tomorrow', 'This week', 'Regular / recurring'],
   service: ['Scheduled run', 'Express delivery', 'Pallet / LTL', 'Full load', 'Residential delivery', 'Not sure'],
+}
+
+/* ───────────── Business details & policies ─────────────
+ * Facts below come from the client's email. Anything the client has not
+ * confirmed is worded neutrally ("as stated in your quote") — do NOT add
+ * specific amounts, fees or reviews until the client provides them.
+ */
+
+export const weeklyHours = [
+  { day: 'Monday', time: '8:00 am – 8:00 pm' },
+  { day: 'Tuesday', time: '8:00 am – 8:00 pm' },
+  { day: 'Wednesday', time: '8:00 am – 8:00 pm' },
+  { day: 'Thursday', time: '8:00 am – 8:00 pm' },
+  { day: 'Friday', time: '8:00 am – 8:00 pm' },
+  { day: 'Saturday', time: 'Closed', closed: true },
+  { day: 'Sunday', time: 'Closed', closed: true },
+]
+
+/** What EagleWing Express carries. */
+export const weDeliver = [
+  'Parcels and boxed goods',
+  'Documents and envelopes',
+  'Single and multiple pallets (LTL)',
+  'Full truckloads',
+  'Business and commercial supplies',
+  'Residential deliveries',
+]
+
+/**
+ * Items not accepted — standard exclusions for a general freight carrier.
+ * CONFIRM with client before launch.
+ */
+export const notAccepted = [
+  "Dangerous goods regulated under Canada's Transportation of Dangerous Goods (TDG) Act — e.g. flammables, compressed gases, corrosives",
+  'Explosives, firearms and ammunition',
+  'Illegal, stolen or restricted items',
+  'Live animals',
+  'Perishable or temperature-controlled goods that need refrigeration',
+  'Cash, jewellery, negotiable documents and irreplaceable items',
+]
+
+export const pricing = {
+  model: 'Quote-based pricing',
+  text: 'We do not publish fixed prices because every shipment is different. Your price depends on distance, the size and weight of your freight, and any special handling — and you always get a clear quote before anything moves.',
+}
+
+export const legal = {
+  updated: 'November 2026',
+  privacyContact: `Privacy contact: ${company.legalName}, ${company.email}, ${company.phone}`,
 }

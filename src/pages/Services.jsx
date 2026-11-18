@@ -2,6 +2,7 @@ import { Truck, ArrowRight } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import ServicesSection from '../components/sections/Services'
 import Fleet from '../components/sections/Fleet'
+import DeliveryScope from '../components/sections/DeliveryScope'
 import RoadDivider from '../components/sections/RoadDivider'
 import CtaBand from '../components/sections/CtaBand'
 import Button from '../components/ui/Button'
@@ -20,6 +21,7 @@ export default function Services() {
       <ServicesSection />
       <RoadDivider />
       <Fleet />
+      <DeliveryScope />
       <CtaBand />
     </>
   )

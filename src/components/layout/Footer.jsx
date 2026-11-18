@@ -99,7 +99,11 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 size-4 shrink-0 text-crimson-400" aria-hidden="true" />
-                {company.hours}
+                <span>
+                  {company.hours}
+                  <br />
+                  Saturday – Sunday · Closed
+                </span>
               </li>
             </ul>
           </Col>
@@ -113,7 +117,15 @@ export default function Footer() {
           <p>
             © {year} {company.legalName} All rights reserved.
           </p>
-          <p>Proudly serving Vancouver Island</p>
+          <nav aria-label="Legal" className="flex items-center gap-5">
+            <Link to="/terms" className="transition hover:text-white">
+              Terms of service
+            </Link>
+            <Link to="/privacy" className="transition hover:text-white">
+              Privacy policy
+            </Link>
+            <span className="hidden sm:inline">Proudly serving Vancouver Island, BC</span>
+          </nav>
         </div>
       </div>
     </footer>
