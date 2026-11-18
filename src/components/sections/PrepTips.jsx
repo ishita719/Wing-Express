@@ -44,7 +44,7 @@ export default function PrepTips() {
                 </Reveal>
               ))}
             </ul>
-            <Button href="#quote" icon={ArrowRight} className="mt-7 w-full">
+            <Button href="/contact" icon={ArrowRight} className="mt-7 w-full">
               Request a quote
             </Button>
           </div>

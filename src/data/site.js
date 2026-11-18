@@ -32,11 +32,11 @@ export const company = {
 }
 
 export const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'How it works', href: '#process' },
-  { label: 'Coverage', href: '#coverage' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'About', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'How it works', to: '/how-it-works' },
+  { label: 'Coverage', to: '/coverage' },
+  { label: 'FAQ', to: '/faq' },
 ]
 
 export const heroBadges = [

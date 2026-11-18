@@ -17,7 +17,7 @@ export default function Fleet() {
             text="Tell us what you are shipping and we will match it to the right run and the right price."
           />
           <Reveal>
-            <Button href="#quote" variant="outline" icon={ArrowRight}>
+            <Button href="/contact" variant="outline" icon={ArrowRight}>
               Not sure? Ask us
             </Button>
           </Reveal>

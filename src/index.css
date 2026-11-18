@@ -255,3 +255,52 @@
   }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* ── Page transitions ─────────────────────────────── */
+/* New page content rises in once the wipe has covered the screen */
+.page-enter {
+  animation: page-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+}
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+/* Charcoal panel with a crimson leading edge sweeps across between pages */
+.route-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  background: #1b1f27;
+  transform: translateX(-101%);
+  animation: route-wipe 0.95s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+.route-wipe::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  right: -10px;
+  width: 10px;
+  background: #d7263d;
+}
+@keyframes route-wipe {
+  0% { transform: translateX(-101%); }
+  42%, 55% { transform: translateX(0); }
+  100% { transform: translateX(101%); }
+}
+
+/* Page banner details */
+.spin-slow { animation: spin-slow 40s linear infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.drive-across { animation: drive-across 9s linear infinite; }
+@keyframes drive-across {
+  from { left: -8%; }
+  to { left: 104%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter, .route-wipe, .spin-slow, .drive-across { animation: none !important; }
+  .route-wipe { display: none; }
+}

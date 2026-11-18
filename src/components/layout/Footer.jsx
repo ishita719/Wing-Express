@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import Logo from '../ui/Logo'
 import { company, navLinks, coverage } from '../../data/site'
@@ -52,18 +53,13 @@ export default function Footer() {
         <div className="lg:col-span-2">
           <Col title="Company">
             <ul className="space-y-3">
-              {navLinks.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className={linkCls}>
+              {[{ label: 'Home', to: '/' }, ...navLinks, { label: 'Contact & quote', to: '/contact' }].map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className={linkCls}>
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
-              <li>
-                <a href="#quote" className={linkCls}>
-                  Get a quote
-                </a>
-              </li>
             </ul>
           </Col>
         </div>
@@ -73,9 +69,9 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-1">
               {coverage.all.map((town) => (
                 <li key={town}>
-                  <a href="#coverage" className={linkCls}>
+                  <Link to="/coverage" className={linkCls}>
                     {town}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

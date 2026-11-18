@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
@@ -19,7 +20,7 @@ export default function Services() {
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ icon: Icon, title, text }, i) => (
             <Reveal key={title} as="article" delay={(i % 3) * 90} className="h-full">
-              <SpotlightCard as="a" href="#quote" className="card card-hover flex h-full flex-col p-7">
+              <SpotlightCard as={Link} to="/contact" className="card card-hover flex h-full flex-col p-7">
                 <span className="relative grid size-12 place-items-center rounded-xl bg-charcoal text-crimson-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-crimson group-hover:text-white">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>

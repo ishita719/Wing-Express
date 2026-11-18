@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const variants = {
   // Crimson (brand) with a light "shine" sweep on hover
   primary: 'bg-crimson text-white shadow-sm shadow-crimson/30 hover:bg-crimson-dark hover:shadow-lg hover:shadow-crimson/30',
@@ -14,7 +16,10 @@ const sizes = {
 }
 
 /**
- * Reusable button. Renders an <a> when `href` is passed, otherwise a <button>.
+ * Reusable button.
+ * - `href="/page"` (starts with "/") → client-side router <Link>
+ * - any other `href` (tel:, mailto:, https:) → plain <a>
+ * - no `href` → <button>
  */
 export default function Button({
   as,
@@ -27,11 +32,13 @@ export default function Button({
   children,
   ...props
 }) {
-  const Tag = as || (href ? 'a' : 'button')
+  const internal = typeof href === 'string' && href.startsWith('/')
+  const Tag = as || (internal ? Link : href ? 'a' : 'button')
+  const linkProps = internal ? { to: href } : href ? { href } : {}
   const shine = variant === 'primary' || variant === 'charcoal'
   return (
     <Tag
-      href={href}
+      {...linkProps}
       className={`group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg font-semibold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >

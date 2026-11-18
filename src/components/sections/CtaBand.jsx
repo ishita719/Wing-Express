@@ -24,7 +24,7 @@ export default function CtaBand() {
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <Magnetic>
-                <Button href="#quote" variant="charcoal" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
+                <Button href="/contact" variant="charcoal" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
                   Get a free quote
                 </Button>
               </Magnetic>

@@ -71,7 +71,7 @@ export default function Hero() {
           <Reveal delay={300}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Magnetic>
-                <Button href="#quote" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
+                <Button href="/contact" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
                   Get a free quote
                 </Button>
               </Magnetic>

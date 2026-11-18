@@ -9,12 +9,12 @@ import useScrollProgress from '../../hooks/useScrollProgress'
  * past in layers — Victoria's skyline and legislature dome give way to
  * evergreen forest, with the Island mountains moving slowest behind.
  */
-export default function RoadDivider() {
+export default function RoadDivider({ rounded = true }) {
   const ref = useRef(null)
   const p = useScrollProgress(ref, { from: 1.05, to: -0.35 })
 
   return (
-    <div ref={ref} className="relative overflow-hidden rounded-t-[2rem] bg-gradient-to-b from-white via-[#f4f6f8] to-[#eceff3]" aria-hidden="true">
+    <div ref={ref} className={`relative overflow-hidden ${rounded ? 'rounded-t-[2rem]' : ''} bg-gradient-to-b from-white via-[#f4f6f8] to-[#eceff3]`} aria-hidden="true">
       <div className="relative h-56 sm:h-72">
         {/* far: mountains */}
         <Mountains

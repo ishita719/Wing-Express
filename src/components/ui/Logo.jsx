@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import BrandMark from './BrandMark'
 
 /** EagleWing Express logo lockup: feather-fan mark + wordmark. */
 export default function Logo({ light = true, animate = false, className = '' }) {
   return (
-    <a href="#top" className={`group inline-flex items-center gap-3 ${className}`} aria-label="EagleWing Express — home">
+    <Link to="/" className={`group inline-flex items-center gap-3 ${className}`} aria-label="EagleWing Express — home">
       <BrandMark
         variant={light ? 'light' : 'dark'}
         animate={animate}
@@ -17,6 +18,6 @@ export default function Logo({ light = true, animate = false, className = '' }) 
           EXPRESS
         </span>
       </span>
-    </a>
+    </Link>
   )
 }

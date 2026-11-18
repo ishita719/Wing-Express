@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, Phone, ArrowRight, Clock, Mail, MapPin } from 'lucide-react'
 import Logo from '../ui/Logo'
 import Button from '../ui/Button'
@@ -10,6 +11,10 @@ import { tel } from '../../lib/utils'
 export default function Header() {
   const scrolled = useScrolled(24)
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  // Close the mobile menu whenever the page changes.
+  useEffect(() => setOpen(false), [pathname])
 
   // Lock body scroll while the mobile menu is open; close on Escape.
   useEffect(() => {
@@ -44,14 +49,24 @@ export default function Header() {
 
           <ul className="hidden items-center gap-1 lg:flex">
             {navLinks.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="group relative px-3.5 py-2 text-sm font-medium whitespace-nowrap text-white/75 transition hover:text-white"
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  className={({ isActive }) =>
+                    `group relative px-3.5 py-2 text-sm font-medium whitespace-nowrap transition hover:text-white ${isActive ? 'text-white' : 'text-white/75'}`
+                  }
                 >
-                  {l.label}
-                  <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-crimson transition-transform duration-300 group-hover:scale-x-100" />
-                </a>
+                  {({ isActive }) => (
+                    <>
+                      {l.label}
+                      <span
+                        className={`absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left rounded-full bg-crimson transition-transform duration-300 group-hover:scale-x-100 ${
+                          isActive ? 'scale-x-100' : 'scale-x-0'
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -66,7 +81,7 @@ export default function Header() {
               </span>
               {company.phone}
             </a>
-            <Button href="#quote" size="sm" icon={ArrowRight}>
+            <Button href="/contact" size="sm" icon={ArrowRight}>
               Get a quote
             </Button>
           </div>
@@ -93,21 +108,25 @@ export default function Header() {
         }`}
       >
         <div className="container-x flex h-full flex-col overflow-y-auto py-6">
-          {navLinks.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
+          {[{ label: 'Home', to: '/' }, ...navLinks].map((l, i) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === '/'}
               onClick={() => setOpen(false)}
               style={{ transitionDelay: open ? `${i * 50}ms` : '0ms' }}
-              className={`border-b border-white/10 py-4 font-display text-2xl font-semibold text-white transition-all duration-300 ${
-                open ? 'translate-x-0 opacity-100' : '-translate-x-3 opacity-0'
-              }`}
+              className={({ isActive }) =>
+                `flex items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold transition-all duration-300 ${
+                  open ? 'translate-x-0 opacity-100' : '-translate-x-3 opacity-0'
+                } ${isActive ? 'text-crimson-400' : 'text-white'}`
+              }
             >
               {l.label}
-            </a>
+              <ArrowRight className="size-5 opacity-40" aria-hidden="true" />
+            </NavLink>
           ))}
           <div className="mt-auto flex flex-col gap-3 pt-8">
-            <Button href="#quote" size="lg" icon={ArrowRight} onClick={() => setOpen(false)}>
+            <Button href="/contact" size="lg" icon={ArrowRight} onClick={() => setOpen(false)}>
               Get a quote
             </Button>
             <Button href={tel(company.phone)} variant="ghost" size="lg" iconLeft={Phone}>

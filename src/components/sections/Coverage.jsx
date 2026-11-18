@@ -158,7 +158,7 @@ export default function Coverage() {
                 </li>
               ))}
             </ul>
-            <Button href="#quote" variant="charcoal" icon={ArrowRight} className="shrink-0">
+            <Button href="/contact" variant="charcoal" icon={ArrowRight} className="shrink-0">
               Check your location
             </Button>
           </div>
