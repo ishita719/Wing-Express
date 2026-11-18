@@ -4,19 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import BackToTop from '../ui/BackToTop'
 import BrandMark from '../ui/BrandMark'
-import { company } from '../../data/site'
-
-const TITLES = {
-  '/': `${company.name} | Freight & Delivery Across Vancouver Island`,
-  '/about': `About Us | ${company.name}`,
-  '/services': `Services | ${company.name}`,
-  '/how-it-works': `How It Works | ${company.name}`,
-  '/coverage': `Coverage Area | ${company.name}`,
-  '/faq': `FAQ | ${company.name}`,
-  '/contact': `Contact & Quote | ${company.name}`,
-  '/terms': `Terms of Service | ${company.name}`,
-  '/privacy': `Privacy Policy | ${company.name}`,
-}
+import usePageMeta from '../../hooks/usePageMeta'
 
 /**
  * Shared page shell: header, footer, back-to-top, plus the page transition —
@@ -26,9 +14,9 @@ const TITLES = {
 export default function Layout() {
   const { pathname, hash } = useLocation()
   const first = useRef(true)
+  usePageMeta(pathname)
 
   useEffect(() => {
-    document.title = TITLES[pathname] ?? `Page not found | ${company.name}`
     if (first.current) {
       first.current = false
       return

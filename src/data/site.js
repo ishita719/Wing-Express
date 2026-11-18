@@ -28,7 +28,7 @@ export const company = {
   hours: 'Monday – Friday · 8:00 am – 8:00 pm',
   hoursShort: 'Mon – Fri, 8 am – 8 pm',
   serviceDays: 'Mon – Fri',
-  url: import.meta.env.VITE_SITE_URL || 'https://wing-express.ishita-8ab.workers.dev',
+  url: import.meta.env?.VITE_SITE_URL || 'https://wing-express.ishita-8ab.workers.dev',
 }
 
 export const navLinks = [

@@ -3,48 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EagleWing Express | Freight &amp; Delivery Across Vancouver Island</title>
-    <meta name="description" content="EagleWing Express delivers parcels, pallets and full loads across Vancouver Island — Victoria, Duncan, Ladysmith, Nanaimo, Parksville, Port Alberni, Courtenay and Campbell River. Call (778) 268-5136." />
-    <meta name="theme-color" content="#1b1f27" />
+    <!-- Per-page title/description/canonical are rewritten at build time (scripts/seo-build.mjs)
+         and kept in sync in the browser (src/hooks/usePageMeta.js). -->
+    <title>EagleWing Express | Freight Delivery on Vancouver Island, BC</title>
+    <meta name="description" content="Parcels, pallets and full loads delivered across Vancouver Island — Victoria, Duncan, Nanaimo, Parksville, Port Alberni, Courtenay and Campbell River. Free quotes." />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="%VITE_SITE_URL%/" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#1b1f27" />
+    <meta name="geo.region" content="CA-BC" />
+    <meta name="geo.placename" content="Vancouver Island" />
 
-    <!-- Open Graph / social -->
+    <!-- Icons & manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph / social previews -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="EagleWing Express" />
-    <meta property="og:title" content="EagleWing Express | Freight across Vancouver Island" />
-    <meta property="og:description" content="Parcels, pallets and full loads from Victoria to Campbell River. Monday to Friday, 8 am – 8 pm." />
+    <meta property="og:title" content="EagleWing Express | Freight Delivery on Vancouver Island, BC" />
+    <meta property="og:description" content="Parcels, pallets and full loads delivered across Vancouver Island — Victoria, Duncan, Nanaimo, Parksville, Port Alberni, Courtenay and Campbell River. Free quotes." />
     <meta property="og:url" content="%VITE_SITE_URL%/" />
-    <meta property="og:image" content="%VITE_SITE_URL%/og-image.svg" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EagleWing Express — freight across Vancouver Island, BC" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EagleWing Express | Freight Delivery on Vancouver Island, BC" />
+    <meta name="twitter:description" content="Parcels, pallets and full loads delivered across Vancouver Island — Victoria to Campbell River. Free quotes." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet" />
 
-    <!-- Structured data for search engines -->
+    <!-- Structured data: business + website -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "EagleWing Express Ltd.",
-        "alternateName": "EagleWing Express",
-        "description": "Freight and delivery company serving Vancouver Island: parcels, pallets and full loads from Victoria to Campbell River.",
-        "url": "%VITE_SITE_URL%/",
-        "logo": "%VITE_SITE_URL%/favicon.svg",
-        "foundingLocation": "Vancouver Island, British Columbia, Canada",
-        "telephone": "+1-778-268-5136",
-        "email": "expresseaglewing@gmail.com",
-        "address": { "@type": "PostalAddress", "addressRegion": "BC", "addressCountry": "CA" },
-        "areaServed": ["Victoria", "Duncan", "Ladysmith", "Nanaimo", "Parksville", "Port Alberni", "Courtenay", "Campbell River"],
-        "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00" }]
+        "@graph": [
+          {
+            "@type": "LocalBusiness",
+            "@id": "%VITE_SITE_URL%/#business",
+            "name": "EagleWing Express Ltd.",
+            "alternateName": "EagleWing Express",
+            "description": "Freight and delivery company based on Vancouver Island, British Columbia, moving parcels, pallets and full loads from Victoria to Campbell River.",
+            "url": "%VITE_SITE_URL%/",
+            "logo": "%VITE_SITE_URL%/icon-512.png",
+            "image": "%VITE_SITE_URL%/og-image.png",
+            "telephone": "+1-778-268-5136",
+            "email": "expresseaglewing@gmail.com",
+            "priceRange": "Quote-based",
+            "address": { "@type": "PostalAddress", "addressRegion": "BC", "addressCountry": "CA" },
+            "areaServed": [
+              { "@type": "City", "name": "Victoria, BC" },
+              { "@type": "City", "name": "Duncan, BC" },
+              { "@type": "City", "name": "Ladysmith, BC" },
+              { "@type": "City", "name": "Nanaimo, BC" },
+              { "@type": "City", "name": "Parksville, BC" },
+              { "@type": "City", "name": "Port Alberni, BC" },
+              { "@type": "City", "name": "Courtenay, BC" },
+              { "@type": "City", "name": "Campbell River, BC" }
+            ],
+            "openingHoursSpecification": [
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00" }
+            ],
+            "contactPoint": { "@type": "ContactPoint", "telephone": "+1-778-268-5136", "contactType": "customer service", "areaServed": "CA-BC", "availableLanguage": "English" }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "%VITE_SITE_URL%/#website",
+            "url": "%VITE_SITE_URL%/",
+            "name": "EagleWing Express",
+            "inLanguage": "en-CA",
+            "publisher": { "@id": "%VITE_SITE_URL%/#business" }
+          }
+        ]
       }
     </script>
   </head>
   <body>
-    <noscript>EagleWing Express — freight and delivery across Vancouver Island. Call (778) 268-5136. Please enable JavaScript to view the full site.</noscript>
+    <noscript>
+      <h1>EagleWing Express — freight delivery on Vancouver Island, BC</h1>
+      <p>Parcels, pallets and full loads from Victoria to Campbell River. Call (778) 268-5136 or email expresseaglewing@gmail.com. Monday to Friday, 8 am – 8 pm.</p>
+      <p>
+        <a href="/about">About</a> · <a href="/services">Services</a> · <a href="/how-it-works">How it works</a> ·
+        <a href="/coverage">Coverage</a> · <a href="/faq">FAQ</a> · <a href="/contact">Contact &amp; quote</a>
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

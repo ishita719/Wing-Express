@@ -41,16 +41,8 @@ function FaqItem({ q, a, open, onToggle, id }) {
 export default function Faq() {
   const [open, setOpen] = useState(0)
 
-  // FAQ structured data for rich results
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-  }
-
   return (
     <section id="faq" className="bg-white py-20 sm:py-28" aria-labelledby="faq-title">
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <SectionHeading

@@ -71,3 +71,20 @@ Until these are set, the form honestly tells visitors it could not send and offe
 npx wrangler login
 npm run deploy
 ```
+
+## SEO
+
+- **Per-page metadata** lives in `src/data/seo.js` (title, description, sitemap priority).
+- `npm run build` runs `scripts/seo-build.mjs` after Vite, which writes `dist/about.html`,
+  `dist/services.html`, … each with its own `<title>`, description, canonical URL,
+  Open Graph/Twitter tags and JSON-LD (BreadcrumbList, plus FAQPage on `/faq`),
+  and generates `dist/sitemap.xml` (with today's `lastmod`) and `dist/robots.txt`.
+- In the browser, `src/hooks/usePageMeta.js` keeps the same tags in sync during
+  in-app navigation and marks unknown pages `noindex`.
+- Business structured data (LocalBusiness + WebSite) is in `index.html`.
+- Share image and icons: edit `public/og-image.svg` / `public/favicon.svg`, then run
+  `node scripts/make-images.mjs` to regenerate the PNGs.
+- After going live: verify the site in **Google Search Console**, submit
+  `/sitemap.xml`, and create a **Google Business Profile** for local search.
+- When the real domain is connected, update `VITE_SITE_URL` in `.env.production`
+  and redeploy — every canonical URL, share link and the sitemap update automatically.
