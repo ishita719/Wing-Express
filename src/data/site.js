@@ -11,7 +11,8 @@ import {
   Truck, Package, Boxes, Zap, Building2, Home, Route, MapPin, Clock,
   Headset, BadgeDollarSign, HandHeart, CalendarSync, Mountain,
   PhoneCall, ClipboardList, PackageCheck, Store, HardHat, Factory,
-  Stethoscope, ShoppingBag, Wheat,
+  Stethoscope, ShoppingBag, Wheat, PackageOpen, Layers, Tag, TriangleAlert,
+  DoorOpen, AlarmClock,
 } from 'lucide-react'
 
 export const company = {
@@ -22,7 +23,8 @@ export const company = {
     'EagleWing Express delivers parcels, pallets and full loads up and down Vancouver Island — from Victoria to Campbell River — with friendly dispatch and upfront quotes.',
   phone: '(778) 268-5136',
   email: 'expresseaglewing@gmail.com',
-  region: 'Vancouver Island, British Columbia',
+  region: 'Vancouver Island, British Columbia, Canada',
+  regionShort: 'Vancouver Island, BC',
   hours: 'Monday – Friday · 8:00 am – 8:00 pm',
   hoursShort: 'Mon – Fri, 8 am – 8 pm',
   serviceDays: 'Mon – Fri',
@@ -30,10 +32,10 @@ export const company = {
 }
 
 export const navLinks = [
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'How it works', href: '#process' },
   { label: 'Coverage', href: '#coverage' },
-  { label: 'Why us', href: '#why' },
   { label: 'FAQ', href: '#faq' },
 ]
 
@@ -41,7 +43,7 @@ export const heroBadges = [
   'Victoria to Campbell River',
   company.hoursShort,
   'Parcels, pallets & full loads',
-  'Fast, upfront quotes',
+  'Based on Vancouver Island, BC',
 ]
 
 export const stats = [
@@ -153,6 +155,59 @@ export const coverage = {
   all: ['Victoria', 'Duncan', 'Ladysmith', 'Nanaimo', 'Parksville', 'Port Alberni', 'Courtenay', 'Campbell River'],
 }
 
+/**
+ * Communities served — public facts about each place, plus approximate
+ * road distance from Victoria (rounded; actual routes vary).
+ */
+export const communities = [
+  { name: 'Victoria', km: 0, region: 'Capital Region', fact: "British Columbia's capital, at the southern tip of the Island — the start of every northbound run." },
+  { name: 'Duncan', km: 60, region: 'Cowichan Valley', fact: 'Known as the "City of Totems", at the heart of the Cowichan Valley over the Malahat.' },
+  { name: 'Ladysmith', km: 88, region: 'Cowichan Valley', fact: 'Historic seaside town on the 49th parallel, between Duncan and Nanaimo on Hwy 1.' },
+  { name: 'Nanaimo', km: 111, region: 'Central Island', fact: 'The "Harbour City" and the mid-Island hub where Hwy 1 meets the Inland Island Highway (Hwy 19).' },
+  { name: 'Parksville', km: 150, region: 'Oceanside', fact: 'Oceanside community where Hwy 4 branches west across the Island toward Port Alberni.' },
+  { name: 'Port Alberni', km: 195, region: 'Alberni Valley', fact: 'At the head of the Alberni Inlet, reached from Parksville on Hwy 4.' },
+  { name: 'Courtenay', km: 220, region: 'Comox Valley', fact: 'The largest city in the Comox Valley, on the Inland Island Highway.' },
+  { name: 'Campbell River', km: 265, region: 'North Island', fact: 'Known as the "Salmon Capital of the World" — the northern end of our network.' },
+]
+
+export const about = {
+  title: 'Locally based. Island focused.',
+  paragraphs: [
+    'EagleWing Express Ltd. is a freight and delivery company based on Vancouver Island, British Columbia. We focus on one thing: moving goods safely and reliably between the communities of the Island.',
+    'Our runs follow the Island’s main corridor — the Trans-Canada Highway (Hwy 1) from Victoria to Nanaimo, then the Inland Island Highway (Hwy 19) north through Parksville and Courtenay to Campbell River — with service west to Port Alberni on Highway 4.',
+    'Because we work the same roads every week, we know the routes, the towns and the people we deliver to. When you call, you speak with the team that is actually handling your shipment.',
+  ],
+  highways: [
+    { code: '1', name: 'Trans-Canada Highway', span: 'Victoria → Duncan → Ladysmith → Nanaimo' },
+    { code: '19', name: 'Inland Island Highway', span: 'Nanaimo → Parksville → Courtenay → Campbell River' },
+    { code: '4', name: 'Pacific Rim Highway', span: 'Parksville → Port Alberni' },
+  ],
+  facts: [
+    { value: '~265 km', label: 'Victoria to Campbell River' },
+    { value: '3', label: 'Island highways we run' },
+    { value: '8', label: 'Communities on our network' },
+  ],
+}
+
+/** Practical, general shipping-prep advice. */
+export const prepTips = [
+  { icon: PackageOpen, title: 'Pack it securely', text: 'Use sturdy boxes, fill empty space and tape every seam. Heavier items go at the bottom.' },
+  { icon: Layers, title: 'Build stable pallets', text: 'Stack evenly with no overhang, stretch-wrap the load to the pallet and keep the top flat.' },
+  { icon: Tag, title: 'Label every piece', text: 'Mark each box or pallet with the delivery name, address and a contact phone number.' },
+  { icon: TriangleAlert, title: 'Flag anything special', text: 'Tell us in advance about fragile, oversized or high-value items so we can plan the handling.' },
+  { icon: DoorOpen, title: 'Share site access', text: 'Let us know about loading docks, stairs, narrow driveways or delivery-time windows at either end.' },
+  { icon: AlarmClock, title: 'Be ready on time', text: 'Have your shipment packed and accessible at the agreed pickup time so the run stays on schedule.' },
+]
+
+/** What dispatch needs for a fast, accurate quote. */
+export const quoteChecklist = [
+  'Pickup and delivery towns (and addresses if you have them)',
+  'What you are shipping and how many pieces',
+  'Approximate weight and size of each piece',
+  'Your preferred pickup date',
+  'Any access notes — dock, stairs, residential, time windows',
+]
+
 export const industries = [
   { icon: Store, label: 'Retail & Wholesale' },
   { icon: HardHat, label: 'Construction' },
@@ -186,6 +241,22 @@ export const faqs = [
   {
     q: 'Do you offer regular pickups for businesses?',
     a: 'Yes — if you ship regularly, ask us about setting up recurring pickups on the days that suit you.',
+  },
+  {
+    q: 'Where is EagleWing Express based?',
+    a: `We are a local company based on ${company.region}, serving communities from Victoria to Campbell River.`,
+  },
+  {
+    q: 'What information do you need to give me a quote?',
+    a: 'The pickup and delivery towns, what you are shipping, the number of pieces with approximate weight and size, your preferred date, and any access notes for either site.',
+  },
+  {
+    q: 'How should I prepare my shipment?',
+    a: 'Pack items in sturdy boxes, wrap pallets securely with no overhang, label each piece with delivery details and a phone number, and tell us in advance about anything fragile or oversized.',
+  },
+  {
+    q: 'Can I request a quote outside business hours?',
+    a: `Yes. Send the quote form or an email any time, and our team will reply during business hours (${company.hoursShort}).`,
   },
 ]
 

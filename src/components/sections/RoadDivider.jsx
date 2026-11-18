@@ -1,49 +1,50 @@
 import { useRef } from 'react'
 import TruckIllustration from '../ui/TruckIllustration'
+import { Mountains, CityToForest } from '../ui/IslandScenery'
 import useScrollProgress from '../../hooks/useScrollProgress'
-import { coverage } from '../../data/site'
 
 /**
- * A short stretch of highway at the top of the page "curtain".
- * The truck drives left → right in step with the scroll, the lane
- * markings stream past, and town signs slide by in the background.
+ * A stretch of Vancouver Island highway at the top of the page "curtain".
+ * As you scroll, the EagleWing truck drives right while the scenery rolls
+ * past in layers — Victoria's skyline and legislature dome give way to
+ * evergreen forest, with the Island mountains moving slowest behind.
  */
 export default function RoadDivider() {
   const ref = useRef(null)
   const p = useScrollProgress(ref, { from: 1.05, to: -0.35 })
 
   return (
-    <div ref={ref} className="relative overflow-hidden rounded-t-[2rem] bg-white pt-10" aria-hidden="true">
-      {/* town signposts drifting the opposite way (parallax) */}
-      <div
-        className="pointer-events-none absolute top-6 left-0 flex gap-24 whitespace-nowrap will-change-transform"
-        style={{ transform: `translateX(${-p * 40}%)` }}
-      >
-        {[...coverage.all, ...coverage.all].map((t, i) => (
-          <span key={i} className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-ink/25 uppercase">
-            <span className="h-4 w-0.5 bg-ink/15" />
-            {t}
-          </span>
-        ))}
-      </div>
+    <div ref={ref} className="relative overflow-hidden rounded-t-[2rem] bg-gradient-to-b from-white via-[#f4f6f8] to-[#eceff3]" aria-hidden="true">
+      <div className="relative h-56 sm:h-72">
+        {/* far: mountains */}
+        <Mountains
+          className="absolute bottom-0 left-0 h-36 w-[2500px] max-w-none will-change-transform sm:h-44 sm:w-[3050px]"
+          style={{ transform: `translateX(${-p * 18}%)` }}
+        />
+        {/* mid: Victoria skyline → forest */}
+        <CityToForest
+          className="absolute bottom-0 left-0 h-28 w-[2240px] max-w-none will-change-transform sm:h-36 sm:w-[2880px]"
+          style={{ transform: `translateX(${-p * 45}%)` }}
+        />
+        {/* roadside verge */}
+        <div className="absolute inset-x-0 bottom-0 h-3 bg-[#cfd5dc]" />
 
-      <div className="relative h-36 sm:h-44">
         {/* truck */}
         <div
-          className="absolute -bottom-1 w-48 will-change-transform sm:w-72"
-          style={{ left: `calc(${-15 + p * 115}% - 60px)` }}
+          className="absolute -bottom-1 w-56 will-change-transform sm:w-80"
+          style={{ left: `calc(${-12 + p * 110}% - 80px)` }}
         >
           <TruckIllustration className="w-full drop-shadow-xl" />
         </div>
       </div>
 
       {/* the road */}
-      <div className="relative h-10 bg-charcoal">
+      <div className="relative h-11 bg-charcoal">
+        <div className="absolute inset-x-0 top-0 h-1 bg-crimson" />
         <div
           className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#ffffff_0_36px,transparent_36px_72px)] opacity-70"
           style={{ backgroundPositionX: `${-p * 900}px` }}
         />
-        <div className="absolute inset-x-0 top-0 h-1 bg-crimson" />
       </div>
     </div>
   )

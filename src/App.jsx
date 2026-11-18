@@ -14,6 +14,8 @@ import CtaBand from './components/sections/CtaBand'
 import BackToTop from './components/ui/BackToTop'
 import PinnedHero from './components/layout/PinnedHero'
 import RoadDivider from './components/sections/RoadDivider'
+import About from './components/sections/About'
+import PrepTips from './components/sections/PrepTips'
 
 export default function App() {
   return (
@@ -33,11 +35,13 @@ export default function App() {
         <div className="relative z-10 -mt-8 rounded-t-[2rem] bg-white shadow-[0_-30px_60px_-12px_rgb(0_0_0/0.55)]">
           <RoadDivider />
           <TrustMarquee />
+          <About />
           <Services />
           <Stats />
           <Fleet />
           <Process />
           <Coverage />
+          <PrepTips />
           <WhyUs />
           <Quote />
           <Faq />

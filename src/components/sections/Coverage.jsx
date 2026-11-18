@@ -3,7 +3,7 @@ import { MapPin, ArrowRight, Navigation } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
 import Button from '../ui/Button'
-import { coverage } from '../../data/site'
+import { coverage, communities } from '../../data/site'
 
 const W = 1000
 const H = 300
@@ -163,6 +163,33 @@ export default function Coverage() {
             </Button>
           </div>
         </Reveal>
+
+        {/* Community cards — hovering one highlights it on the map above */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {communities.map((c, i) => (
+            <Reveal key={c.name} delay={(i % 4) * 80}>
+              <article
+                onMouseEnter={() => setActive(c.name)}
+                onMouseLeave={() => setActive(null)}
+                className={`h-full rounded-xl border p-5 transition-all duration-300 ${
+                  active === c.name ? '-translate-y-1 border-crimson bg-crimson-50/50 shadow-card-hover' : 'border-line bg-white'
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg">{c.name}</h3>
+                    <p className="text-xs font-medium tracking-wide text-crimson-700 uppercase">{c.region}</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-surface px-2.5 py-1 text-xs font-semibold text-ink/70">
+                    {c.km === 0 ? 'Start' : `~${c.km} km`}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{c.fact}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-4 text-center text-xs text-muted">Distances are approximate road distances from Victoria.</p>
       </div>
     </section>
   )

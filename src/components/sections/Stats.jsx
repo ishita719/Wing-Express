@@ -9,7 +9,7 @@ export default function Stats() {
     <section className="bg-white py-16" aria-label="EagleWing Express at a glance">
       <div className="container-x">
         <Reveal effect="scale" className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-charcoal to-charcoal-3 px-6 py-12 text-white sm:px-10">
-          <BrandMark variant="white" className="absolute -right-10 -bottom-16 size-72 opacity-[0.07]" />
+          <BrandMark variant="light" className="absolute -right-12 -bottom-4 h-auto w-96 opacity-[0.06]" />
           <div className="relative grid grid-cols-2 gap-y-10 lg:grid-cols-4">
             {stats.map((s, i) => (
               <div key={s.label} className={`px-2 text-center ${i > 0 ? 'lg:border-l lg:border-white/10' : ''}`}>

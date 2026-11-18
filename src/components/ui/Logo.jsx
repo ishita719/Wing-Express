@@ -1,19 +1,21 @@
 import BrandMark from './BrandMark'
 
-/** EagleWing Express logo lockup: Wing-E mark + wordmark. */
+/** EagleWing Express logo lockup: feather-fan mark + wordmark. */
 export default function Logo({ light = true, animate = false, className = '' }) {
   return (
     <a href="#top" className={`group inline-flex items-center gap-3 ${className}`} aria-label="EagleWing Express — home">
       <BrandMark
-        variant={light ? 'crimson' : 'charcoal'}
+        variant={light ? 'light' : 'dark'}
         animate={animate}
-        className="size-10 shrink-0 transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105"
+        className="h-8 w-auto shrink-0 transition-transform duration-500 group-hover:scale-105"
       />
       <span className="leading-none">
-        <span className={`block font-display text-[1.35rem] font-extrabold tracking-tight ${light ? 'text-white' : 'text-ink'}`}>
+        <span className={`block font-brand text-[1.6rem] font-medium tracking-tight ${light ? 'text-white' : 'text-ink'}`}>
           EagleWing
         </span>
-        <span className="mt-1 block text-[10px] font-bold tracking-[0.34em] text-crimson-400">EXPRESS</span>
+        <span className={`mt-0.5 block font-brand text-[10px] font-semibold tracking-[0.42em] ${light ? 'text-crimson-400' : 'text-crimson'}`}>
+          EXPRESS
+        </span>
       </span>
     </a>
   )

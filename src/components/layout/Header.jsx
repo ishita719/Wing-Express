@@ -29,7 +29,7 @@ export default function Header() {
               <Clock className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.hours}
             </span>
             <span className="inline-flex items-center gap-2">
-              <MapPin className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.region}
+              <MapPin className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.regionShort}
             </span>
           </div>
           <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 transition hover:text-white">
