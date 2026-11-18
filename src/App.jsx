@@ -12,6 +12,8 @@ import Quote from './components/sections/Quote'
 import Faq from './components/sections/Faq'
 import CtaBand from './components/sections/CtaBand'
 import BackToTop from './components/ui/BackToTop'
+import PinnedHero from './components/layout/PinnedHero'
+import RoadDivider from './components/sections/RoadDivider'
 
 export default function App() {
   return (
@@ -24,17 +26,23 @@ export default function App() {
       </a>
       <Header />
       <main id="main">
-        <Hero />
-        <TrustMarquee />
-        <Services />
-        <Stats />
-        <Fleet />
-        <Process />
-        <Coverage />
-        <WhyUs />
-        <Quote />
-        <Faq />
-        <CtaBand />
+        {/* Home hero stays pinned; everything after slides up over it like a curtain */}
+        <PinnedHero>
+          <Hero />
+        </PinnedHero>
+        <div className="relative z-10 -mt-8 rounded-t-[2rem] bg-white shadow-[0_-30px_60px_-12px_rgb(0_0_0/0.55)]">
+          <RoadDivider />
+          <TrustMarquee />
+          <Services />
+          <Stats />
+          <Fleet />
+          <Process />
+          <Coverage />
+          <WhyUs />
+          <Quote />
+          <Faq />
+          <CtaBand />
+        </div>
       </main>
       <Footer />
       <BackToTop />

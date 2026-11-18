@@ -159,9 +159,84 @@
   stroke-dashoffset: 0;
 }
 
+/* Cards dealt in from alternating sides */
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left { transform: translateX(-70px) rotate(-4deg); }
+.reveal-right { transform: translateX(70px) rotate(4deg); }
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Word-by-word heading reveal */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.word-mask > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.is-visible .word-mask > span {
+  transform: none;
+}
+
+/* Odometer digits */
+.odo-col {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1;
+}
+.odo-col > span {
+  display: block;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Map stops pop in after the route has drawn */
+.stop-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+}
+.is-visible .stop-pop {
+  animation: stop-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes stop-pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+.stop-label {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.is-visible .stop-label {
+  opacity: 1;
+}
+.stop-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: stop-ring 1.6s ease-out infinite;
+}
+@keyframes stop-ring {
+  from { transform: scale(1); opacity: 0.7; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal-up, .reveal-scale, .grow-x, .feather, .draw-path {
+  .reveal-up, .reveal-scale, .reveal-left, .reveal-right, .grow-x, .feather, .draw-path,
+  .word-mask > span, .stop-pop, .stop-label, .odo-col > span {
     opacity: 1 !important;
     transform: none !important;
     stroke-dashoffset: 0 !important;

@@ -2,6 +2,8 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import Logo from '../ui/Logo'
 import { company, navLinks, coverage } from '../../data/site'
 import { tel } from '../../lib/utils'
+import { useRef } from 'react'
+import useScrollProgress from '../../hooks/useScrollProgress'
 
 function Col({ title, children }) {
   return (
@@ -12,7 +14,25 @@ function Col({ title, children }) {
   )
 }
 
-const linkCls = 'text-sm text-white/60 transition hover:text-crimson'
+const linkCls = 'text-sm text-white/60 transition hover:text-crimson-400'
+
+/** Giant outlined wordmark that fills with crimson as the footer scrolls in. */
+function Wordmark() {
+  const ref = useRef(null)
+  const p = useScrollProgress(ref, { from: 1.05, to: 0.82 })
+  const cls = 'block font-display text-[19vw] leading-[0.82] font-extrabold tracking-tighter whitespace-nowrap select-none lg:text-[13.5rem]'
+  return (
+    <div ref={ref} className="container-x relative overflow-hidden pt-4" aria-hidden="true">
+      <span className={`${cls} text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.14)]`}>EagleWing</span>
+      <span
+        className={`${cls} absolute inset-x-4 top-4 bg-gradient-to-r from-crimson to-crimson-400 bg-clip-text text-transparent sm:inset-x-6 lg:inset-x-8`}
+        style={{ clipPath: `inset(0 ${100 - p * 100}% 0 0)` }}
+      >
+        EagleWing
+      </span>
+    </div>
+  )
+}
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -89,6 +109,8 @@ export default function Footer() {
           </Col>
         </div>
       </div>
+
+      <Wordmark />
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/45 sm:flex-row">

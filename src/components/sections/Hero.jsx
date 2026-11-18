@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, Phone, CircleCheck, Check, Truck, PackageCheck, ClipboardList } from 'lucide-react'
 import Button from '../ui/Button'
+import Magnetic from '../ui/Magnetic'
 import Reveal from '../ui/Reveal'
 import TruckIllustration from '../ui/TruckIllustration'
 import { company, heroBadges, coverage } from '../../data/site'
@@ -30,7 +31,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-gradient-to-br from-charcoal-950 via-charcoal to-charcoal-3 pt-36 pb-20 text-white lg:pt-44 lg:pb-28"
+      className="relative isolate overflow-hidden bg-gradient-to-br from-charcoal-950 via-charcoal to-charcoal-3 pt-36 pb-24 text-white lg:flex lg:min-h-svh lg:items-center lg:pt-32 lg:pb-24"
       aria-labelledby="hero-title"
     >
       {/* Ambient background */}
@@ -69,9 +70,11 @@ export default function Hero() {
 
           <Reveal delay={300}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button href="#quote" size="lg" icon={ArrowRight}>
-                Get a free quote
-              </Button>
+              <Magnetic>
+                <Button href="#quote" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
+                  Get a free quote
+                </Button>
+              </Magnetic>
               <Button href={tel(company.phone)} size="lg" variant="ghost" iconLeft={Phone}>
                 {company.phone}
               </Button>

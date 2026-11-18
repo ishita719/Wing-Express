@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { MapPin, ArrowRight, Navigation } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
@@ -15,6 +16,7 @@ const LINE_Y = 175
  */
 export default function Coverage() {
   const { mainLine, branch, all } = coverage
+  const [active, setActive] = useState(null)
   const x = (i) => 70 + (i / (mainLine.length - 1)) * (W - 140)
   const pts = mainLine.map((name, i) => ({ name, x: x(i), y: LINE_Y }))
   const fork = pts.find((p) => p.name === branch.from)
@@ -78,18 +80,38 @@ export default function Coverage() {
                 const end = p.name === mainLine[0] || p.name === mainLine.at(-1)
                 const isBranch = p.name === branch.to
                 const below = isBranch ? false : p.name === branch.from ? true : i % 2 === 0
+                const on = active === p.name
+                const delay = `${(isBranch ? 2.2 : 0.6) + i * 0.16}s`
                 return (
-                  <g key={p.name} className="group">
-                    <circle cx={p.x} cy={p.y} r={end ? 11 : 8} fill="#fff" stroke={isBranch ? '#b51d32' : '#1b1f27'} strokeWidth="4" />
-                    {end && <circle cx={p.x} cy={p.y} r="4" fill="#d7263d" />}
+                  <g
+                    key={p.name}
+                    className="cursor-pointer"
+                    onMouseEnter={() => setActive(p.name)}
+                    onMouseLeave={() => setActive(null)}
+                  >
+                    {on && <circle cx={p.x} cy={p.y} r="10" fill="#d7263d" className="stop-ring" />}
+                    <g className="stop-pop" style={{ animationDelay: delay }}>
+                      <circle
+                        cx={p.x}
+                        cy={p.y}
+                        r={on ? 13 : end ? 11 : 8}
+                        fill={on ? '#d7263d' : '#fff'}
+                        stroke={on || isBranch ? '#b51d32' : '#1b1f27'}
+                        strokeWidth="4"
+                        style={{ transition: 'r 0.25s, fill 0.25s' }}
+                      />
+                      {end && !on && <circle cx={p.x} cy={p.y} r="4" fill="#d7263d" />}
+                    </g>
                     <text
                       x={isBranch ? p.x - 18 : p.x}
                       y={isBranch ? p.y + 5 : below ? p.y + 36 : p.y - 24}
                       textAnchor={isBranch ? 'end' : 'middle'}
                       fontFamily="Archivo, sans-serif"
                       fontWeight="700"
-                      fontSize="16"
-                      fill="#1b1f27"
+                      fontSize={on ? 18 : 16}
+                      fill={on ? '#d7263d' : '#1b1f27'}
+                      className="stop-label"
+                      style={{ transitionDelay: delay }}
                     >
                       {p.name}
                     </text>
@@ -120,8 +142,19 @@ export default function Coverage() {
           <div className="flex flex-col items-start justify-between gap-6 border-t border-line p-6 lg:flex-row lg:items-center">
             <ul className="flex flex-wrap gap-2">
               {all.map((t) => (
-                <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3.5 py-1.5 text-sm text-ink/80 transition hover:bg-crimson-50">
-                  <MapPin className="size-3.5 text-crimson-dark" aria-hidden="true" /> {t}
+                <li key={t}>
+                  <button
+                    type="button"
+                    onMouseEnter={() => setActive(t)}
+                    onMouseLeave={() => setActive(null)}
+                    onFocus={() => setActive(t)}
+                    onBlur={() => setActive(null)}
+                    className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm transition-all duration-200 ${
+                      active === t ? '-translate-y-0.5 bg-crimson text-white shadow-md' : 'bg-surface text-ink/80'
+                    }`}
+                  >
+                    <MapPin className={`size-3.5 ${active === t ? 'text-white' : 'text-crimson-dark'}`} aria-hidden="true" /> {t}
+                  </button>
                 </li>
               ))}
             </ul>

@@ -2,6 +2,8 @@ import { ArrowRight, Phone } from 'lucide-react'
 import Button from '../ui/Button'
 import Reveal from '../ui/Reveal'
 import BrandMark from '../ui/BrandMark'
+import Magnetic from '../ui/Magnetic'
+import SplitWords from '../ui/SplitWords'
 import { company } from '../../data/site'
 import { tel } from '../../lib/utils'
 
@@ -14,16 +16,18 @@ export default function CtaBand() {
           <div className="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <h2 id="cta-title" className="text-3xl leading-tight sm:text-4xl">
-                Have freight to move on the Island?
+                <SplitWords text="Have freight to move on the Island?" delay={200} />
               </h2>
               <p className="mt-3 text-white/85">
                 Call {company.phone} or request a quote online — we are open {company.hoursShort}.
               </p>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <Button href="#quote" variant="charcoal" size="lg" icon={ArrowRight}>
-                Get a free quote
-              </Button>
+              <Magnetic>
+                <Button href="#quote" variant="charcoal" size="lg" icon={ArrowRight} className="w-full sm:w-auto">
+                  Get a free quote
+                </Button>
+              </Magnetic>
               <Button href={tel(company.phone)} variant="white" size="lg" iconLeft={Phone}>
                 Call now
               </Button>

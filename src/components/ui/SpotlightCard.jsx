@@ -1,23 +1,36 @@
 import { useRef } from 'react'
 
 /**
- * Card with a soft crimson spotlight that follows the cursor.
- * Falls back to a normal card on touch devices.
+ * Card that tilts in 3D toward the cursor, with a soft crimson spotlight
+ * following the pointer. Mouse only — touch devices get a normal card.
  */
-export default function SpotlightCard({ as: Tag = 'div', className = '', children, ...props }) {
+export default function SpotlightCard({ as: Tag = 'div', tilt = 7, className = '', children, ...props }) {
   const ref = useRef(null)
+
   const onMove = (e) => {
+    if (e.pointerType !== 'mouse') return
     const el = ref.current
     if (!el) return
     const r = el.getBoundingClientRect()
-    el.style.setProperty('--mx', `${e.clientX - r.left}px`)
-    el.style.setProperty('--my', `${e.clientY - r.top}px`)
+    const x = e.clientX - r.left
+    const y = e.clientY - r.top
+    el.style.setProperty('--mx', `${x}px`)
+    el.style.setProperty('--my', `${y}px`)
+    const rx = (0.5 - y / r.height) * tilt
+    const ry = (x / r.width - 0.5) * tilt
+    el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`
   }
+  const reset = () => {
+    if (ref.current) ref.current.style.transform = ''
+  }
+
   return (
     <Tag
       ref={ref}
-      onMouseMove={onMove}
-      className={`group relative overflow-hidden ${className}`}
+      onPointerMove={onMove}
+      onPointerLeave={reset}
+      className={`group relative overflow-hidden [transform-style:preserve-3d] ${className}`}
+      style={{ transition: 'transform 0.25s ease-out, translate 0.3s, box-shadow 0.3s, border-color 0.3s' }}
       {...props}
     >
       <span

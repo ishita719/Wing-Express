@@ -7,7 +7,7 @@ import { shipmentSizes } from '../../data/site'
 /** "What we carry" — shipment sizes from parcels to full loads. */
 export default function Fleet() {
   return (
-    <section id="shipments" className="bg-white py-20 sm:py-28" aria-labelledby="shipments-title">
+    <section id="shipments" className="overflow-x-clip bg-white py-20 sm:py-28" aria-labelledby="shipments-title">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
@@ -25,7 +25,7 @@ export default function Fleet() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {shipmentSizes.map(({ icon: Icon, name, text, examples, featured }, i) => (
-            <Reveal key={name} as="article" delay={i * 100}>
+            <Reveal key={name} as="article" effect={i === 0 ? 'left' : i === 2 ? 'right' : 'up'} delay={i * 120}>
               <div
                 className={`group relative flex h-full flex-col overflow-hidden rounded-2xl p-8 transition duration-300 hover:-translate-y-1 ${
                   featured ? 'bg-charcoal text-white shadow-xl shadow-charcoal/25' : 'card card-hover'

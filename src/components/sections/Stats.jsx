@@ -1,8 +1,9 @@
-import Counter from '../ui/Counter'
+import Odometer from '../ui/Odometer'
 import Reveal from '../ui/Reveal'
 import BrandMark from '../ui/BrandMark'
 import { stats } from '../../data/site'
 
+/** Stats panel styled like a truck dashboard: odometer-roll numbers. */
 export default function Stats() {
   return (
     <section className="bg-white py-16" aria-label="EagleWing Express at a glance">
@@ -12,10 +13,10 @@ export default function Stats() {
           <div className="relative grid grid-cols-2 gap-y-10 lg:grid-cols-4">
             {stats.map((s, i) => (
               <div key={s.label} className={`px-2 text-center ${i > 0 ? 'lg:border-l lg:border-white/10' : ''}`}>
-                <p className="font-display text-4xl font-extrabold text-crimson-400 sm:text-5xl">
-                  <Counter value={s.value} suffix={s.suffix} />
+                <p className="inline-flex rounded-lg bg-black/25 px-3 py-2 font-display text-4xl font-extrabold text-crimson-400 shadow-inner sm:text-5xl">
+                  <Odometer value={s.value} suffix={s.suffix} />
                 </p>
-                <p className="mt-2 text-sm text-white/70">{s.label}</p>
+                <p className="mt-3 text-sm text-white/70">{s.label}</p>
               </div>
             ))}
           </div>
