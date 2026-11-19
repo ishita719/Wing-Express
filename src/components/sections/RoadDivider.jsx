@@ -34,7 +34,7 @@ export default function RoadDivider({ rounded = true }) {
           className="absolute -bottom-1 w-56 will-change-transform sm:w-80"
           style={{ left: `calc(${-12 + p * 110}% - 80px)` }}
         >
-          <TruckIllustration className="w-full drop-shadow-xl" />
+          <TruckIllustration className="w-full drop-shadow-xl" wheelAngle={p * 2400} bounce={p > 0 && p < 1} />
         </div>
       </div>
 

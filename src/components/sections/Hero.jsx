@@ -112,8 +112,15 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="mt-5 overflow-hidden rounded-xl bg-gradient-to-b from-brand-50 to-surface px-4 pt-5">
-              <TruckIllustration className="w-full animate-float" />
+            {/* truck "driving": wheels spin, body bounces, lane markings stream past */}
+            <div className="mt-5 overflow-hidden rounded-xl bg-gradient-to-b from-brand-50 to-surface pt-5">
+              <div className="relative z-10 px-4">
+                <TruckIllustration className="w-full" spinning bounce />
+              </div>
+              <div className="relative -mt-3 h-7 bg-charcoal">
+                <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
+                <div className="road-dash absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2" />
+              </div>
             </div>
 
             {/* Route track with moving marker */}
