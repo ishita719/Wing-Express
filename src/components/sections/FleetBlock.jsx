@@ -18,10 +18,13 @@ export default function FleetBlock() {
         </div>
 
         <div className="lg:col-span-7">
-          <Reveal effect="scale" className="rounded-2xl bg-gradient-to-b from-brand-50 to-surface px-6 pt-6">
-            <TruckIllustration className="w-full" spinning bounce />
-            <div className="-mx-6 h-6 bg-charcoal" style={{ marginTop: '-1.75%' }}>
-              <div className="h-0.5 bg-crimson" />
+          <Reveal effect="scale" className="overflow-hidden rounded-2xl bg-gradient-to-b from-brand-50 to-surface pt-6">
+            <div className="truck-travel relative z-10 px-6" style={{ animationDuration: '11s' }}>
+              <TruckIllustration className="w-full" spinning bounce />
+            </div>
+            <div className="relative h-6 bg-charcoal" style={{ marginTop: '-1.75%' }}>
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
+              <div className="road-dash absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2" style={{ animation: 'none' }} />
             </div>
           </Reveal>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">

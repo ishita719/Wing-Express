@@ -323,3 +323,12 @@
   animation: road-dash 0.55s linear infinite;
 }
 @keyframes road-dash { to { background-position: -44px 0; } }
+/* Truck drives in from the left, across the road and out to the right, on a loop */
+.truck-travel { animation: truck-travel 9s linear infinite; will-change: transform; }
+@keyframes truck-travel {
+  from { transform: translateX(-105%); }
+  to { transform: translateX(105%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .truck-travel, .animate-wheel, .truck-bounce, .road-dash { animation: none !important; }
+}
