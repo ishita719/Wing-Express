@@ -31,10 +31,10 @@ export default function RoadDivider({ rounded = true }) {
 
         {/* truck */}
         <div
-          className="absolute -bottom-1 w-56 will-change-transform sm:w-80"
+          className="absolute -bottom-[3px] w-60 will-change-transform sm:w-[22rem]"
           style={{ left: `calc(${-12 + p * 110}% - 80px)` }}
         >
-          <TruckIllustration className="w-full drop-shadow-xl" wheelAngle={p * 2400} bounce={p > 0 && p < 1} />
+          <TruckIllustration className="w-full" wheelAngle={p * 2400} bounce={p > 0 && p < 1} />
         </div>
       </div>
 

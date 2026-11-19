@@ -117,7 +117,8 @@ export default function Hero() {
               <div className="relative z-10 px-4">
                 <TruckIllustration className="w-full" spinning bounce />
               </div>
-              <div className="relative -mt-3 h-7 bg-charcoal">
+              {/* tyres sit on the road: offset matches the truck art's ground line (12/690 of its width) */}
+              <div className="relative h-7 bg-charcoal" style={{ marginTop: '-1.75%' }}>
                 <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
                 <div className="road-dash absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2" />
               </div>

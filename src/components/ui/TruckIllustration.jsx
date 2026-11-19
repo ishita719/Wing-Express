@@ -18,10 +18,15 @@ const X1 = 70 // x of the near-back corner
 const W = 132 // apparent width of the front face
 const G0 = 380 // ground line at the front
 
+/** Perspective scale with distance from the front (further back = smaller). */
+const S = (d) => 1 - 0.18 * d
+/** Far side looks slightly smaller. */
+const K = (e) => 1 - 0.14 * e
+
 function P(d, e, h) {
-  const s = 1 - 0.3 * d // things further back look smaller
-  const k = 1 - 0.14 * e // far side looks slightly smaller
-  return [X0 + (X1 - X0) * d + W * e * (1 - 0.25 * d), G0 - 55 * d - 30 * e - h * s * k]
+  // Ground stays level along the truck (no rise with d) so all near-side
+  // tyres touch the same road line; the far side sits slightly higher.
+  return [X0 + (X1 - X0) * d + W * e * (1 - 0.25 * d), G0 - 30 * e - h * S(d) * K(e)]
 }
 const f = (n) => n.toFixed(1)
 const poly = (...pts) => `M${pts.map(([x, y]) => `${f(x)} ${f(y)}`).join(' L')} Z`
@@ -40,8 +45,7 @@ function sideMatrix(dLeft, dRight, hTop, hBottom, w, h) {
  */
 function Wheel({ d, e = 0, R = 50, ids, angle, spinning, far = false }) {
   const [cx, cy] = P(d, e, R)
-  const s = 1 - 0.3 * d
-  const r = R * s
+  const r = R * S(d) * K(e)
   const holes = Array.from({ length: 10 }, (_, i) => i * 36)
   const nuts = Array.from({ length: 10 }, (_, i) => (i / 10) * Math.PI * 2)
   return (
@@ -114,14 +118,14 @@ export default function TruckIllustration({ className = '', wheelAngle, spinning
 
   // front wheel arch on the cab side
   const [wcx, wcy] = P(FRONT_AXLE, 0, 50)
-  const ws = 1 - 0.3 * FRONT_AXLE
+  const ws = S(FRONT_AXLE)
   const archRx = 50 * ws * 0.8 * 1.18
   const archRy = 50 * ws * 1.16
   const archY = wcy - 10
   const cabSide = `${poly(P(CAB_BACK, 0, ROOF - 4), P(CAB_BACK - 0.01, 0, ROOF), P(0.15, 0, ROOF + 1), P(0.142, 0, ROOF - 6), P(COWL, 0, HOOD + 8), P(0.004, 0, HOOD - 4), P(0, 0, HOOD - 12), P(0, 0, CAB_BOTTOM)).slice(0, -2)} L${f(wcx + archRx)} ${f(archY)} A${f(archRx)} ${f(archRy)} 0 0 0 ${f(wcx - archRx)} ${f(archY)} L${f(P(CAB_BACK, 0, CAB_BOTTOM)[0])} ${f(P(CAB_BACK, 0, CAB_BOTTOM)[1])} Z`
 
   return (
-    <svg viewBox="40 60 680 350" className={className} role="img" aria-label="EagleWing Express box truck">
+    <svg viewBox="40 70 690 322" className={className} role="img" aria-label="EagleWing Express box truck">
       <defs>
         <linearGradient id={ids.alu} x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#d6dade" />
@@ -168,6 +172,11 @@ export default function TruckIllustration({ className = '', wheelAngle, spinning
 
       {/* ground shadow */}
       <path d={poly(P(1.02, -0.06, 0), P(-0.04, -0.06, 0), P(-0.04, 1.06, 0), P(1.02, 1.06, 0))} fill="#000" opacity="0.22" filter={`url(#${ids.shadow})`} />
+
+      {/* far-side tyres (front + rear dual), partly hidden by the body */}
+      <Wheel d={REAR_AXLE + 0.012} e={0.9} ids={ids} far />
+      <Wheel d={REAR_AXLE} e={0.9} ids={ids} far />
+      <Wheel d={FRONT_AXLE} e={0.9} ids={ids} far />
 
       <g className={bounce ? 'truck-bounce' : ''}>
         {/* ── BOX ── */}
