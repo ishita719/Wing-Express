@@ -79,7 +79,7 @@ const sections = [
   {
     id: 'contact',
     title: 'Contact us',
-    body: [`Questions about these terms? Call ${company.phone} or email ${company.email}, ${company.hoursShort}.`],
+    body: [`Questions about these terms? Call ${company.phone} or email ${company.email} (phones ${company.phoneHoursShort}).`],
   },
 ]
 

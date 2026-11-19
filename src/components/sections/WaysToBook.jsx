@@ -9,7 +9,7 @@ import { tel } from '../../lib/utils'
 /** Three ways to book, each a tilting card that links straight to the action. */
 export default function WaysToBook() {
   const ways = [
-    { icon: PhoneCall, title: 'Call dispatch', text: `Speak with our team directly, ${company.hoursShort}.`, cta: company.phone, href: tel(company.phone) },
+    { icon: PhoneCall, title: 'Call dispatch', text: `Speak with our team directly, ${company.phoneHoursShort}. Deliveries ${company.deliveryDays}.`, cta: company.phone, href: tel(company.phone) },
     { icon: Mail, title: 'Send an email', text: 'Send your shipment details any time — we reply during business hours.', cta: company.email, href: `mailto:${company.email}` },
     { icon: FileText, title: 'Request a quote online', text: 'Fill in the quote form with your pickup, delivery and freight details.', cta: 'Open the quote form', to: '/contact' },
   ]

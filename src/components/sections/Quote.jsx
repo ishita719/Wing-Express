@@ -8,7 +8,7 @@ import { tel } from '../../lib/utils'
 
 const initial = {
   name: '', company: '', phone: '', email: '',
-  from: '', to: '', service: '', timing: '',
+  from: '', to: '', address: '', service: '', timing: '',
   cargo: '', weight: '', tailgate: false, notes: '',
   website: '', // honeypot — real visitors never fill this
 }
@@ -35,7 +35,7 @@ function buildMailto(d) {
 export default function Quote() {
   const [data, setData] = useState(initial)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
-  const stopNames = [...coverage.all, 'Other / not listed']
+  const stopNames = [...coverage.all, coverage.mainlandLabel, 'Other / not listed']
 
   const update = (e) => {
     const { name, value, type, checked } = e.target
@@ -63,7 +63,7 @@ export default function Quote() {
     { icon: Phone, label: 'Dispatch', value: company.phone, href: tel(company.phone) },
     { icon: Mail, label: 'Email', value: company.email, href: `mailto:${company.email}` },
     { icon: MapPin, label: 'Service area', value: company.region },
-    { icon: Clock, label: 'Hours', value: company.hours },
+    { icon: Clock, label: 'Hours', value: company.hoursRule },
   ]
 
   return (
@@ -141,12 +141,19 @@ export default function Quote() {
                       {stopNames.map((s) => <option key={s}>{s}</option>)}
                     </select>
                   </Field>
+                  <Field label="City or address, if not listed" id="address">
+                    <input id="address" name="address" maxLength={200} value={data.address} onChange={update} className="field" placeholder="e.g. Burnaby, or a street address" />
+                  </Field>
                   <Field label="Service" id="service">
                     <select id="service" name="service" value={data.service} onChange={update} className="field">
                       <option value="">Select…</option>
                       {quoteOptions.service.map((s) => <option key={s}>{s}</option>)}
                     </select>
                   </Field>
+                  <label className="flex cursor-pointer items-center gap-3 self-end rounded-lg border border-crimson/30 bg-crimson-50 px-4 py-3 text-sm">
+                    <input type="checkbox" name="tailgate" checked={data.tailgate} onChange={update} className="size-4 accent-brand" />
+                    Tailgate lift needed (no dock or forklift)
+                  </label>
                   <Field label="Timing" id="timing">
                     <select id="timing" name="timing" value={data.timing} onChange={update} className="field">
                       <option value="">Select…</option>
@@ -154,31 +161,27 @@ export default function Quote() {
                     </select>
                   </Field>
                   <Field label="What is moving?" id="cargo" required>
-                    <input id="cargo" name="cargo" required value={data.cargo} onChange={update} className="field" placeholder="e.g. 4 pallets of tiles" />
+                    <input id="cargo" name="cargo" maxLength={200} required value={data.cargo} onChange={update} className="field" placeholder="e.g. 4 pallets of tiles" />
                   </Field>
                   <Field label="Weight or piece count" id="weight">
-                    <input id="weight" name="weight" value={data.weight} onChange={update} className="field" placeholder="e.g. 1,800 lb" />
+                    <input id="weight" name="weight" maxLength={100} value={data.weight} onChange={update} className="field" placeholder="e.g. 1,800 lb" />
                   </Field>
 
-                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-line bg-surface px-4 py-3 text-sm sm:col-span-2">
-                    <input type="checkbox" name="tailgate" checked={data.tailgate} onChange={update} className="size-4 accent-brand" />
-                    Tailgate needed — no dock or forklift at the delivery site
-                  </label>
 
                   <Field label="Full name" id="name" required>
-                    <input id="name" name="name" required autoComplete="name" value={data.name} onChange={update} className="field" />
+                    <input id="name" name="name" maxLength={100} required autoComplete="name" value={data.name} onChange={update} className="field" />
                   </Field>
                   <Field label="Company" id="company">
-                    <input id="company" name="company" autoComplete="organization" value={data.company} onChange={update} className="field" />
+                    <input id="company" name="company" maxLength={120} autoComplete="organization" value={data.company} onChange={update} className="field" />
                   </Field>
                   <Field label="Phone" id="phone" required>
-                    <input id="phone" name="phone" type="tel" required autoComplete="tel" value={data.phone} onChange={update} className="field" />
+                    <input id="phone" name="phone" maxLength={30} type="tel" required autoComplete="tel" value={data.phone} onChange={update} className="field" />
                   </Field>
                   <Field label="Email" id="email" required>
-                    <input id="email" name="email" type="email" required autoComplete="email" value={data.email} onChange={update} className="field" />
+                    <input id="email" name="email" maxLength={160} type="email" required autoComplete="email" value={data.email} onChange={update} className="field" />
                   </Field>
                   <Field label="Anything else?" id="notes" className="sm:col-span-2">
-                    <textarea id="notes" name="notes" rows={3} value={data.notes} onChange={update} className="field resize-none" placeholder="Dimensions, access notes, delivery windows…" />
+                    <textarea id="notes" name="notes" maxLength={2000} rows={3} value={data.notes} onChange={update} className="field resize-none" placeholder="Dimensions, access notes, delivery windows…" />
                   </Field>
 
                   {/* Honeypot */}
@@ -200,7 +203,7 @@ export default function Quote() {
 
                 <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                   <p className="max-w-xs text-xs text-muted">
-                    Dispatch hours: {company.hoursShort}. We use your details only to respond to this request — see our{' '}
+                    Phones: {company.phoneHoursShort}. Deliveries {company.deliveryDays}. We use your details only to respond to this request — see our{' '}
                     <Link to="/privacy" className="underline hover:text-ink">privacy policy</Link>.
                   </p>
                   <Button type="submit" size="lg" disabled={status === 'sending'} icon={status === 'sending' ? undefined : Send}>

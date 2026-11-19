@@ -19,7 +19,7 @@ export default function CtaBand() {
                 <SplitWords text="Have freight to move on the Island?" delay={200} />
               </h2>
               <p className="mt-3 text-white/85">
-                Call {company.phone} or request a quote online — we are open {company.hoursShort}.
+                Call {company.phone} or request a quote online. {company.hoursRule}.
               </p>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">

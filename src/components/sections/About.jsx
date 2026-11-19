@@ -1,3 +1,4 @@
+import { Ship } from "lucide-react"
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
 import BrandMark from '../ui/BrandMark'
@@ -5,6 +6,12 @@ import { about, company } from '../../data/site'
 
 /** Highway shield in the BC-route style (simplified, original drawing). */
 function HighwayShield({ code }) {
+  if (code === "ferry")
+    return (
+      <span className="relative grid h-12 w-11 shrink-0 place-items-center rounded-xl bg-crimson" aria-hidden="true">
+        <Ship className="size-6 text-white" />
+      </span>
+    )
   return (
     <span className="relative grid h-12 w-11 shrink-0 place-items-center" aria-hidden="true">
       <svg viewBox="0 0 44 48" className="absolute inset-0 h-full w-full">
@@ -53,7 +60,7 @@ export default function About() {
                   <HighwayShield code={h.code} />
                   <div>
                     <p className="font-semibold">
-                      Highway {h.code} · <span className="text-white/70">{h.name}</span>
+                      {h.code === "ferry" ? "BC Ferries" : `Highway ${h.code}`} · <span className="text-white/70">{h.name}</span>
                     </p>
                     <p className="mt-0.5 text-sm text-white/55">{h.span}</p>
                   </div>
@@ -63,7 +70,7 @@ export default function About() {
 
             <p className="mt-8 rounded-xl bg-white/5 px-4 py-3 text-sm text-white/70">
               Dispatch: <a href={`tel:${company.phone.replace(/[^\d+]/g, '')}`} className="font-semibold text-white hover:text-crimson-400">{company.phone}</a> ·{' '}
-              {company.hoursShort}
+              {company.hoursRule}
             </p>
           </div>
         </Reveal>

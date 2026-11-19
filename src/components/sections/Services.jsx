@@ -13,14 +13,23 @@ export default function Services() {
           id="services-title"
           align="center"
           eyebrow="Our services"
-          title="Delivery services built around your business"
-          text="Whether it is one box or a full truckload, EagleWing Express has a service that fits the shipment, the timeline and the budget."
+          title="Tailgate delivery, daily Island runs and the mainland"
+          text="Our 3 and 5 ton tailgate trucks run daily across the Island and to the Lower Mainland — from one box to a full load, for businesses and homes."
         />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, text }, i) => (
-            <Reveal key={title} as="article" delay={(i % 3) * 90} className="h-full">
-              <SpotlightCard as={Link} to="/contact" className="card card-hover flex h-full flex-col p-7">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map(({ icon: Icon, title, text, highlight }, i) => (
+            <Reveal key={title} as="article" delay={(i % 4) * 80} className="h-full">
+              <SpotlightCard
+                as={Link}
+                to="/contact"
+                className={`card card-hover flex h-full flex-col p-7 ${highlight ? '!border-crimson/40 ring-1 ring-crimson/20' : ''}`}
+              >
+                {highlight && (
+                  <span className="absolute top-5 right-5 rounded-full bg-crimson px-2.5 py-1 text-[11px] font-bold text-white">
+                    {i === 0 ? 'Our specialty' : 'Every day'}
+                  </span>
+                )}
                 <span className="relative grid size-12 place-items-center rounded-xl bg-charcoal text-crimson-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-crimson group-hover:text-white">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>

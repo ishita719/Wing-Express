@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { MapPin, ArrowRight, Navigation } from 'lucide-react'
+import { MapPin, Phone, Navigation, Ship } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
 import Button from '../ui/Button'
-import { coverage, communities } from '../../data/site'
+import { coverage, communities, company } from '../../data/site'
+import { tel } from '../../lib/utils'
 
 const W = 1000
-const H = 300
+const H = 320
 const LINE_Y = 175
 
 /**
@@ -25,6 +26,9 @@ export default function Coverage() {
   const main = `M${pts[0].x} ${LINE_Y} H${pts.at(-1).x}`
   const spur = `M${fork.x} ${LINE_Y} C${fork.x} ${LINE_Y - 60} ${alberni.x} ${alberni.y + 60} ${alberni.x} ${alberni.y}`
   const nanaimoX = pts.find((p) => p.name === 'Nanaimo').x
+  // Daily ferry lane to the mainland: east of Nanaimo = down on this north-right map
+  const mainland = { x: nanaimoX + 46, y: 282 }
+  const ferry = `M${nanaimoX} ${LINE_Y} C${nanaimoX} ${LINE_Y + 50} ${mainland.x} ${mainland.y - 50} ${mainland.x} ${mainland.y}`
 
   return (
     <section id="coverage" className="bg-white py-20 sm:py-28" aria-labelledby="coverage-title">
@@ -33,8 +37,8 @@ export default function Coverage() {
           id="coverage-title"
           align="center"
           eyebrow="Coverage"
-          title="Serving Vancouver Island, end to end"
-          text={`From Victoria in the south to Campbell River in the north — ${all.length} communities on one dependable network.`}
+          title="Daily service, Victoria to Campbell River"
+          text={`Daily runs to ${all.length} Island communities from Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland via Duke Point – Tsawwassen. Not on the list? Ask us.`}
         />
 
         <Reveal effect="none" className="card mt-14 overflow-hidden">
@@ -43,13 +47,21 @@ export default function Coverage() {
             <div className="absolute top-5 right-6 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-muted shadow-sm">
               <Navigation className="size-3.5 rotate-90 text-brand" aria-hidden="true" /> North
             </div>
-            <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`Route map: ${mainLine.join(', ')}, with a branch from ${branch.from} to ${branch.to}`}>
+            <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`Route map: ${mainLine.join(', ')}, with a branch from ${branch.from} to ${branch.to}, and a daily ferry run from Nanaimo (Duke Point) to the Lower Mainland (Tsawwassen)`}>
               {/* track beds */}
               <path d={main} fill="none" stroke="#dde3ea" strokeWidth="14" strokeLinecap="round" />
               <path d={spur} fill="none" stroke="#dde3ea" strokeWidth="14" strokeLinecap="round" />
               {/* drawn lines */}
               <path id="ew-main" d={main} pathLength="1000" className="draw-path" fill="none" stroke="#1b1f27" strokeWidth="5" strokeLinecap="round" />
               <path d={spur} pathLength="1000" className="draw-path" style={{ transitionDelay: '1.2s' }} fill="none" stroke="#d7263d" strokeWidth="5" strokeLinecap="round" />
+
+              {/* daily mainland lane (ferry), dashed */}
+              <path d={ferry} pathLength="1000" className="draw-path" style={{ transitionDelay: '1.6s' }} fill="none" stroke="#46607a" strokeWidth="4" strokeDasharray="10 9" strokeLinecap="round" />
+              <g className="stop-label" style={{ transitionDelay: '2.6s' }}>
+                <circle cx={mainland.x} cy={mainland.y} r="9" fill="#fff" stroke="#46607a" strokeWidth="4" />
+                <text x={mainland.x + 18} y={mainland.y + 2} fontFamily="Archivo, sans-serif" fontWeight="700" fontSize="16" fill="#1b1f27">Lower Mainland</text>
+                <text x={mainland.x + 18} y={mainland.y + 19} fontFamily="Public Sans, sans-serif" fontSize="11.5" fill="#46607a">Daily · Duke Point – Tsawwassen ferry</text>
+              </g>
 
               {/* highway labels */}
               {[
@@ -135,6 +147,14 @@ export default function Coverage() {
                     </span>
                   </p>
                 )}
+                {s === coverage.mainland.from && (
+                  <p className="mt-2 inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-sm">
+                    <Ship className="size-4 shrink-0 text-brand" aria-hidden="true" />
+                    <span>
+                      Daily run to the <strong>Lower Mainland</strong> via Duke Point – Tsawwassen
+                    </span>
+                  </p>
+                )}
               </li>
             ))}
           </ol>
@@ -157,11 +177,36 @@ export default function Coverage() {
                   </button>
                 </li>
               ))}
+              <li>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3.5 py-1.5 text-sm text-brand">
+                  <Ship className="size-3.5" aria-hidden="true" /> Lower Mainland (daily)
+                </span>
+              </li>
             </ul>
-            <Button href="/contact" variant="charcoal" icon={ArrowRight} className="shrink-0">
-              Check your location
-            </Button>
+            <div className="shrink-0 text-left lg:text-right">
+              <p className="mb-2 text-sm text-muted">Not on the list? We may still be able to help.</p>
+              <Button href={tel(company.phone)} variant="charcoal" iconLeft={Phone}>
+                Call {company.phone}
+              </Button>
+            </div>
           </div>
+        </Reveal>
+
+        {/* Mainland lane block */}
+        <Reveal className="mt-8 flex flex-col gap-5 rounded-2xl bg-charcoal p-7 text-white sm:flex-row sm:items-center sm:p-9">
+          <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-crimson">
+            <Ship className="size-7" aria-hidden="true" />
+          </span>
+          <div className="flex-1">
+            <h3 className="text-2xl">Daily Island to Mainland run</h3>
+            <p className="mt-2 text-sm leading-relaxed text-white/70">
+              We cross Duke Point (Nanaimo) to Tsawwassen every day, moving freight between Vancouver Island and the Lower
+              Mainland. Ask dispatch which mainland cities we can reach for your shipment.
+            </p>
+          </div>
+          <Button href="/contact" className="shrink-0">
+            Quote a mainland run
+          </Button>
         </Reveal>
 
         {/* Community cards — hovering one highlights it on the map above */}

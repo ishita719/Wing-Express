@@ -13,7 +13,7 @@ export default function Coverage() {
         eyebrow="Coverage"
         icon={MapPinned}
         title="Victoria to Campbell River, and everywhere between"
-        text={`We serve ${coverage.all.length} Vancouver Island communities along Highways 1 and 19, with service west to Port Alberni on Highway 4.`}
+        text={`We serve ${coverage.all.length} Vancouver Island communities along Highways 1 and 19, with service west to Port Alberni on Highway 4 — plus a daily run to the Lower Mainland via the Duke Point – Tsawwassen ferry.`}
       />
       <TrustMarquee />
       <CoverageSection />

@@ -13,7 +13,7 @@ export default function Contact() {
         eyebrow="Contact & quote"
         icon={Send}
         title="Tell us what is moving, and where"
-        text={`Send the form below, call ${company.phone} or email ${company.email}. Our dispatch team is available ${company.hoursShort}; we are closed on weekends.`}
+        text={`Send the form below, call ${company.phone} or email ${company.email}. Phones are answered ${company.phoneHoursShort}, and deliveries run ${company.deliveryDays}.`}
       />
       <Quote />
 

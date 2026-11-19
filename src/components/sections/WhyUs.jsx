@@ -11,7 +11,7 @@ export default function WhyUs() {
             id="why-title"
             eyebrow="Why EagleWing"
             title="A carrier you can count on"
-            text="Built for businesses that cannot afford a missed delivery. Clear communication, careful handling and trucks that leave on time — every time."
+            text="Daily runs, tailgate trucks and a dispatch team you can actually reach. Our trucks leave on schedule — and if anything changes, dispatch calls you."
           />
           <Reveal delay={120} className="mt-10">
             <p className="mb-4 text-sm font-semibold text-ink">Industries we serve</p>

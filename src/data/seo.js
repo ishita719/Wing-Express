@@ -14,9 +14,9 @@ export const pages = [
   {
     path: '/',
     file: 'index.html',
-    title: 'EagleWing Express | Freight Delivery on Vancouver Island, BC',
+    title: 'EagleWing Express | Vancouver Island Freight & Tailgate Delivery',
     description:
-      'Parcels, pallets and full loads delivered across Vancouver Island — Victoria, Duncan, Nanaimo, Parksville, Port Alberni, Courtenay and Campbell River. Free quotes.',
+      'Daily freight and tailgate delivery on Vancouver Island, Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland. Free quotes.',
     priority: '1.0',
   },
   {
@@ -25,7 +25,7 @@ export const pages = [
     name: 'About us',
     title: 'About EagleWing Express | Vancouver Island Freight Company',
     description:
-      'EagleWing Express Ltd. is a freight and delivery company based on Vancouver Island, BC, running Highways 1, 19 and 4 from Victoria to Campbell River.',
+      'EagleWing Express Ltd. is a freight and delivery company based on Vancouver Island, BC, with 3 and 5 ton tailgate trucks running daily Island and Lower Mainland routes.',
     priority: '0.8',
   },
   {
@@ -34,7 +34,7 @@ export const pages = [
     name: 'Services',
     title: 'Freight & Delivery Services | EagleWing Express',
     description:
-      'Scheduled Island runs, express delivery, pallet and LTL freight, full loads, business and residential delivery on Vancouver Island. Quote-based pricing.',
+      'Tailgate delivery, daily Island runs, a daily Lower Mainland run, express, pallet/LTL and full loads for businesses and homes on Vancouver Island.',
     priority: '0.9',
   },
   {
@@ -52,7 +52,7 @@ export const pages = [
     name: 'Coverage',
     title: 'Coverage Area: Victoria to Campbell River | EagleWing Express',
     description:
-      'We deliver to 8 Vancouver Island communities: Victoria, Duncan, Ladysmith, Nanaimo, Parksville, Port Alberni, Courtenay and Campbell River.',
+      'Daily service to 8 Vancouver Island communities from Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland via Tsawwassen.',
     priority: '0.9',
   },
   {
@@ -70,7 +70,7 @@ export const pages = [
     name: 'Contact & quote',
     title: 'Contact & Free Quote | EagleWing Express',
     description:
-      'Request a free freight quote or call (236) 888-3135. Dispatch is open Monday to Friday, 8 am to 8 pm, serving Vancouver Island, BC.',
+      'Request a free freight quote or call (236) 888-3135. Phones Mon–Fri 8 am–8 pm; deliveries 7 days a week by booking.',
     priority: '0.8',
   },
   {

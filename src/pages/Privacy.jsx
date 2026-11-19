@@ -42,6 +42,7 @@ const sections = [
     title: 'When we share it',
     body: [
       'We share personal information only when needed to complete your shipment (for example, giving a recipient name to the driver), with service providers who help us run our business under confidentiality obligations, or when required by law.',
+      'Our website is hosted by Cloudflare, and quote requests sent through the website form are delivered to us by an email service provider. These providers may store or process information outside Canada, including in the United States, where it may be subject to local laws. We do not sell your personal information.',
     ],
   },
   {
@@ -62,7 +63,7 @@ const sections = [
   {
     id: 'contact',
     title: 'Privacy contact',
-    body: [legal.privacyContact, `We aim to respond to privacy requests within the time required by PIPA. Office hours: ${company.hoursShort}.`],
+    body: [legal.privacyContact, `We aim to respond to privacy requests within the time required by PIPA. Phone hours: ${company.phoneHoursShort}.`],
   },
 ]
 

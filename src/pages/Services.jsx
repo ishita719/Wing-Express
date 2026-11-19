@@ -1,6 +1,7 @@
 import { Truck, ArrowRight } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import ServicesSection from '../components/sections/Services'
+import FleetBlock from '../components/sections/FleetBlock'
 import Fleet from '../components/sections/Fleet'
 import DeliveryScope from '../components/sections/DeliveryScope'
 import RoadDivider from '../components/sections/RoadDivider'
@@ -13,13 +14,14 @@ export default function Services() {
       <PageHero
         eyebrow="Services"
         icon={Truck}
-        title="Freight services for Island businesses and homes"
-        text="Scheduled Island runs, express deliveries, pallets and full loads — matched to your shipment, your timeline and your budget."
+        title="Tailgate delivery and daily freight runs"
+        text="Tailgate delivery, daily Island runs and a daily mainland run via Tsawwassen — from one box to a full load, for businesses and homes."
       >
         <Button href="/contact" icon={ArrowRight}>Get a free quote</Button>
       </PageHero>
       <ServicesSection />
       <RoadDivider />
+      <FleetBlock />
       <Fleet />
       <DeliveryScope />
       <CtaBand />

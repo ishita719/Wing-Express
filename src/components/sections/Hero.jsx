@@ -41,32 +41,28 @@ export default function Hero() {
 
       <div className="container-x grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <Reveal>
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/85 backdrop-blur">
-              <span className="size-2 animate-pulse-dot rounded-full bg-accent" aria-hidden="true" />
-              Now booking · {company.hoursShort}
-            </p>
-          </Reveal>
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/85 backdrop-blur">
+            <span className="size-2 animate-pulse-dot rounded-full bg-accent" aria-hidden="true" />
+            Booking now · Deliveries 7 days a week
+          </p>
 
-          <Reveal delay={100}>
-            <h1 id="hero-title" className="text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.6rem]">
-              Freight delivery across{' '}
+          {/* Headline shows instantly (no fade) so the first screen is never blank; only the underline animates */}
+          <Reveal effect="none">
+            <h1 id="hero-title" className="text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.4rem]">
+              Daily Island freight &amp;{' '}
               <span className="relative whitespace-nowrap text-crimson-400">
-                Vancouver Island
+                tailgate delivery
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
                   <path d="M2 9 C80 2 200 2 298 7" fill="none" stroke="#d7263d" strokeWidth="3" strokeLinecap="round" pathLength="1000" className="draw-path" />
                 </svg>
               </span>
-              , done right.
             </h1>
           </Reveal>
 
-          <Reveal delay={200}>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">
-              Parcels, pallets and full loads moved safely between Victoria and Campbell River — with friendly
-              dispatch, clear communication and upfront quotes.
-            </p>
-          </Reveal>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
+            Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland via Duke Point –
+            Tsawwassen. 3 and 5 ton trucks with tailgate lifts — no dock needed — for businesses and homes.
+          </p>
 
           <Reveal delay={300}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -93,13 +89,13 @@ export default function Hero() {
           </Reveal>
         </div>
 
-        {/* Live run card */}
+        {/* Illustration of how a run works — clearly labelled, not live tracking (review C5) */}
         <Reveal effect="scale" delay={250} className="lg:col-span-6">
           <div className="relative rounded-2xl bg-white p-5 text-ink shadow-2xl shadow-black/40 sm:p-7">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-medium text-muted">Today's Island run</p>
-                <p className="font-display text-lg font-bold">EW-1024 · Northbound</p>
+                <p className="text-xs font-medium text-muted">Illustration · not live tracking</p>
+                <p className="font-display text-lg font-bold">How a run works</p>
               </div>
               <span
                 key={step}

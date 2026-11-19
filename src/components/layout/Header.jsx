@@ -31,7 +31,7 @@ export default function Header() {
         <div className="container-x flex h-9 items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-2">
-              <Clock className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.hours}
+              <Clock className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.hoursRule}
             </span>
             <span className="inline-flex items-center gap-2">
               <MapPin className="size-3.5 text-crimson-400" aria-hidden="true" /> {company.regionShort}
