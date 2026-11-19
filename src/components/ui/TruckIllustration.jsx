@@ -19,7 +19,7 @@ const W = 132 // apparent width of the front face
 const G0 = 380 // ground line at the front
 
 /** Perspective scale with distance from the front (further back = smaller). */
-const S = (d) => 1 - 0.18 * d
+const S = (d) => 1 - 0.1 * d
 /** Far side looks slightly smaller. */
 const K = (e) => 1 - 0.14 * e
 
@@ -222,8 +222,10 @@ export default function TruckIllustration({ className = '', wheelAngle, spinning
           <text x="8" y="124" fontFamily="Public Sans, sans-serif" fontWeight="600" fontSize="15" fill="#55606e">
             {company.phone} · Vancouver Island, BC
           </text>
-          <rect x="0" y="146" width="400" height="9" fill="#d7263d" />
         </g>
+
+        {/* red stripe: constant height along the box, parallel to the bottom rail */}
+        <path d={poly(P(0.984, 0, 112), P(BOX_FRONT + 0.014, 0, 112), P(BOX_FRONT + 0.014, 0, 103), P(0.984, 0, 103))} fill="#d7263d" />
 
         {/* rear underride guard */}
         <path d={poly(P(0.99, 0, BOX_BOTTOM), P(0.975, 0, BOX_BOTTOM), P(0.975, 0, 44), P(0.99, 0, 44))} fill="#2a2d34" />

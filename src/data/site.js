@@ -21,7 +21,7 @@ export const company = {
   tagline: 'Fast, reliable freight across Vancouver Island.',
   description:
     'EagleWing Express delivers parcels, pallets and full loads up and down Vancouver Island — from Victoria to Campbell River — with friendly dispatch and upfront quotes.',
-  phone: '(778) 268-5136',
+  phone: '(236) 888-3135',
   email: 'expresseaglewing@gmail.com',
   region: 'Vancouver Island, British Columbia, Canada',
   regionShort: 'Vancouver Island, BC',
@@ -113,7 +113,7 @@ export const process = [
   {
     icon: PhoneCall,
     title: 'Call or request a quote',
-    text: `Call ${'(778) 268-5136'} or send the quote form. We reply with a clear, upfront price.`,
+    text: `Call ${'(236) 888-3135'} or send the quote form. We reply with a clear, upfront price.`,
   },
   {
     icon: ClipboardList,

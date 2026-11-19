@@ -70,7 +70,7 @@ export const pages = [
     name: 'Contact & quote',
     title: 'Contact & Free Quote | EagleWing Express',
     description:
-      'Request a free freight quote or call (778) 268-5136. Dispatch is open Monday to Friday, 8 am to 8 pm, serving Vancouver Island, BC.',
+      'Request a free freight quote or call (236) 888-3135. Dispatch is open Monday to Friday, 8 am to 8 pm, serving Vancouver Island, BC.',
     priority: '0.8',
   },
   {
