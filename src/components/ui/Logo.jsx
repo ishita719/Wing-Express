@@ -8,7 +8,6 @@ export default function Logo({ light = true, animate = false, className = '' }) 
       <BrandMark
         variant={light ? 'light' : 'dark'}
         animate={animate}
-        fly
         className="h-9 w-auto shrink-0 transition-transform duration-500 group-hover:scale-105 sm:h-10"
       />
       <span className="leading-none">

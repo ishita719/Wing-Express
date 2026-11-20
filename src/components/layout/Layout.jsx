@@ -47,7 +47,7 @@ export default function Layout() {
       <BackToTop />
       {showWipe && (
         <div key={`wipe-${pathname}`} className="route-wipe" aria-hidden="true">
-          <BrandMark variant="light" animate fly className="h-auto w-36" />
+          <BrandMark variant="light" animate className="h-auto w-28" />
         </div>
       )}
     </>
