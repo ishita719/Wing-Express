@@ -8,7 +8,7 @@ import usePageMeta from '../../hooks/usePageMeta'
 
 /**
  * Shared page shell: header, footer, back-to-top, plus the page transition —
- * a charcoal panel with the feather-fan mark sweeps across the screen while
+ * a charcoal panel with the EagleWing wings mark sweeps across the screen while
  * the new page rises in behind it.
  */
 export default function Layout() {

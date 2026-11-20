@@ -6,7 +6,7 @@ import BrandMark from '../ui/BrandMark'
 
 /**
  * Animated banner at the top of every inner page.
- * Title rises word by word; on the right the feather-fan mark opens inside
+ * Title rises word by word; on the right the EagleWing wings mark opens inside
  * a slowly turning dashed ring with the page's icon floating beside it;
  * along the bottom a small truck drives across a road.
  */

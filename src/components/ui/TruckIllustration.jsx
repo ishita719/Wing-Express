@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { FEATHERS, BASE } from './BrandMark'
+import { MARK_SRC, MARK_W, MARK_H } from '../../data/brand'
 import { company } from '../../data/site'
 
 /*
@@ -207,19 +207,15 @@ export default function TruckIllustration({ className = '', wheelAngle, spinning
 
         {/* livery, mapped onto the box side */}
         <g transform={sideMatrix(0.955, 0.36, 268, 104, 400, 164)}>
-          <g transform="translate(6 16) scale(0.92)">
-            {FEATHERS.map((ft, i) => (
-              <path key={i} d={ft.d} fill={ft.centre ? '#d7263d' : '#1b1f27'} />
-            ))}
-            <rect x={BASE.x} y={BASE.y} width={BASE.w} height={BASE.h} rx="1" fill="#1b1f27" />
-          </g>
-          <text x="112" y="58" fontFamily="Quicksand, Public Sans, sans-serif" fontWeight="500" fontSize="50" fill="#1b1f27" letterSpacing="-0.5">
+          {/* wings-and-shield mark above the wordmark, like the client's logo */}
+          <image href={MARK_SRC} x={200 - 85} y="0" width="170" height={(170 * MARK_H) / MARK_W} />
+          <text x="200" y="104" textAnchor="middle" fontFamily="Quicksand, Public Sans, sans-serif" fontWeight="500" fontSize="44" fill="#1b1f27" letterSpacing="-0.5">
             EagleWing
           </text>
-          <text x="115" y="86" fontFamily="Quicksand, Public Sans, sans-serif" fontWeight="600" fontSize="16" letterSpacing="10" fill="#d7263d">
+          <text x="205" y="126" textAnchor="middle" fontFamily="Quicksand, Public Sans, sans-serif" fontWeight="600" fontSize="14" letterSpacing="9" fill="#d7263d">
             EXPRESS
           </text>
-          <text x="8" y="124" fontFamily="Public Sans, sans-serif" fontWeight="600" fontSize="15" fill="#55606e">
+          <text x="200" y="156" textAnchor="middle" fontFamily="Public Sans, sans-serif" fontWeight="600" fontSize="14" fill="#55606e">
             {company.phone} · Vancouver Island, BC
           </text>
         </g>
@@ -269,10 +265,7 @@ export default function TruckIllustration({ className = '', wheelAngle, spinning
         <path d={poly(P(CAB_BACK, 0, 112), P(0.004, 0, 112), P(0.004, 0, 106), P(CAB_BACK, 0, 106))} fill="#d7263d" />
         {/* door logo */}
         <g transform={sideMatrix(0.255, 0.195, 140, 120, 100, 64)}>
-          {FEATHERS.map((ft, i) => (
-            <path key={i} d={ft.d} fill={ft.centre ? '#d7263d' : '#1b1f27'} />
-          ))}
-          <rect x={BASE.x} y={BASE.y} width={BASE.w} height={BASE.h} rx="1" fill="#1b1f27" />
+          <image href={MARK_SRC} x="0" y={32 - (100 * MARK_H) / MARK_W / 2} width="100" height={(100 * MARK_H) / MARK_W} />
         </g>
 
         {/* hood top */}
