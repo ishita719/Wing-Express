@@ -114,10 +114,65 @@ const red = coverage('red')
 const any = coverage('any')
 const back = fillHoles(grow(any, 3))
 
-const [dBack, dWhite, dRed] = await Promise.all([trace(toPng(back)), trace(toPng(white)), trace(toPng(red))])
+// Split into left wing, right wing and shield so the wings can flap.
+// Shield outline measured on the source image (source pixels), shifted into mark coordinates.
+const SHIELD = [
+  [456, 231], [552, 231], [552, 300], [547, 326], [534, 349], [519, 364], [504, 376],
+  [489, 364], [474, 349], [461, 326], [456, 300],
+].map(([x, y]) => [x - X0, y - Y0])
+const MID = 504 - X0
+const PIVOT_L = [470 - X0, 238 - Y0] // left shoulder (top-left of shield)
+const PIVOT_R = [538 - X0, 238 - Y0] // right shoulder
+const inShield = (x, y) => {
+  let inside = false
+  for (let i = 0, j = SHIELD.length - 1; i < SHIELD.length; j = i++) {
+    const [xi, yi] = SHIELD[i], [xj, yj] = SHIELD[j]
+    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside
+  }
+  return inside
+}
+const region = (m, keep) => {
+  const out = new Float32Array(w * h)
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (keep(x, y)) out[y * w + x] = m[y * w + x]
+  return out
+}
+const parts = {
+  l: (x, y) => x < MID && !inShield(x, y),
+  r: (x, y) => x >= MID && !inShield(x, y),
+  s: (x, y) => inShield(x, y),
+}
+const layers = {}
+for (const [k, keep] of Object.entries(parts)) {
+  layers[k] = await Promise.all([back, white, red].map((m) => trace(toPng(region(m, keep)))))
+}
+const group = (id, [b, wt, r]) =>
+  `<g id="${id}"><path d="${b}" fill="#1b1f27" fill-rule="evenodd"/><path d="${wt}" fill="#ffffff" fill-rule="evenodd"/><path d="${r}" fill="#d7263d" fill-rule="evenodd"/></g>`
+const body = group('wing-l', layers.l) + group('wing-r', layers.r) + group('shield', layers.s)
+const open = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><title>EagleWing Express</title>`
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><title>EagleWing Express</title><path d="${dBack}" fill="#1b1f27" fill-rule="evenodd"/><path d="${dWhite}" fill="#ffffff" fill-rule="evenodd"/><path d="${dRed}" fill="#d7263d" fill-rule="evenodd"/></svg>
-`
+// Static mark (truck livery, share image, watermarks)
+const svg = `${open}${body}</svg>\n`
 writeFileSync(join(root, 'public/eaglewing-mark.svg'), svg)
 writeFileSync(join(root, 'brand/eaglewing-mark.svg'), svg)
-console.log(`eaglewing-mark.svg: ${w}×${h}, ${(svg.length / 1024).toFixed(1)} KB`)
+
+// Flying mark: two wing beats (wings rise and fold in, then sweep down and open), then a short glide.
+// The animation lives inside the SVG, so it also plays when used as an <img>. Honours reduced motion.
+const [lx, ly] = PIVOT_L
+const [rx, ry] = PIVOT_R
+const css = [
+  `#bird{transform-origin:${w / 2}px ${ly}px;animation:lift 2.8s ease-in-out infinite}`,
+  `#wing-l{transform-origin:${lx}px ${ly}px;animation:flap-l 2.8s ease-in-out infinite}`,
+  `#wing-r{transform-origin:${rx}px ${ry}px;animation:flap-r 2.8s ease-in-out infinite}`,
+  '@keyframes flap-l{0%,62%,100%{transform:none}14%{transform:rotate(24deg) scaleX(.78)}30%{transform:rotate(-16deg) scaleX(.94)}44%{transform:rotate(22deg) scaleX(.8)}56%{transform:rotate(-8deg)}}',
+  '@keyframes flap-r{0%,62%,100%{transform:none}14%{transform:rotate(-24deg) scaleX(.78)}30%{transform:rotate(16deg) scaleX(.94)}44%{transform:rotate(-22deg) scaleX(.8)}56%{transform:rotate(8deg)}}',
+  '@keyframes lift{0%,62%,100%{transform:none}14%{transform:translateY(6px)}30%{transform:translateY(-10px)}44%{transform:translateY(4px)}56%{transform:translateY(-6px)}}',
+  '@media (prefers-reduced-motion:reduce){#bird,#wing-l,#wing-r{animation:none}}',
+].join('')
+// Extra room above and below so raised wing tips are not cut off (keep in sync with FLY_PAD_* in src/data/brand.js).
+const PAD_TOP = 150
+const PAD_BOTTOM = 20
+const flyH = h + PAD_TOP + PAD_BOTTOM
+const flyOpen = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 ${-PAD_TOP} ${w} ${flyH}" width="${w}" height="${flyH}"><title>EagleWing Express</title>`
+const fly = `${flyOpen}<style>${css}</style><g id="bird">${body}</g></svg>\n`
+writeFileSync(join(root, 'public/eaglewing-mark-fly.svg'), fly)
+console.log(`eaglewing-mark.svg ${(svg.length / 1024).toFixed(1)} KB, eaglewing-mark-fly.svg ${(fly.length / 1024).toFixed(1)} KB`)

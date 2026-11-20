@@ -54,7 +54,7 @@ export default function PageHero({ eyebrow, title, text, icon: Icon, children })
               <circle cx="100" cy="4" r="4" fill="#d7263d" />
             </svg>
             <div className="absolute inset-10 rounded-full bg-white/[0.04] ring-1 ring-white/10" aria-hidden="true" />
-            <BrandMark variant="light" animate className="relative h-auto w-44" />
+            <BrandMark variant="light" animate fly className="relative h-auto w-56" />
             {Icon && (
               <span className="absolute right-4 bottom-10 grid size-16 animate-float place-items-center rounded-2xl bg-crimson text-white shadow-xl shadow-crimson/30">
                 <Icon className="size-7" aria-hidden="true" />

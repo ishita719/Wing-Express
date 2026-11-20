@@ -3,6 +3,11 @@
  * Node build scripts (scripts/make-brand.mjs). Plain JS so Node can import it.
  */
 export const MARK_SRC = '/eaglewing-mark.svg'
+/** Same mark with the wings flapping (two beats, then a glide), animated inside the SVG. */
+export const MARK_FLY_SRC = '/eaglewing-mark-fly.svg'
+/** Headroom in the flying SVG (mark units) so raised wings are not clipped — keep in sync with scripts/trace-logo.mjs. */
+export const FLY_PAD_TOP = 150
+export const FLY_PAD_BOTTOM = 20
 export const MARK_W = 888
 export const MARK_H = 315
 
