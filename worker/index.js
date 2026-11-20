@@ -29,8 +29,9 @@ export default {
       return Response.redirect(url.toString(), 301)
     }
 
-    // Optional: once the custom domain is live, set REDIRECT_WORKERS_DEV=true to send workers.dev visitors to it.
-    if (isWorkersDev && env.REDIRECT_WORKERS_DEV === 'true') {
+    // The custom domain is live: send visitors of the production workers.dev address there
+    // (one address for search engines). Preview URLs (<id>-wing-express.…) are left alone.
+    if (isWorkersDev && url.hostname.startsWith('wing-express.') && env.REDIRECT_WORKERS_DEV === 'true') {
       url.hostname = PRIMARY_HOST
       url.protocol = 'https:'
       return Response.redirect(url.toString(), 301)
@@ -43,13 +44,15 @@ export default {
 
     if (url.pathname.startsWith('/api/')) return json({ ok: false, error: 'Not found' }, 404)
 
-    let res = await env.ASSETS.fetch(request)
-
-    // Paths without a file extension that are not real pages get the SPA's 404 page, but with status 404.
+    // Paths without a file extension that are not real pages get the 404 page (noindex) with status 404.
     const path = url.pathname.replace(/\/+$/, '') || '/'
     const looksLikePage = !/\.[a-z0-9]+$/i.test(path)
+    let res
     if (looksLikePage && !ROUTES.has(path) && path !== '/index.html') {
-      res = new Response(res.body, { status: 404, headers: res.headers })
+      const notFound = await env.ASSETS.fetch(new Request(new URL('/404', url), request))
+      res = new Response(notFound.body, { status: 404, headers: notFound.headers })
+    } else {
+      res = await env.ASSETS.fetch(request)
     }
 
     if (isWorkersDev) res = withHeaders(res, { 'X-Robots-Tag': 'noindex, nofollow' })

@@ -85,12 +85,13 @@
   </head>
   <body>
     <noscript>
-      <h1>EagleWing Express — freight delivery on Vancouver Island, BC</h1>
-      <p>Daily freight and tailgate delivery from Victoria to Campbell River and Port Alberni, plus a daily Lower Mainland run. Call (236) 888-3135 or email expresseaglewing@gmail.com. Phones Monday to Friday, 8 am – 8 pm; deliveries 7 days a week by booking.</p>
-      <p>
-        <a href="/about">About</a> · <a href="/services">Services</a> · <a href="/how-it-works">How it works</a> ·
-        <a href="/coverage">Coverage</a> · <a href="/faq">FAQ</a> · <a href="/contact">Contact &amp; quote</a>
-      </p>
+      <!-- Without JavaScript the pre-rendered page text is shown as-is (scroll animations need JS) -->
+      <style>
+        [class*='reveal'], [class*='reveal'] > *, .word-mask > span, .stop-label, .stop-pop, .grow-x, .route-wipe {
+          opacity: 1 !important; transform: none !important; clip-path: none !important;
+        }
+        .route-wipe { display: none !important; }
+      </style>
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

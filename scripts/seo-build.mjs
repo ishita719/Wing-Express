@@ -7,13 +7,19 @@
  * its own title, description, canonical URL, Open Graph/Twitter tags and
  * structured data — e.g. dist/about.html is served for /about.
  *
- * It also writes dist/sitemap.xml with today's date as <lastmod>.
+ * Each page's body is pre-rendered from the React app (dist-ssr/entry-server.js,
+ * built by `vite build --ssr`), so crawlers that don't run JavaScript still see
+ * the full page text. The browser app then takes over as normal.
+ *
+ * It also writes dist/404.html (noindex), dist/sitemap.xml with today's date
+ * as <lastmod>, and dist/robots.txt.
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { pages, SITE_NAME } from '../src/data/seo.js'
-import { faqs } from '../src/data/site.js'
+import { pages, SITE_NAME, notFoundMeta } from '../src/data/seo.js'
+import { faqs, services } from '../src/data/site.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
@@ -41,6 +47,15 @@ function setMeta(html, attr, key, value) {
 const jsonLd = (obj) => `    <script type="application/ld+json">${JSON.stringify(obj)}</script>\n`
 
 const base = readFileSync(join(dist, 'index.html'), 'utf8')
+const ssrEntry = join(root, 'dist-ssr', 'entry-server.js')
+const { render } = await import(pathToFileURL(ssrEntry).href)
+
+/** Put the pre-rendered page markup inside <div id="root">. */
+const withBody = (html, path) => {
+  const markup = render(path)
+  if (!html.includes('<div id="root"></div>')) throw new Error('<div id="root"></div> not found in index.html')
+  return html.replace('<div id="root"></div>', () => `<div id="root">${markup}</div>`)
+}
 
 for (const page of pages) {
   const url = `${SITE}${page.path === '/' ? '/' : page.path}`
@@ -72,10 +87,40 @@ for (const page of pages) {
       mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     })
   }
-  if (extra) html = html.replace('</head>', `${extra}  </head>`)
+  if (page.path === '/services') {
+    extra += jsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'EagleWing Express freight services',
+      itemListElement: services.map((sv, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Service',
+          name: sv.title,
+          description: sv.text,
+          serviceType: 'Freight delivery',
+          provider: { '@id': `${SITE}/#business` },
+          areaServed: ['Vancouver Island, BC', 'Lower Mainland, BC'],
+        },
+      })),
+    })
+  }
+  if (extra) html = html.replace('</head>', () => `${extra}  </head>`)
 
-  writeFileSync(join(dist, page.file), html)
+  writeFileSync(join(dist, page.file), withBody(html, page.path))
 }
+
+// 404 page: real "not found" title, kept out of search results.
+{
+  let html = base
+  html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(notFoundMeta.title)}</title>`)
+  html = setMeta(html, 'name', 'description', notFoundMeta.description)
+  html = html.replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="noindex, follow" />')
+  html = html.replace(/\s*<link rel="canonical" href="[^"]*" \/>/, '')
+  writeFileSync(join(dist, '404.html'), withBody(html, '/404-not-found'))
+}
+rmSync(join(root, 'dist-ssr'), { recursive: true, force: true })
 
 const today = new Date().toISOString().slice(0, 10)
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
