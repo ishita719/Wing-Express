@@ -16,6 +16,8 @@ import { MARK_SRC, MARK_W, MARK_H, shieldSvg } from '../../data/brand'
 
 export { MARK_SRC, MARK_W, MARK_H, shieldSvg }
 
+// The wings are always static (client's request); `animate` is accepted but no longer moves the mark.
+// eslint-disable-next-line no-unused-vars
 export default function BrandMark({ variant = 'light', animate = false, className = 'h-9 w-auto', title }) {
   if (variant === 'tile-dark' || variant === 'tile-red') {
     return (
@@ -38,7 +40,7 @@ export default function BrandMark({ variant = 'light', animate = false, classNam
       aria-hidden={title ? undefined : true}
       decoding="async"
       draggable="false"
-      className={`${animate ? 'wing-spread' : ''} ${className}`}
+      className={className}
     />
   )
 }
