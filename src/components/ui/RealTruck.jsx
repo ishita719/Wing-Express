@@ -77,7 +77,7 @@ export function TruckOnRoad({ duration = '9s', className = '' }) {
         <div className="road-dash absolute inset-x-0 top-[58%] h-0.5 -translate-y-1/2" style={{ animation: 'none' }} />
       </div>
       <div className="truck-travel relative z-10 mx-auto w-[86%]" style={{ animationDuration: duration }}>
-        <RealTruck bounce spinning eager />
+        <RealTruck spinning eager />
       </div>
     </div>
   )

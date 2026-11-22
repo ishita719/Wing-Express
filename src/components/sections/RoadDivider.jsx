@@ -34,7 +34,7 @@ export default function RoadDivider({ rounded = true }) {
           className="road-drive absolute bottom-0 z-10 w-56 sm:w-[22rem]"
           style={{ transform: `translateY(${(1 - ROAD_EDGE) * 100}%)` }}
         >
-          <RealTruck bounce spinning />
+          <RealTruck spinning />
         </div>
       </div>
 
