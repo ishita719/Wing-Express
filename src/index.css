@@ -328,7 +328,7 @@
 /* Road section truck: drives the full width of the road, entering and leaving off-screen */
 .road-drive { animation: road-drive 12s linear infinite; }
 @keyframes road-drive {
-  from { left: 0; margin-left: -24rem; }
+  from { left: 0; margin-left: -25rem; }
   to { left: 100%; margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .road-drive { animation: none !important; left: 30%; } }
