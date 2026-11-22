@@ -3,7 +3,7 @@ import { ArrowRight, Phone, CircleCheck, Check, Truck, PackageCheck, ClipboardLi
 import Button from '../ui/Button'
 import Magnetic from '../ui/Magnetic'
 import Reveal from '../ui/Reveal'
-import TruckIllustration from '../ui/TruckIllustration'
+import { TruckOnRoad } from '../ui/RealTruck'
 import { company, heroBadges, coverage } from '../../data/site'
 import { tel } from '../../lib/utils'
 
@@ -108,16 +108,9 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* truck drives across the road on a loop: wheels spin, body bounces */}
-            <div className="mt-5 overflow-hidden rounded-xl bg-gradient-to-b from-brand-50 to-surface pt-5">
-              <div className="truck-travel relative z-10 px-4">
-                <TruckIllustration className="w-full" spinning bounce />
-              </div>
-              {/* tyres sit on the road: offset matches the truck art's ground line (12/690 of its width) */}
-              <div className="relative h-7 bg-charcoal" style={{ marginTop: '-1.75%' }}>
-                <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
-                <div className="road-dash absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2" style={{ animation: 'none' }} />
-              </div>
+            {/* the truck drives across the road on a loop */}
+            <div className="mt-5 overflow-hidden rounded-xl bg-gradient-to-b from-brand-50 to-surface pt-5 pb-4">
+              <TruckOnRoad />
             </div>
 
             {/* Route track with moving marker */}

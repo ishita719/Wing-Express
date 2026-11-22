@@ -1,15 +1,23 @@
 /**
  * Quote request handler — POST /api/quote (called from worker/index.js)
  *
- * Emails quote requests to dispatch using Resend (https://resend.com).
- * Set these in Cloudflare → Workers & Pages → wing-express → Settings → Variables and Secrets:
- *   RESEND_API_KEY   (secret)  your Resend API key
- *   QUOTE_TO_EMAIL             where requests are delivered, e.g. dispatch@wingexpress.ca
- *   QUOTE_FROM_EMAIL           a sender on a domain verified in Resend, e.g. website@wingexpress.ca
+ * Emails each quote request to the company inbox. Two ways to deliver, tried in order:
  *
- * Until they are set, this returns 503 and the site shows the visitor an
+ * 1. Cloudflare Email Routing (free, no extra account) — the default.
+ *    wrangler.jsonc has a "send_email" binding named QUOTE_EMAIL whose destination is the
+ *    company inbox. One-time setup in the Cloudflare dashboard:
+ *      eaglewingexpress.ca → Email → Email Routing → enable (adds the DNS records),
+ *      then Destination addresses → add the company inbox and click the link in the
+ *      verification email Cloudflare sends to it.
+ *    Messages are sent from QUOTE_FROM_EMAIL (an address on eaglewingexpress.ca).
+ *
+ * 2. Resend (https://resend.com) — used instead if RESEND_API_KEY is set.
+ *
+ * If neither is set up, this returns 503 and the site shows the visitor an
  * email / phone fallback instead of pretending the request was sent.
  */
+import { EmailMessage } from 'cloudflare:email'
+
 const REQUIRED = ['name', 'phone', 'email', 'from', 'to', 'cargo']
 const LABELS = {
   name: 'Name', company: 'Company', phone: 'Phone', email: 'Email',
@@ -74,24 +82,40 @@ export async function handleQuote(request, env) {
     return json({ ok: false, error: 'Invalid phone' }, 422)
   }
 
-  if (!env.RESEND_API_KEY || !env.QUOTE_TO_EMAIL || !env.QUOTE_FROM_EMAIL) {
-    return json({ ok: false, error: 'Email delivery is not configured' }, 503)
-  }
-
   const rows = Object.keys(LABELS)
     .filter((k) => data[k] !== undefined && data[k] !== '' && data[k] !== false)
     .map((k) => `<tr><td style="padding:6px 12px;color:#666">${LABELS[k]}</td><td style="padding:6px 12px"><b>${escape(data[k] === true ? 'Yes' : String(data[k]))}</b></td></tr>`)
     .join('')
 
+  const subject = `New quote request — ${String(data.name).slice(0, 80)} (${data.from} → ${data.to})`
+  const html = emailHtml(rows, data)
+  const from = env.QUOTE_FROM_EMAIL || 'website@eaglewingexpress.ca'
+
+  // 1. Cloudflare Email Routing
+  if (env.QUOTE_EMAIL && env.QUOTE_TO_EMAIL) {
+    try {
+      const raw = mime({ from, to: env.QUOTE_TO_EMAIL, replyTo: data.email, replyName: data.name, subject, html })
+      await env.QUOTE_EMAIL.send(new EmailMessage(from, env.QUOTE_TO_EMAIL, raw))
+      return json({ ok: true })
+    } catch (err) {
+      console.error('Email Routing send failed:', err?.message || err)
+      if (!env.RESEND_API_KEY) return json({ ok: false, error: 'Email delivery failed' }, 502)
+    }
+  }
+
+  // 2. Resend
+  if (!env.RESEND_API_KEY || !env.QUOTE_TO_EMAIL) {
+    return json({ ok: false, error: 'Email delivery is not configured' }, 503)
+  }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: `EagleWing Express Website <${env.QUOTE_FROM_EMAIL}>`,
+      from: `EagleWing Express Website <${from}>`,
       to: [env.QUOTE_TO_EMAIL],
       reply_to: data.email,
-      subject: `New quote request — ${String(data.name).slice(0, 80)} (${data.from} → ${data.to})`,
-      html: `<h2>New quote request</h2><table>${rows}</table>`,
+      subject,
+      html,
     }),
   })
 
@@ -99,3 +123,41 @@ export async function handleQuote(request, env) {
   return json({ ok: true })
 }
 
+
+/** The email body: a tidy table of the request, with one-tap reply / call links. */
+function emailHtml(rows, data) {
+  const tel = String(data.phone).replace(/[^\d+]/g, '')
+  return `<div style="font-family:Arial,sans-serif;color:#1b1f27;max-width:620px">
+<h2 style="margin:0 0 4px">New quote request</h2>
+<p style="margin:0 0 16px;color:#666">Sent from the quote form on eaglewingexpress.ca</p>
+<table style="border-collapse:collapse;width:100%;font-size:14px">${rows}</table>
+<p style="margin:20px 0 0">
+<a href="mailto:${escape(data.email)}" style="background:#d7263d;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:bold">Reply to ${escape(data.name)}</a>
+&nbsp; <a href="tel:${escape(tel)}" style="color:#d7263d;font-weight:bold">Call ${escape(data.phone)}</a>
+</p></div>`
+}
+
+/** Minimal MIME message for Email Routing (UTF-8 subject and HTML body, base64-encoded). */
+function mime({ from, to, replyTo, replyName, subject, html }) {
+  const b64 = (str) => {
+    const bytes = new TextEncoder().encode(str)
+    let bin = ''
+    for (const b of bytes) bin += String.fromCharCode(b)
+    return btoa(bin)
+  }
+  const noBreaks = (v) => String(v).replace(/[\r\n]+/g, ' ')
+  const body = b64(html).replace(/.{1,76}/g, '$&\r\n')
+  return [
+    `From: "EagleWing Express Website" <${from}>`,
+    `To: <${to}>`,
+    `Reply-To: =?UTF-8?B?${b64(noBreaks(replyName))}?= <${noBreaks(replyTo)}>`,
+    `Subject: =?UTF-8?B?${b64(noBreaks(subject))}?=`,
+    `Date: ${new Date().toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@eaglewingexpress.ca>`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/html; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    body,
+  ].join('\r\n')
+}

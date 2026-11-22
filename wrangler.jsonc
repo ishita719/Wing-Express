@@ -14,6 +14,11 @@
   // 5 quote submissions per minute per IP (see worker/quote.js)
   "ratelimits": [{ "name": "QUOTE_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }],
   // Production workers.dev address forwards to eaglewingexpress.ca (see worker/index.js)
-  "vars": { "REDIRECT_WORKERS_DEV": "true" },
+  "vars": {
+    "REDIRECT_WORKERS_DEV": "true",
+    // Quote form emails (see worker/quote.js): sent from the website address to the company inbox
+    "QUOTE_FROM_EMAIL": "website@eaglewingexpress.ca",
+    "QUOTE_TO_EMAIL": "expresseaglewing@gmail.com"
+  },
   "observability": { "enabled": true }
 }

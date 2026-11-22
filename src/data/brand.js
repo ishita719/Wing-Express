@@ -1,5 +1,5 @@
 /**
- * Logo constants shared by the site (BrandMark, TruckIllustration) and the
+ * Logo constants shared by the site (BrandMark) and the
  * Node build scripts (scripts/make-brand.mjs). Plain JS so Node can import it.
  */
 export const MARK_SRC = '/eaglewing-mark.svg'

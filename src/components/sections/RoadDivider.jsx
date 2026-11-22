@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import TruckIllustration from '../ui/TruckIllustration'
+import RealTruck from '../ui/RealTruck'
+import { TRUCK_REAR_CONTACT } from '../../data/truck'
 import { Mountains, CityToForest } from '../ui/IslandScenery'
 import useScrollProgress from '../../hooks/useScrollProgress'
 
@@ -29,12 +30,15 @@ export default function RoadDivider({ rounded = true }) {
         {/* roadside verge */}
         <div className="absolute inset-x-0 bottom-0 h-3 bg-[#cfd5dc]" />
 
-        {/* truck */}
+        {/* truck: rear tyres on the road's edge, front tyre a little lower on the road */}
         <div
-          className="absolute -bottom-[3px] w-60 will-change-transform sm:w-[22rem]"
-          style={{ left: `calc(${-12 + p * 110}% - 80px)` }}
+          className="absolute bottom-0 z-10 w-64 will-change-transform sm:w-[24rem]"
+          style={{
+            left: `calc(${-12 + p * 110}% - 80px)`,
+            transform: `translateY(${(1 - TRUCK_REAR_CONTACT) * 100}%)`,
+          }}
         >
-          <TruckIllustration className="w-full" wheelAngle={p * 2400} bounce={p > 0 && p < 1} />
+          <RealTruck bounce={p > 0 && p < 1} />
         </div>
       </div>
 

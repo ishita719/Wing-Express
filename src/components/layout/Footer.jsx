@@ -127,6 +127,17 @@ export default function Footer() {
             <span className="hidden sm:inline">Proudly serving Vancouver Island, BC</span>
           </nav>
         </div>
+        <div className="container-x border-t border-white/5 py-4 text-center text-xs text-white/45">
+          Made by{' '}
+          <a
+            href="https://www.instagram.com/opsvera.ca/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-white/80 underline-offset-4 transition hover:text-crimson-400 hover:underline"
+          >
+            @opsverasystems
+          </a>
+        </div>
       </div>
     </footer>
   )
