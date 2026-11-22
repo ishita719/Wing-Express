@@ -8,7 +8,8 @@ export const ROAD_EDGE = TRUCK_REAR_CONTACT - 0.07
 
 /**
  * Realistic EagleWing Express box truck (photo cut-out with the livery
- * painted on — built by scripts/make-truck.mjs). Faces right.
+ * painted on — built by scripts/make-truck.mjs). Faces left, as in the photo,
+ * so it drives right → left.
  *
  * `bounce` adds a subtle suspension bob while driving.
  */
@@ -43,7 +44,7 @@ export function TruckOnRoad({ duration = '9s', className = '' }) {
         <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
         <div className="road-dash absolute inset-x-0 top-[58%] h-0.5 -translate-y-1/2" style={{ animation: 'none' }} />
       </div>
-      <div className="truck-travel relative z-10 mx-auto w-[86%]" style={{ animationDuration: duration }}>
+      <div className="truck-travel-rtl relative z-10 mx-auto w-[86%]" style={{ animationDuration: duration }}>
         <RealTruck bounce eager />
       </div>
     </div>
