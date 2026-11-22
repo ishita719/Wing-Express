@@ -4,7 +4,7 @@
  *
  *   1. removes the maker's badge from the grille and the model name from the door
  *   2. removes the white background; the ground shadow becomes soft transparency
- *   3. keeps the photo's original orientation (truck faces left; it drives right → left on the site)
+ *   3. mirrors the photo so the truck faces right (it drives left → right on the site)
  *   4. paints the EagleWing Express livery onto the box side in correct perspective,
  *      blended with the panel's own shading so it looks painted on
  *   5. crops tightly and writes a 2× PNG plus the measurements the site needs
@@ -132,12 +132,12 @@ for (let y = 0; y < H; y++)
     if (touchesBg) set(x, y, [r, g, b, lum > 225 ? 70 : 170])
   }
 
-// 3. Original orientation (no mirroring) — the truck faces left, as in the photo.
+// 3. Mirror horizontally (truck faces right).
 const flipped = new Float32Array(W * H * 4)
 for (let y = 0; y < H; y++)
   for (let x = 0; x < W; x++) {
     const s = idx(x, y)
-    const d = idx(x, y)
+    const d = idx(W - 1 - x, y)
     for (let k = 0; k < 4; k++) flipped[d + k] = img[s + k]
   }
 
@@ -167,13 +167,13 @@ for (let y = 0; y < OH; y++)
     for (let k = 0; k < 3; k++) out[o + k] = a > 0 ? c[k] / a : 0
   }
 
-// 4. Livery on the box side. Side corners measured on the photo, then scaled.
-const m = ([x, y]) => [x * SCALE, y * SCALE]
+// 4. Livery on the box side. Side corners measured on the photo, mirrored (x → W-1-x), then scaled.
+const m = ([x, y]) => [(W - 1 - x) * SCALE, y * SCALE]
 const quad = {
-  tl: m([343, 58]), // front top (by the cab)
-  tr: m([485, 133]), // rear top
-  br: m([487, 240]), // rear bottom
-  bl: m([347, 232]), // front bottom
+  tl: m([485, 133]), // rear top
+  tr: m([343, 58]), // front top (by the cab)
+  br: m([347, 232]), // front bottom
+  bl: m([487, 240]), // rear bottom
 }
 
 // Quicksand ships as WOFF; convert to TTF so the renderer can use the real logo font.

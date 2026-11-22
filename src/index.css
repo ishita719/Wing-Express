@@ -340,12 +340,6 @@
   from { transform: translateX(-105%); }
   to { transform: translateX(105%); }
 }
-/* Same, right → left (the photo truck faces left, so it drives forwards this way) */
-.truck-travel-rtl { animation: truck-travel-rtl 9s linear infinite; will-change: transform; }
-@keyframes truck-travel-rtl {
-  from { transform: translateX(105%); }
-  to { transform: translateX(-105%); }
-}
 @media (prefers-reduced-motion: reduce) {
-  .truck-travel, .truck-travel-rtl, .animate-wheel, .truck-bounce, .road-dash { animation: none !important; }
+  .truck-travel, .animate-wheel, .truck-bounce, .road-dash { animation: none !important; }
 }
