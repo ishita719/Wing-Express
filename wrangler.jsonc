@@ -20,5 +20,7 @@
     "QUOTE_FROM_EMAIL": "website@eaglewingexpress.ca",
     "QUOTE_TO_EMAIL": "expresseaglewing@gmail.com"
   },
+  // Cloudflare Email Routing: lets the Worker email the (verified) company inbox
+  "send_email": [{ "name": "QUOTE_EMAIL", "destination_address": "expresseaglewing@gmail.com" }],
   "observability": { "enabled": true }
 }
