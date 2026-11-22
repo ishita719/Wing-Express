@@ -325,6 +325,13 @@
 @keyframes wheel-spin { to { transform: rotate(360deg); } }
 /* Photo truck: wheel rims turn clockwise as it drives right (one turn ≈ the distance it travels) */
 .rim-spin { animation: wheel-spin 1.3s linear infinite; }
+/* Road section truck: drives the full width of the road, entering and leaving off-screen */
+.road-drive { animation: road-drive 12s linear infinite; }
+@keyframes road-drive {
+  from { left: 0; margin-left: -24rem; }
+  to { left: 100%; margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .road-drive { animation: none !important; left: 30%; } }
 @media (prefers-reduced-motion: reduce) { .rim-spin { animation: none !important; } }
 .truck-bounce { animation: truck-bounce 0.42s ease-in-out infinite alternate; }
 @keyframes truck-bounce {

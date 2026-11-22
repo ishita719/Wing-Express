@@ -5,9 +5,9 @@ import useScrollProgress from '../../hooks/useScrollProgress'
 
 /**
  * A stretch of Vancouver Island highway at the top of the page "curtain".
- * As you scroll, the EagleWing truck drives right while the scenery rolls
- * past in layers — Victoria's skyline and legislature dome give way to
- * evergreen forest, with the Island mountains moving slowest behind.
+ * The EagleWing truck drives along the road on a loop; as you scroll, the
+ * scenery rolls past in layers — Victoria's skyline and legislature dome give
+ * way to evergreen forest, with the Island mountains moving slowest behind.
  */
 export default function RoadDivider({ rounded = true }) {
   const ref = useRef(null)
@@ -29,25 +29,19 @@ export default function RoadDivider({ rounded = true }) {
         {/* roadside verge */}
         <div className="absolute inset-x-0 bottom-0 h-3 bg-[#cfd5dc]" />
 
-        {/* truck: all wheels on the road surface (front tyre lower, three-quarter view) */}
+        {/* truck drives along the road on its own (wheels spinning); all wheels on the road surface */}
         <div
-          className="absolute bottom-0 z-10 w-64 will-change-transform sm:w-[24rem]"
-          style={{
-            left: `calc(${-12 + p * 110}% - 80px)`,
-            transform: `translateY(${(1 - ROAD_EDGE) * 100}%)`,
-          }}
+          className="road-drive absolute bottom-0 z-10 w-56 sm:w-[22rem]"
+          style={{ transform: `translateY(${(1 - ROAD_EDGE) * 100}%)` }}
         >
-          <RealTruck bounce={p > 0 && p < 1} wheelAngle={p * 2200} />
+          <RealTruck bounce spinning />
         </div>
       </div>
 
-      {/* the road */}
-      <div className="relative h-11 bg-charcoal">
+      {/* the road: deep enough that the whole truck, front tyre included, sits on it */}
+      <div className="relative h-12 bg-charcoal sm:h-16">
         <div className="absolute inset-x-0 top-0 h-1 bg-crimson" />
-        <div
-          className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#ffffff_0_36px,transparent_36px_72px)] opacity-70"
-          style={{ backgroundPositionX: `${-p * 900}px` }}
-        />
+        <div className="absolute inset-x-0 top-[55%] h-1 -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#ffffff_0_36px,transparent_36px_72px)] opacity-70" />
       </div>
     </div>
   )
