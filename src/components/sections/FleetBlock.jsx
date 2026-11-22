@@ -1,7 +1,7 @@
 import { Check, ArrowDownToLine } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
-import { TruckOnRoad } from '../ui/RealTruck'
+import { TruckOnRoad } from '../ui/SideTruck'
 import { fleet } from '../../data/site'
 
 /** Our fleet — 7 trucks, 3 ton and 5 ton, with tailgate lifts (client-confirmed). */
