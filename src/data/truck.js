@@ -5,3 +5,5 @@ export const TRUCK_H = 542
 /** Where the tyres meet the ground, as a fraction of the image height. */
 export const TRUCK_REAR_CONTACT = 0.9059
 export const TRUCK_FRONT_CONTACT = 1.0055
+/** Spinning wheel rims: centre and radii as fractions of the image width (x, rx) and height (y, ry). */
+export const TRUCK_RIMS = [{"src":"/truck-rim-front.png","x":0.5032,"y":0.8432,"rx":0.0333,"ry":0.0904},{"src":"/truck-rim-rear.png","x":0.0923,"y":0.8081,"rx":0.0086,"ry":0.0554}]

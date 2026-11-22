@@ -317,6 +317,41 @@ for (let y = 0; y < CH; y++)
   }
 writeFileSync(at('public/truck.png'), PNG.sync.write(png, { colorType: 6 }))
 
+// 6. Wheel rims as separate round images that the site spins. Each rim is an ellipse in the photo
+// (seen at an angle); it is unstretched into a circle here, rotated on the page, then squashed back
+// to the same ellipse, so the spin follows the wheel's perspective. Measured on the final image.
+const RIMS = [
+  { id: 'front', cx: 469, cy: 457, rx: 31, ry: 49 },
+  { id: 'rear', cx: 86, cy: 438, rx: 8, ry: 30 },
+]
+const RS = 2 // rim image resolution multiplier
+for (const r of RIMS) {
+  const R = r.ry * RS
+  const size = R * 2
+  const rim = new PNG({ width: size, height: size })
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      const u = (x + 0.5 - R) / RS
+      const v = (y + 0.5 - R) / RS
+      const dist = Math.hypot(u, v) / r.ry
+      const d = (y * size + x) * 4
+      if (dist > 1) continue
+      // sample the photo at the matching point of the ellipse (bilinear)
+      const fx = r.cx + (u * r.rx) / r.ry
+      const fy = r.cy + v
+      const x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0
+      for (let k = 0; k < 3; k++) {
+        const p = (xx, yy) => png.data[(yy * CW + xx) * 4 + k]
+        rim.data[d + k] = Math.round(
+          p(x0, y0) * (1 - tx) * (1 - ty) + p(x0 + 1, y0) * tx * (1 - ty) + p(x0, y0 + 1) * (1 - tx) * ty + p(x0 + 1, y0 + 1) * tx * ty,
+        )
+      }
+      // soft edge so the spinning disc blends into the tyre
+      rim.data[d + 3] = Math.round(255 * Math.min(1, Math.max(0, (1 - dist) * r.ry * 0.9)))
+    }
+  writeFileSync(at(`public/truck-rim-${r.id}.png`), PNG.sync.write(rim, { colorType: 6 }))
+}
+
 // Measurements the site uses to sit the tyres on the road (fractions of the image height).
 const rearContact = (302 * SCALE - cy0) / CH // far/rear tyres touch the ground here
 const frontContact = (329 * SCALE - cy0) / CH // near front tyre (lowest point)
@@ -329,6 +364,16 @@ export const TRUCK_H = ${CH}
 /** Where the tyres meet the ground, as a fraction of the image height. */
 export const TRUCK_REAR_CONTACT = ${rearContact.toFixed(4)}
 export const TRUCK_FRONT_CONTACT = ${frontContact.toFixed(4)}
+/** Spinning wheel rims: centre and radii as fractions of the image width (x, rx) and height (y, ry). */
+export const TRUCK_RIMS = ${JSON.stringify(
+    RIMS.map((r) => ({
+      src: `/truck-rim-${r.id}.png`,
+      x: +(r.cx / CW).toFixed(4),
+      y: +(r.cy / CH).toFixed(4),
+      rx: +(r.rx / CW).toFixed(4),
+      ry: +(r.ry / CH).toFixed(4),
+    })),
+  )}
 `,
 )
 console.log(`truck.png ${CW}×${CH}, ${(readFileSync(at('public/truck.png')).length / 1024).toFixed(0)} KB; rear contact ${rearContact.toFixed(3)}, front ${frontContact.toFixed(3)}`)

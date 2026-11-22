@@ -37,7 +37,7 @@ export default function RoadDivider({ rounded = true }) {
             transform: `translateY(${(1 - ROAD_EDGE) * 100}%)`,
           }}
         >
-          <RealTruck bounce={p > 0 && p < 1} />
+          <RealTruck bounce={p > 0 && p < 1} wheelAngle={p * 2200} />
         </div>
       </div>
 
