@@ -1,7 +1,7 @@
 import { Check, ArrowDownToLine } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
-import { TruckOnRoad } from '../ui/RealTruck'
+import TruckIllustration from '../ui/TruckIllustration'
 import { fleet } from '../../data/site'
 
 /** Our fleet — 7 trucks, 3 ton and 5 ton, with tailgate lifts (client-confirmed). */
@@ -18,8 +18,14 @@ export default function FleetBlock() {
         </div>
 
         <div className="lg:col-span-7">
-          <Reveal effect="scale" className="overflow-hidden rounded-2xl bg-gradient-to-b from-brand-50 to-surface pt-6 pb-4">
-            <TruckOnRoad duration="11s" />
+          <Reveal effect="scale" className="overflow-hidden rounded-2xl bg-gradient-to-b from-brand-50 to-surface pt-6">
+            <div className="truck-travel relative z-10 px-6" style={{ animationDuration: '11s' }}>
+              <TruckIllustration className="w-full" spinning bounce />
+            </div>
+            <div className="relative h-6 bg-charcoal" style={{ marginTop: '-1.75%' }}>
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-crimson" />
+              <div className="road-dash absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2" style={{ animation: 'none' }} />
+            </div>
           </Reveal>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {fleet.types.map((t, i) => (
