@@ -3,7 +3,7 @@ import { ArrowRight, Phone, CircleCheck, Check, Truck, PackageCheck, ClipboardLi
 import Button from '../ui/Button'
 import Magnetic from '../ui/Magnetic'
 import Reveal from '../ui/Reveal'
-import { TruckOnRoad } from '../ui/SideTruck'
+import { TruckOnRoad } from '../ui/RealTruck'
 import { company, heroBadges, coverage } from '../../data/site'
 import { tel } from '../../lib/utils'
 

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import SideTruck, { SIDE_ROAD_EDGE } from '../ui/SideTruck'
+import RealTruck, { ROAD_EDGE } from '../ui/RealTruck'
 import { Mountains, CityToForest } from '../ui/IslandScenery'
 import useScrollProgress from '../../hooks/useScrollProgress'
 
@@ -31,10 +31,10 @@ export default function RoadDivider({ rounded = true }) {
 
         {/* truck drives along the road on its own (wheels spinning); all wheels on the road surface */}
         <div
-          className="road-drive absolute bottom-0 z-10 w-60 sm:w-[24rem]"
-          style={{ transform: `translateY(${(1 - SIDE_ROAD_EDGE) * 100}%)` }}
+          className="road-drive absolute bottom-0 z-10 w-56 sm:w-[22rem]"
+          style={{ transform: `translateY(${(1 - ROAD_EDGE) * 100}%)` }}
         >
-          <SideTruck spinning />
+          <RealTruck spinning />
         </div>
       </div>
 
