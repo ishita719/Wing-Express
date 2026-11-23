@@ -21,7 +21,7 @@ export default function DeliveryScope() {
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {/* we deliver */}
           <Reveal effect="left" className="card p-7">
-            <p className="eyebrow text-accent">We deliver</p>
+            <p className="eyebrow text-accent-dark">We deliver</p>
             <ul className="mt-5 space-y-3">
               {weDeliver.map((item, i) => (
                 <Reveal as="li" key={item} delay={150 + i * 70} className="flex items-start gap-3 text-sm text-ink/85">

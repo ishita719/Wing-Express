@@ -1,7 +1,6 @@
 import { Check, ArrowDownToLine } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
-import { TruckOnRoad } from '../ui/RealTruck'
 import { fleet } from '../../data/site'
 
 /** Our fleet — 7 trucks, 3 ton and 5 ton, with tailgate lifts (client-confirmed). */
@@ -18,10 +17,9 @@ export default function FleetBlock() {
         </div>
 
         <div className="lg:col-span-7">
-          <Reveal effect="scale" className="overflow-hidden rounded-2xl bg-gradient-to-b from-brand-50 to-surface pt-6 pb-4">
-            <TruckOnRoad duration="11s" />
-          </Reveal>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {/* The truck photo is a mock-up, so it stays in the hero illustration card only (review N6).
+              Add a real photo of a client truck with the tailgate lift down here once it is supplied. */}
+          <div className="grid gap-5 sm:grid-cols-2">
             {fleet.types.map((t, i) => (
               <Reveal key={t.name} effect={i === 0 ? 'left' : 'right'} delay={150} className="card p-6">
                 <h3 className="text-xl">{t.name}</h3>

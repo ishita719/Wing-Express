@@ -61,6 +61,26 @@ export async function handleQuote(request, env) {
     }
   }
 
+  // Bot check: Cloudflare Turnstile. Active once the TURNSTILE_SECRET secret is set on the Worker
+  // (Cloudflare dashboard → Turnstile widget for eaglewingexpress.ca); until then this step is skipped.
+  if (env.TURNSTILE_SECRET) {
+    const token = typeof data.turnstileToken === 'string' ? data.turnstileToken : ''
+    if (!token || token.length > 2048) return json({ ok: false, error: 'Please complete the bot check' }, 403)
+    const form = new FormData()
+    form.append('secret', env.TURNSTILE_SECRET)
+    form.append('response', token)
+    const ip = request.headers.get('CF-Connecting-IP')
+    if (ip) form.append('remoteip', ip)
+    let passed = false
+    try {
+      const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form })
+      passed = (await r.json()).success === true
+    } catch {
+      passed = false
+    }
+    if (!passed) return json({ ok: false, error: 'Bot check failed, please try again' }, 403)
+  }
+
   // Keep only known fields, as trimmed strings, and enforce length caps.
   const clean = {}
   for (const [k, max] of Object.entries(LIMITS)) {

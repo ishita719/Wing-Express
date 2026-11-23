@@ -26,6 +26,7 @@
   --color-brand-100: #dde3ea;
   --color-accent: #0f9d76;
   --color-accent-50: #e7f6f1;
+  --color-accent-dark: #0a7558; /* same green, darker: for small text (WCAG AA 4.5:1 on white and accent-50) */
   --color-surface: #f7f6f4;
   --color-line: #e2e8f0;
   --color-ink: #1b1f27;

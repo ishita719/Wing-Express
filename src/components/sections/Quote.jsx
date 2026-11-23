@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Phone, Mail, MapPin, Clock, Send, LoaderCircle, CircleCheck, TriangleAlert } from 'lucide-react'
 import Reveal from '../ui/Reveal'
 import Button from '../ui/Button'
+import Turnstile from '../ui/Turnstile'
 import { company, coverage, quoteOptions } from '../../data/site'
 import { tel } from '../../lib/utils'
 
@@ -35,6 +36,9 @@ function buildMailto(d) {
 export default function Quote() {
   const [data, setData] = useState(initial)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [botCheck, setBotCheck] = useState(false) // true once the Turnstile check is switched on
+  const [token, setToken] = useState('')
+  const [resetKey, setResetKey] = useState(0)
   const stopNames = [...coverage.all, coverage.mainlandLabel, 'Other / not listed']
 
   const update = (e) => {
@@ -44,18 +48,23 @@ export default function Quote() {
 
   const submit = async (e) => {
     e.preventDefault()
+    if (botCheck && !token) {
+      setStatus('needs-check')
+      return
+    }
     setStatus('sending')
     try {
       const res = await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(botCheck ? { ...data, turnstileToken: token } : data),
       })
       if (!res.ok) throw new Error(String(res.status))
       setStatus('sent')
       setData(initial)
     } catch {
       setStatus('error')
+      setResetKey((k) => k + 1) // a token works once; get a fresh one for the retry
     }
   }
 
@@ -187,6 +196,13 @@ export default function Quote() {
                   {/* Honeypot */}
                   <input type="text" name="website" value={data.website} onChange={update} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                 </div>
+
+                <Turnstile onToken={setToken} onEnabled={setBotCheck} resetKey={resetKey} />
+                {status === 'needs-check' && (
+                  <p className="mt-3 text-sm font-medium text-crimson-dark" role="alert">
+                    Please tick the check box above so we know you are not a bot.
+                  </p>
+                )}
 
                 {status === 'error' && (
                   <div className="mt-5 flex gap-3 rounded-lg border border-crimson-200 bg-crimson-50 p-4 text-sm text-ink" role="alert">

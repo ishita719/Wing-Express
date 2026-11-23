@@ -100,7 +100,7 @@ export default function Hero() {
               <span
                 key={step}
                 className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                  step === 3 ? 'bg-accent-50 text-accent' : 'bg-crimson-50 text-crimson-dark'
+                  step === 3 ? 'bg-accent-50 text-accent-dark' : 'bg-crimson-50 text-crimson-dark'
                 }`}
               >
                 <span className={`size-1.5 rounded-full ${step === 3 ? 'bg-accent' : 'bg-crimson-dark'}`} aria-hidden="true" />
@@ -109,7 +109,7 @@ export default function Hero() {
             </div>
 
             {/* the truck drives across the road on a loop */}
-            <div className="mt-5 overflow-hidden rounded-xl bg-gradient-to-b from-brand-50 to-surface pt-5 pb-4">
+            <div className="mt-5 overflow-hidden rounded-xl pb-4">
               <TruckOnRoad />
             </div>
 

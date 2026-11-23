@@ -7,7 +7,7 @@ const pages = [
   { to: '/about', icon: Info, title: 'About us', text: 'Who we are and the Island roads we run.' },
   { to: '/services', icon: Truck, title: 'Services', text: 'Scheduled runs, express, pallets and full loads.' },
   { to: '/how-it-works', icon: Route, title: 'How it works', text: 'From your first call to a confirmed delivery.' },
-  { to: '/coverage', icon: MapPinned, title: 'Coverage', text: 'Eight communities, Victoria to Campbell River.' },
+  { to: '/coverage', icon: MapPinned, title: 'Coverage', text: 'Eight Island communities, plus the Lower Mainland (daily).' },
   { to: '/faq', icon: CircleHelp, title: 'FAQ', text: 'Straight answers before your first booking.' },
 ]
 

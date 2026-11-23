@@ -1,4 +1,4 @@
-import { Send, MapPin } from 'lucide-react'
+import { Send, MapPin, Ship } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import Quote from '../components/sections/Quote'
 import HoursCard from '../components/sections/HoursCard'
@@ -35,6 +35,10 @@ export default function Contact() {
                   {t}
                 </Reveal>
               ))}
+              <Reveal as="li" delay={150 + coverage.all.length * 50} className="col-span-2 inline-flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-2 text-sm font-medium">
+                <Ship className="size-4 text-crimson" aria-hidden="true" />
+                Lower Mainland (daily)
+              </Reveal>
             </ul>
           </Reveal>
         </div>

@@ -2,7 +2,6 @@ import { Building2 } from 'lucide-react'
 import PageHero from '../components/layout/PageHero'
 import AboutSection from '../components/sections/About'
 import FleetBlock from '../components/sections/FleetBlock'
-import WhyUs from '../components/sections/WhyUs'
 import CtaBand from '../components/sections/CtaBand'
 import Button from '../components/ui/Button'
 
@@ -19,7 +18,6 @@ export default function About() {
       </PageHero>
       <AboutSection />
       <FleetBlock />
-      <WhyUs />
       <CtaBand />
     </>
   )

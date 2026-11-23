@@ -42,6 +42,14 @@ export default {
       return handleQuote(request, env)
     }
 
+    // Public settings for the quote form: the Turnstile site key (empty until the
+    // TURNSTILE_SITE_KEY secret is set; then the form shows the bot check).
+    if (url.pathname === '/api/config') {
+      return new Response(JSON.stringify({ turnstileSiteKey: env.TURNSTILE_SITE_KEY || '' }), {
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+      })
+    }
+
     if (url.pathname.startsWith('/api/')) return json({ ok: false, error: 'Not found' }, 404)
 
     // Paths without a file extension that are not real pages get the 404 page (noindex) with status 404.

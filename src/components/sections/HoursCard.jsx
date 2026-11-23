@@ -26,7 +26,7 @@ export default function HoursCard({ className = '' }) {
         </h3>
         <span
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-            open ? 'bg-accent-50 text-accent' : 'bg-crimson-50 text-crimson-700'
+            open ? 'bg-accent-50 text-accent-dark' : 'bg-crimson-50 text-crimson-700'
           }`}
         >
           <span className={`size-1.5 rounded-full ${open ? 'animate-pulse-dot bg-accent' : 'bg-crimson'}`} aria-hidden="true" />

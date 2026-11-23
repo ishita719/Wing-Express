@@ -1,13 +1,16 @@
 import { useRef } from 'react'
-import RealTruck, { ROAD_EDGE } from '../ui/RealTruck'
 import { Mountains, CityToForest } from '../ui/IslandScenery'
 import useScrollProgress from '../../hooks/useScrollProgress'
 
 /**
  * A stretch of Vancouver Island highway at the top of the page "curtain".
- * The EagleWing truck drives along the road on a loop; as you scroll, the
- * scenery rolls past in layers — Victoria's skyline and legislature dome give
- * way to evergreen forest, with the Island mountains moving slowest behind.
+ * As you scroll, the scenery rolls past in layers — Victoria's skyline and
+ * legislature dome give way to evergreen forest, with the Island mountains
+ * moving slowest behind.
+ *
+ * The truck photo is a mock-up (not a client truck), so per the OpsVera review (N6)
+ * it is shown only inside the hero "How a run works" illustration card, not here.
+ * The earlier version with the truck driving on this road is in git history (commit 4ac8492).
  */
 export default function RoadDivider({ rounded = true }) {
   const ref = useRef(null)
@@ -28,17 +31,9 @@ export default function RoadDivider({ rounded = true }) {
         />
         {/* roadside verge */}
         <div className="absolute inset-x-0 bottom-0 h-3 bg-[#cfd5dc]" />
-
-        {/* truck drives along the road on its own (wheels spinning); all wheels on the road surface */}
-        <div
-          className="road-drive absolute bottom-0 z-10 w-56 sm:w-[22rem]"
-          style={{ transform: `translateY(${(1 - ROAD_EDGE) * 100}%)` }}
-        >
-          <RealTruck spinning />
-        </div>
       </div>
 
-      {/* the road: deep enough that the whole truck, front tyre included, sits on it */}
+      {/* the road */}
       <div className="relative h-12 bg-charcoal sm:h-16">
         <div className="absolute inset-x-0 top-0 h-1 bg-crimson" />
         <div className="absolute inset-x-0 top-[55%] h-1 -translate-y-1/2 bg-[repeating-linear-gradient(90deg,#ffffff_0_36px,transparent_36px_72px)] opacity-70" />
