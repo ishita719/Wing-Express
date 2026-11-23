@@ -1,4 +1,5 @@
 /**
+ * (Superseded: the site now uses the side-view photo — see scripts/make-truck-side.mjs.)
  * Builds the realistic truck image used on the website (public/truck.png)
  * from the reference photo (brand/source/truck-reference.png):
  *
