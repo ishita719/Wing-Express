@@ -25,7 +25,10 @@ function Wordmark() {
   // smallest box that holds the whole "g" (so the crimson fill isn't cut off); it leaves 0.145em of
   // empty space above the capitals, which the -0.145em margin removes. The letters then sit exactly in
   // their box, so equal padding gives equal space above and below; the word is centred left to right.
-  const cls = 'block font-display leading-[1.07] font-extrabold tracking-tighter whitespace-nowrap select-none'
+  // px-[0.08em]: the tight letter spacing also trims space after the last letter, so the right side of
+  // the final "g" would stick out past the box the crimson fill paints in. Equal padding on both sides
+  // keeps every letter inside the fill area and the word centred.
+  const cls = 'block px-[0.08em] font-display leading-[1.07] font-extrabold tracking-tighter whitespace-nowrap select-none'
   return (
     <div ref={ref} className="container-x flex justify-center overflow-hidden py-10 sm:py-12" aria-hidden="true">
       <div className="relative -mt-[0.145em] text-[17vw] lg:text-[12.5rem]">
