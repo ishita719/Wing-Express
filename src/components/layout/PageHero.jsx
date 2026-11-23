@@ -28,7 +28,7 @@ export default function PageHero({ eyebrow, title, text, icon: Icon, children })
             <span className="text-white/85">{eyebrow}</span>
           </nav>
           <p className="eyebrow mb-4 inline-flex items-center gap-2.5 text-crimson-400">
-            <span className="grow-x h-0.5 w-7 bg-current" aria-hidden="true" />
+            <span className="grow-x h-0.5 w-2.5 bg-current" aria-hidden="true" />
             {eyebrow}
           </p>
           <h1 className="text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.4rem]">

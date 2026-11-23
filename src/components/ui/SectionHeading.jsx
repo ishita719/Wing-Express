@@ -11,7 +11,7 @@ export default function SectionHeading({ eyebrow, title, text, align = 'left', d
     <Reveal effect="none" className={`max-w-2xl ${center ? 'mx-auto text-center' : ''}`}>
       {eyebrow && (
         <p className={`eyebrow mb-3 inline-flex items-center gap-2.5 ${dark ? 'text-crimson-400' : 'text-crimson-700'}`}>
-          <span className="grow-x h-0.5 w-7 bg-current" aria-hidden="true" />
+          <span className="grow-x h-0.5 w-2.5 bg-current" aria-hidden="true" />
           {eyebrow}
         </p>
       )}
