@@ -21,16 +21,22 @@ const linkCls = 'text-sm text-white/60 transition hover:text-crimson-400'
 function Wordmark() {
   const ref = useRef(null)
   const p = useScrollProgress(ref, { from: 1.05, to: 0.82 })
-  const cls = 'block font-display text-[19vw] leading-[0.82] font-extrabold tracking-tighter whitespace-nowrap select-none lg:text-[13.5rem]'
+  // In Archivo the letters reach 0.725em above and 0.2em below the baseline. A 1.07 line height is the
+  // smallest box that holds the whole "g" (so the crimson fill isn't cut off); it leaves 0.145em of
+  // empty space above the capitals, which the -0.145em margin removes. The letters then sit exactly in
+  // their box, so equal padding gives equal space above and below; the word is centred left to right.
+  const cls = 'block font-display leading-[1.07] font-extrabold tracking-tighter whitespace-nowrap select-none'
   return (
-    <div ref={ref} className="container-x relative overflow-hidden pt-4" aria-hidden="true">
-      <span className={`${cls} text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.14)]`}>EagleWing</span>
-      <span
-        className={`${cls} absolute inset-x-4 top-4 bg-gradient-to-r from-crimson to-crimson-400 bg-clip-text text-transparent sm:inset-x-6 lg:inset-x-8`}
-        style={{ clipPath: `inset(0 ${100 - p * 100}% 0 0)` }}
-      >
-        EagleWing
-      </span>
+    <div ref={ref} className="container-x flex justify-center overflow-hidden py-10 sm:py-12" aria-hidden="true">
+      <div className="relative -mt-[0.145em] text-[17vw] lg:text-[12.5rem]">
+        <span className={`${cls} text-transparent [-webkit-text-stroke:1.5px_rgb(255_255_255/0.14)]`}>EagleWing</span>
+        <span
+          className={`${cls} absolute inset-0 bg-gradient-to-r from-crimson to-crimson-400 bg-clip-text text-transparent`}
+          style={{ clipPath: `inset(0 ${100 - p * 100}% 0 0)` }}
+        >
+          EagleWing
+        </span>
+      </div>
     </div>
   )
 }
@@ -130,12 +136,12 @@ export default function Footer() {
         <div className="container-x border-t border-white/5 py-4 text-center text-xs text-white/45">
           Made by{' '}
           <a
-            href="https://www.instagram.com/opsvera.ca/"
+            href="https://opsverasystems.ca"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             className="font-semibold text-white/80 underline-offset-4 transition hover:text-crimson-400 hover:underline"
           >
-            @opsverasystems
+            opsverasystems.ca
           </a>
         </div>
       </div>
