@@ -61,9 +61,11 @@ export async function handleQuote(request, env) {
     }
   }
 
-  // Bot check: Cloudflare Turnstile. Active once the TURNSTILE_SECRET secret is set on the Worker
-  // (Cloudflare dashboard → Turnstile widget for eaglewingexpress.ca); until then this step is skipped.
-  if (env.TURNSTILE_SECRET) {
+  // Bot check: Cloudflare Turnstile. Active only when BOTH keys are set on the Worker
+  // (TURNSTILE_SITE_KEY shows the widget, TURNSTILE_SECRET verifies it). If only the secret
+  // were set, the form would show no widget and every quote would be rejected, so that
+  // half-configured state is treated as "off".
+  if (env.TURNSTILE_SECRET && env.TURNSTILE_SITE_KEY) {
     const token = typeof data.turnstileToken === 'string' ? data.turnstileToken : ''
     if (!token || token.length > 2048) return json({ ok: false, error: 'Please complete the bot check' }, 403)
     const form = new FormData()

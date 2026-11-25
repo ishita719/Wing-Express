@@ -45,7 +45,9 @@ export default {
     // Public settings for the quote form: the Turnstile site key (empty until the
     // TURNSTILE_SITE_KEY secret is set; then the form shows the bot check).
     if (url.pathname === '/api/config') {
-      return new Response(JSON.stringify({ turnstileSiteKey: env.TURNSTILE_SITE_KEY || '' }), {
+      // Only offer the widget when the server can also verify it (both keys set).
+      const key = env.TURNSTILE_SITE_KEY && env.TURNSTILE_SECRET ? env.TURNSTILE_SITE_KEY : ''
+      return new Response(JSON.stringify({ turnstileSiteKey: key }), {
         headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       })
     }
