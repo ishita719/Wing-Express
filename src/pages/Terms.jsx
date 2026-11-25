@@ -58,8 +58,8 @@ const sections = [
     ],
   },
   // A 'Bill of lading' section ("a bill of lading is issued for every shipment ...") was live on
-  // 25 Nov 2026 and taken out on 26 Nov per the OpsVera review: it states how the client operates,
-  // and the client has not yet confirmed it. Restore it from git history (commit before 26 Nov) once
+  // 25 Nov 2026 and taken out later that day (commit 86f1e4b) per the OpsVera review: it states how the client operates,
+  // and the client has not yet confirmed it. Restore it from git history (the commit before 86f1e4b) once
   // the client confirms and their lawyer has reviewed it.
   {
     id: 'liability',
