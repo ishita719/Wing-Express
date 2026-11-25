@@ -57,20 +57,16 @@ const sections = [
       'If you need to change or cancel a booking, please contact dispatch as early as possible. Any charge for a late cancellation or a missed pickup will be stated in your quote or confirmed with you at the time of booking.',
     ],
   },
-  {
-    id: 'bill-of-lading',
-    title: 'Bill of lading',
-    body: [
-      'A bill of lading is issued for every shipment we carry, as required by British Columbia’s Motor Vehicle Act Regulations (Division 37). It records the shipper, the consignee, the pickup and delivery points, a description of the goods and any declared value.',
-      'Each shipment is carried under the uniform conditions of carriage set out in those Regulations. If anything in these terms conflicts with those conditions, the conditions apply.',
-    ],
-  },
+  // A 'Bill of lading' section ("a bill of lading is issued for every shipment ...") was live on
+  // 25 Nov 2026 and taken out on 26 Nov per the OpsVera review: it states how the client operates,
+  // and the client has not yet confirmed it. Restore it from git history (commit before 26 Nov) once
+  // the client confirms and their lawyer has reviewed it.
   {
     id: 'liability',
     title: 'Loss or damage',
     body: [
       'We handle every shipment with care. If something is lost or damaged while in our care, please let us know as soon as possible — ideally at the time of delivery — and note any visible damage on the delivery paperwork.',
-      'Under the uniform conditions of carriage, our liability for loss or damage is limited to $4.41 per kg ($2 per lb) of the shipment, unless you declare a higher value on the bill of lading when you book. An extra charge may apply for declared value. If your shipment is high-value, declare its value before pickup.',
+      'Shipments are subject to the uniform conditions of carriage in British Columbia’s Motor Vehicle Act Regulations (Division 37). Under those conditions, liability for loss or damage is limited to $4.41 per kg ($2 per lb) of the shipment, unless you declare a higher value when you book. An extra charge may apply for declared value. If your shipment is high-value, declare its value before pickup.',
       'We are not responsible for loss or damage caused by inadequate packaging, inaccurate shipment descriptions, inherent defects in the goods, or events outside our reasonable control.',
     ],
   },

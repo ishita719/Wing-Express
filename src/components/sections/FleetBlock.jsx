@@ -1,6 +1,7 @@
 import { Check, ArrowDownToLine } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
+import RealTruck from '../ui/RealTruck'
 import { fleet } from '../../data/site'
 
 /** Our fleet — 7 trucks, 3 ton and 5 ton, with tailgate lifts (client-confirmed). */
@@ -17,9 +18,24 @@ export default function FleetBlock() {
         </div>
 
         <div className="lg:col-span-7">
-          {/* The truck photo is a mock-up, so it stays in the hero illustration card only (review N6).
-              Add a real photo of a client truck with the tailgate lift down here once it is supplied. */}
-          <div className="grid gap-5 sm:grid-cols-2">
+          {/* Parked truck with the tailgate lift lowered and a pallet on it (review N6: show the
+              specialty). It is a mock-up, so it is labelled as an illustration; swap in a real photo
+              of a client truck with the lift down once one is supplied. */}
+          <Reveal effect="scale" className="overflow-hidden rounded-2xl bg-gradient-to-b from-brand-50 to-surface">
+            <figure>
+              <div className="relative px-5 pt-8 sm:px-8">
+                <div className="relative ml-auto w-[76%]">
+                  <RealTruck lift="down" />
+                </div>
+              </div>
+              <div className="h-3 bg-charcoal" aria-hidden="true" />
+              <figcaption className="flex items-center gap-2 px-5 py-3 text-xs text-muted sm:px-8">
+                <ArrowDownToLine className="size-4 shrink-0 text-crimson" aria-hidden="true" />
+                Illustration: the tailgate lift lowers your pallet to the ground, no dock or forklift needed.
+              </figcaption>
+            </figure>
+          </Reveal>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {fleet.types.map((t, i) => (
               <Reveal key={t.name} effect={i === 0 ? 'left' : 'right'} delay={150} className="card p-6">
                 <h3 className="text-xl">{t.name}</h3>

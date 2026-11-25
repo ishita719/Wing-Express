@@ -13,8 +13,9 @@ export const ROAD_EDGE = TRUCK_REAR_CONTACT - 0.07
  * spinning    — wheel rims turn continuously (for a truck driving on a loop)
  * wheelAngle  — or set the rims' angle yourself (e.g. from scroll position)
  * bounce      — subtle suspension bob while driving
+ * lift        — 'up' (stowed, for a moving truck) or 'down' (lowered to the ground with a pallet on it)
  */
-export default function RealTruck({ className = 'w-full', bounce = false, spinning = false, wheelAngle, eager = false }) {
+export default function RealTruck({ className = 'w-full', bounce = false, spinning = false, wheelAngle, eager = false, lift = 'up' }) {
   return (
     <div className={`relative select-none ${bounce ? 'truck-bounce' : ''} ${className}`}>
       <img
@@ -43,15 +44,46 @@ export default function RealTruck({ className = 'w-full', bounce = false, spinni
             <stop offset="1" stopColor="#a3aab3" />
           </linearGradient>
         </defs>
-        {/* rail post */}
-        <rect x="-9" y="226" width="9" height="222" fill="#5d646e" />
-        {/* folded platform */}
-        <rect x="-27" y="238" width="18" height="200" rx="2" fill="url(#lift-metal)" stroke="#6b727c" strokeWidth="1.5" />
-        {[262, 292, 322, 352, 382, 412].map((y) => (
-          <path key={y} d={`M-24 ${y} l12 -8`} stroke="#8a929c" strokeWidth="1.5" />
-        ))}
-        {/* hinge / carriage */}
-        <rect x="-30" y="436" width="48" height="10" rx="2" fill="#2f343c" />
+        {lift === 'down' ? (
+          <g>
+            {/* rail post, carriage run down to the ground */}
+            <rect x="-9" y="226" width="9" height="282" fill="#5d646e" />
+            <rect x="-16" y="488" width="22" height="20" rx="2" fill="#2f343c" />
+            {/* platform lowered flat at ground level */}
+            <rect x="-262" y="496" width="252" height="13" rx="2" fill="url(#lift-metal)" stroke="#6b727c" strokeWidth="1.5" />
+            <path d="M-262 496 l-10 13 h10 z" fill="#8e96a0" />
+            <ellipse cx="-130" cy="512" rx="150" ry="5" fill="#000" opacity="0.18" />
+            {/* wooden pallet */}
+            <rect x="-236" y="474" width="196" height="7" fill="#b8874f" />
+            {[-236, -146, -56].map((x) => (
+              <rect key={x} x={x} y="481" width="16" height="15" fill="#9c6f3e" />
+            ))}
+            <rect x="-236" y="481" width="196" height="3" fill="#8a5f33" opacity="0.6" />
+            {/* boxes on the pallet, stretch-wrapped */}
+            {[
+              [-232, 412, 62, 62], [-168, 412, 62, 62], [-104, 412, 62, 62],
+              [-222, 352, 58, 60], [-162, 352, 58, 60], [-102, 360, 52, 52],
+            ].map(([x, y, w, h]) => (
+              <g key={`${x}-${y}`}>
+                <rect x={x} y={y} width={w} height={h} fill="#c9965c" stroke="#9a6d3c" strokeWidth="1.5" />
+                <rect x={x + w / 2 - 4} y={y} width="8" height={h} fill="#d9b07c" opacity="0.8" />
+              </g>
+            ))}
+            <rect x="-236" y="350" width="196" height="124" fill="#ffffff" opacity="0.16" />
+          </g>
+        ) : (
+          <g>
+            {/* rail post */}
+            <rect x="-9" y="226" width="9" height="222" fill="#5d646e" />
+            {/* folded platform */}
+            <rect x="-27" y="238" width="18" height="200" rx="2" fill="url(#lift-metal)" stroke="#6b727c" strokeWidth="1.5" />
+            {[262, 292, 322, 352, 382, 412].map((y) => (
+              <path key={y} d={`M-24 ${y} l12 -8`} stroke="#8a929c" strokeWidth="1.5" />
+            ))}
+            {/* hinge / carriage */}
+            <rect x="-30" y="436" width="48" height="10" rx="2" fill="#2f343c" />
+          </g>
+        )}
       </svg>
       {(spinning || wheelAngle !== undefined) &&
         TRUCK_RIMS.map((r) => {
