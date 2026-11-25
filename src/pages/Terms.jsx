@@ -58,11 +58,19 @@ const sections = [
     ],
   },
   {
+    id: 'bill-of-lading',
+    title: 'Bill of lading',
+    body: [
+      'A bill of lading is issued for every shipment we carry, as required by British Columbia’s Motor Vehicle Act Regulations (Division 37). It records the shipper, the consignee, the pickup and delivery points, a description of the goods and any declared value.',
+      'Each shipment is carried under the uniform conditions of carriage set out in those Regulations. If anything in these terms conflicts with those conditions, the conditions apply.',
+    ],
+  },
+  {
     id: 'liability',
     title: 'Loss or damage',
     body: [
       'We handle every shipment with care. If something is lost or damaged while in our care, please let us know as soon as possible — ideally at the time of delivery — and note any visible damage on the delivery paperwork.',
-      'Our liability for loss or damage is limited to the extent permitted by law and as set out in your quote or shipping documents. If your shipment is high-value, tell us before booking so we can discuss the options available.',
+      'Under the uniform conditions of carriage, our liability for loss or damage is limited to $4.41 per kg ($2 per lb) of the shipment, unless you declare a higher value on the bill of lading when you book. An extra charge may apply for declared value. If your shipment is high-value, declare its value before pickup.',
       'We are not responsible for loss or damage caused by inadequate packaging, inaccurate shipment descriptions, inherent defects in the goods, or events outside our reasonable control.',
     ],
   },

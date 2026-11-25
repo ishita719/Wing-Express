@@ -27,6 +27,32 @@ export default function RealTruck({ className = 'w-full', bounce = false, spinni
         draggable="false"
         className="block h-auto w-full"
       />
+      {/* Tailgate lift (the EagleWing specialty), shown stowed as it is while driving:
+          the platform folded up behind the box, on its rail, with the hinge at the bottom.
+          Drawn in the image's own pixel units so it scales with the truck. */}
+      <svg
+        aria-hidden="true"
+        viewBox={`0 0 ${TRUCK_W} ${TRUCK_H}`}
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+      >
+        <defs>
+          <linearGradient id="lift-metal" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#8e96a0" />
+            <stop offset="0.45" stopColor="#d6dbe1" />
+            <stop offset="1" stopColor="#a3aab3" />
+          </linearGradient>
+        </defs>
+        {/* rail post */}
+        <rect x="-9" y="226" width="9" height="222" fill="#5d646e" />
+        {/* folded platform */}
+        <rect x="-27" y="238" width="18" height="200" rx="2" fill="url(#lift-metal)" stroke="#6b727c" strokeWidth="1.5" />
+        {[262, 292, 322, 352, 382, 412].map((y) => (
+          <path key={y} d={`M-24 ${y} l12 -8`} stroke="#8a929c" strokeWidth="1.5" />
+        ))}
+        {/* hinge / carriage */}
+        <rect x="-30" y="436" width="48" height="10" rx="2" fill="#2f343c" />
+      </svg>
       {(spinning || wheelAngle !== undefined) &&
         TRUCK_RIMS.map((r) => {
           // A square box around the rim, squashed to the rim's ellipse; the round disc inside rotates.

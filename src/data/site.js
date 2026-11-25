@@ -297,7 +297,7 @@ export const faqs = [
   },
   {
     q: 'Is my freight insured?',
-    a: 'Please ask dispatch about cargo coverage before you book, and tell us about any high-value items so we can discuss declared value and handling options.',
+    a: 'Every shipment travels on a bill of lading under the standard conditions of carriage set by BC’s Motor Vehicle Act Regulations (Division 37). Under those conditions, carrier liability for loss or damage is limited to $4.41 per kg ($2 per lb), unless you declare a higher value on the bill of lading when you book. An extra charge may apply for declared value. If your goods are worth more, declare their value when booking, or ask dispatch about your options.',
   },
   {
     q: 'How do I report loss or damage?',
