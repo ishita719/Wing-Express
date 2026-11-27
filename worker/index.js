@@ -32,7 +32,7 @@ export default {
 
     // One address per page for Google: http → https, and /about/, /about.html, /index.html
     // → the clean URL, all as permanent (301) redirects.
-    if (url.hostname === PRIMARY_HOST && request.method === 'GET') {
+    if (url.hostname === PRIMARY_HOST && (request.method === 'GET' || request.method === 'HEAD')) {
       let clean = url.pathname
       if (clean === '/index.html') clean = '/'
       else if (clean.length > 1 && clean.endsWith('/')) clean = clean.replace(/\/+$/, '')
