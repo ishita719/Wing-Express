@@ -2,6 +2,7 @@
  * EagleWing Express — Cloudflare Worker entry.
  *
  * - www.eaglewingexpress.ca → 301 redirect to https://eaglewingexpress.ca
+ * - http://, trailing slash, .html and /index.html → 301 to the clean https URL
  * - /api/quote → quote form handler (validated + rate limited)
  * - known pages → the static site in /dist (Workers Static Assets)
  * - unknown pages → the site's 404 page with a real 404 status
@@ -27,6 +28,20 @@ export default {
       url.hostname = PRIMARY_HOST
       url.protocol = 'https:'
       return Response.redirect(url.toString(), 301)
+    }
+
+    // One address per page for Google: http → https, and /about/, /about.html, /index.html
+    // → the clean URL, all as permanent (301) redirects.
+    if (url.hostname === PRIMARY_HOST && request.method === 'GET') {
+      let clean = url.pathname
+      if (clean === '/index.html') clean = '/'
+      else if (clean.length > 1 && clean.endsWith('/')) clean = clean.replace(/\/+$/, '')
+      else if (clean.endsWith('.html') && ROUTES.has(clean.slice(0, -5))) clean = clean.slice(0, -5)
+      if (url.protocol === 'http:' || clean !== url.pathname) {
+        url.protocol = 'https:'
+        url.pathname = clean
+        return Response.redirect(url.toString(), 301)
+      }
     }
 
     // The custom domain is live: send visitors of the production workers.dev address there

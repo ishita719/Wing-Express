@@ -14,7 +14,7 @@ export const pages = [
   {
     path: '/',
     file: 'index.html',
-    title: 'EagleWing Express | Vancouver Island Freight & Tailgate Delivery',
+    title: 'Vancouver Island Freight & Delivery | EagleWing Express',
     description:
       'Daily freight and tailgate delivery on Vancouver Island, Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland. Free quotes.',
     priority: '1.0',
@@ -25,7 +25,7 @@ export const pages = [
     name: 'About us',
     title: 'About EagleWing Express | Vancouver Island Freight Company',
     description:
-      'EagleWing Express Ltd. is a freight and delivery company based on Vancouver Island, BC, with 3 and 5 ton tailgate trucks running daily Island and Lower Mainland routes.',
+      'EagleWing Express Ltd. is a Vancouver Island, BC freight company with 3 and 5 ton tailgate trucks on daily Island and Lower Mainland routes.',
     priority: '0.8',
   },
   {
