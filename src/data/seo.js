@@ -25,7 +25,7 @@ export const pages = [
     name: 'About us',
     title: 'About EagleWing Express | Vancouver Island Freight Company',
     description:
-      'EagleWing Express Ltd. is a Vancouver Island, BC freight company with 3 and 5 ton tailgate trucks on daily Island and Lower Mainland routes.',
+      'EagleWing Express Ltd. is a Nanaimo-based Vancouver Island freight company with 3 and 5 ton tailgate trucks on daily Island and Lower Mainland routes.',
     priority: '0.8',
   },
   {

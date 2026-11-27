@@ -25,7 +25,7 @@ export default function Contact() {
               <MapPin className="size-5 text-crimson" aria-hidden="true" /> Service area
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              We are based on {company.region}. Pickups and deliveries are arranged by phone, email or the quote form, and we serve
+              Our base terminal is in Nanaimo, on Vancouver Island, BC. Pickups and deliveries are arranged by phone, email or the quote form, and we serve
               these communities:
             </p>
             <ul className="mt-5 grid grid-cols-2 gap-2">

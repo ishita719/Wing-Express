@@ -31,9 +31,12 @@ export const company = {
   description:
     'EagleWing Express runs daily freight from Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland via Duke Point – Tsawwassen, with 3 and 5 ton tailgate trucks for businesses and homes.',
   phone: '(236) 888-3135',
-  email: 'expresseaglewing@gmail.com', // TODO: switch to a branded address (e.g. dispatch@eaglewingexpress.ca) once it exists
+  email: 'info@eaglewingexpress.ca', // client-confirmed 27 Nov 2026
   region: 'Vancouver Island, British Columbia, Canada',
-  regionShort: 'Vancouver Island, BC',
+  regionShort: 'Nanaimo, BC',
+  // Base terminal, client-confirmed 27 Nov 2026 (moved from Victoria to Nanaimo)
+  base: 'Nanaimo',
+  baseLine: 'Base terminal: Nanaimo, Vancouver Island, BC',
   // One hours rule, used everywhere (review item C3)
   phoneHours: 'Monday – Friday · 8:00 am – 8:00 pm',
   phoneHoursShort: 'Mon – Fri, 8 am – 8 pm',
@@ -135,7 +138,7 @@ export const shipmentSizes = [
 /** Fleet — confirmed: 7 trucks, 3 ton and 5 ton, with tailgate lifts. */
 export const fleet = {
   total: 7,
-  intro: 'Seven trucks based on Vancouver Island, running daily between Victoria, Campbell River, Port Alberni and the Lower Mainland.',
+  intro: 'Seven trucks based at our Nanaimo terminal, running daily between Victoria, Campbell River, Port Alberni and the Lower Mainland.',
   types: [
     {
       name: '3 ton trucks',
@@ -204,10 +207,10 @@ export const coverage = {
  * road distance from Victoria (rounded; actual routes vary).
  */
 export const communities = [
-  { name: 'Victoria', km: 0, region: 'Capital Region', fact: "British Columbia's capital, at the southern tip of the Island — the start of every northbound run." },
+  { name: 'Victoria', km: 0, region: 'Capital Region', fact: "British Columbia's capital, at the southern tip of the Island." },
   { name: 'Duncan', km: 60, region: 'Cowichan Valley', fact: 'Known as the "City of Totems", at the heart of the Cowichan Valley over the Malahat.' },
   { name: 'Ladysmith', km: 88, region: 'Cowichan Valley', fact: 'Historic seaside town on the 49th parallel, between Duncan and Nanaimo on Hwy 1.' },
-  { name: 'Nanaimo', km: 111, region: 'Central Island', fact: 'The "Harbour City", where Hwy 1 meets Hwy 19 — and home of the Duke Point ferry terminal, our link to the mainland.' },
+  { name: 'Nanaimo', km: 111, region: 'Central Island', fact: 'The "Harbour City" and home of our base terminal, where Hwy 1 meets Hwy 19 — with the Duke Point ferry, our link to the mainland.' },
   { name: 'Parksville', km: 150, region: 'Oceanside', fact: 'Oceanside community where Hwy 4 branches west across the Island toward Port Alberni.' },
   { name: 'Port Alberni', km: 195, region: 'Alberni Valley', fact: 'At the head of the Alberni Inlet, reached from Parksville on Hwy 4.' },
   { name: 'Courtenay', km: 220, region: 'Comox Valley', fact: 'The largest city in the Comox Valley, on the Inland Island Highway.' },
@@ -217,7 +220,7 @@ export const communities = [
 export const about = {
   title: 'Island based, on the road every day',
   paragraphs: [
-    'EagleWing Express Ltd. is a freight and delivery company based on Vancouver Island, British Columbia. We run daily between Victoria, Campbell River and Port Alberni, and every day across to the Lower Mainland via Duke Point – Tsawwassen.',
+    'EagleWing Express Ltd. is a freight and delivery company with its base terminal in Nanaimo, on Vancouver Island, British Columbia. We run daily between Victoria, Campbell River and Port Alberni, and every day across to the Lower Mainland via Duke Point – Tsawwassen.',
     'Our fleet of seven 3 ton and 5 ton trucks carries tailgate lifts, so we can deliver to homes, job sites and shops that have no loading dock or forklift — tailgate delivery is our specialty.',
     'Our phones are answered Monday to Friday, 8 am to 8 pm, and deliveries can be booked any day of the week. When you call, you speak with the team that is actually handling your shipment.',
   ],
@@ -309,7 +312,7 @@ export const faqs = [
   },
   {
     q: 'Where is EagleWing Express based?',
-    a: `We are a local company based on ${company.region}, serving communities from Victoria to Campbell River and the Lower Mainland.`,
+    a: `Our base terminal is in Nanaimo, on Vancouver Island, BC. From there we serve communities from Victoria to Campbell River and Port Alberni, plus the Lower Mainland.`,
   },
   {
     q: 'What information do you need to give me a quote?',

@@ -12,7 +12,7 @@ export default function About() {
         eyebrow="About us"
         icon={Building2}
         title="A local carrier for Vancouver Island"
-        text="EagleWing Express Ltd. is based on Vancouver Island, British Columbia, running daily freight from Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland — with 3 and 5 ton tailgate trucks."
+        text="EagleWing Express Ltd. is based in Nanaimo, on Vancouver Island, British Columbia, running daily freight from Victoria to Campbell River and Port Alberni, plus a daily run to the Lower Mainland — with 3 and 5 ton tailgate trucks."
       >
         <Button href="/coverage" variant="ghost">See where we go</Button>
       </PageHero>
